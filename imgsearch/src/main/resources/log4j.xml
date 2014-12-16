@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.imgsearch.web">
+	<logger name="org.imgsearch.controller">
 		<level value="info" />
 	</logger>
 	

@@ -15,9 +15,9 @@
 		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://wkqk60th.iptime.org:6001/nodo"></property>
-		<property name="username" value="nodo"></property>
-		<property name="password" value="nodo"></property>
+		<property name="url" value="jdbc:mysql://wkqk60th.iptime.org:6001/imgsearch"></property>
+		<property name="username" value="bit60"></property>
+		<property name="password" value="8997"></property>
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
