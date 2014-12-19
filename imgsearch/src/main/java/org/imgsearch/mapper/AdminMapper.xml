@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.imgsearch.mapper.AdminMapper">
+
+	<insert id ="keywordInsert" parameterType="org.imgsearch.vo.KeywordVO">
+		insert into tbl_keyword (k_keyword)values(#{k_keyword})
+	</insert>
+	
+	<select id="keywordSelect" resultType="org.imgsearch.vo.KeywordVO">
+		select * from tbl_keyword order by k_no desc
+	</select>
+	
+	<update id="keywordUpdate" parameterType="org.imgsearch.vo.KeywordVO">
+		update tbl_keyword set k_keyword = #{k_keyword} where k_no = #{k_no}
+	</update>
+	
+	<delete id="keywordDelete">
+		delete from tbl_keyword where k_no=#{k_no}
+	</delete>
+</mapper>

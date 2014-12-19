@@ -1,0 +1,9 @@
+@CHARSET "EUC-KR";
+
+body{
+	background: #f6f6f6;
+}
+.main {
+	margin:auto;
+	padding-bottom: 20px;
+}
