@@ -6,9 +6,20 @@ public class UserVO {
 	private String u_id;
 	private String u_pw;
 	private String u_email;
-	private int u_age;
+	private int u_age = 0;
 	private String u_gender;
 	private String u_job;
+	private String u_type;	
+	private int ug_age;
+	private int ug_view;
+	private int ug_kind;
+	private int ug_intell;
+	private int ug_face;
+	private int ug_trouble;
+	private int ug_rumor;
+	private int ug_Atype;
+	private int ug_Btype;
+	private int ug_Ctype;
 	
 	
 	public int getU_no() {
@@ -53,15 +64,88 @@ public class UserVO {
 	public void setU_job(String u_job) {
 		this.u_job = u_job;
 	}
+	public String getU_type() {
+		return u_type;
+	}
+	public void setU_type(String u_type) {
+		this.u_type = u_type;
+	}
+	public int getUg_age() {
+		return ug_age;
+	}
+	public void setUg_age(int ug_age) {
+		this.ug_age = ug_age;
+	}
+	public int getUg_view() {
+		return ug_view;
+	}
+	public void setUg_view(int ug_view) {
+		this.ug_view = ug_view;
+	}
+	public int getUg_kind() {
+		return ug_kind;
+	}
+	public void setUg_kind(int ug_kind) {
+		this.ug_kind = ug_kind;
+	}
+	public int getUg_intell() {
+		return ug_intell;
+	}
+	public void setUg_intell(int ug_intell) {
+		this.ug_intell = ug_intell;
+	}
+	public int getUg_face() {
+		return ug_face;
+	}
+	public void setUg_face(int ug_face) {
+		this.ug_face = ug_face;
+	}
+	public int getUg_trouble() {
+		return ug_trouble;
+	}
+	public void setUg_trouble(int ug_trouble) {
+		this.ug_trouble = ug_trouble;
+	}
+	public int getUg_rumor() {
+		return ug_rumor;
+	}
+	public void setUg_rumor(int ug_rumor) {
+		this.ug_rumor = ug_rumor;
+	}
+	public int getUg_Atype() {
+		return ug_Atype;
+	}
+	public void setUg_Atype(int ug_Atype) {
+		this.ug_Atype = ug_Atype;
+	}
+	public int getUg_Btype() {
+		return ug_Btype;
+	}
+	public void setUg_Btype(int ug_Btype) {
+		this.ug_Btype = ug_Btype;
+	}
+	public int getUg_Ctype() {
+		return ug_Ctype;
+	}
+	public void setUg_Ctype(int ug_Ctype) {
+		this.ug_Ctype = ug_Ctype;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [u_no=" + u_no + ", u_id=" + u_id + ", u_pw=" + u_pw
 				+ ", u_email=" + u_email + ", u_age=" + u_age + ", u_gender="
-				+ u_gender + ", u_job=" + u_job + "]";
+				+ u_gender + ", u_job=" + u_job + ", u_type=" + u_type
+				+ ", ug_age=" + ug_age + ", ug_view=" + ug_view + ", ug_kind="
+				+ ug_kind + ", ug_intell=" + ug_intell + ", ug_face=" + ug_face
+				+ ", ug_trouble=" + ug_trouble + ", ug_rumor=" + ug_rumor
+				+ ", ug_Atype=" + ug_Atype + ", ug_Btype=" + ug_Btype
+				+ ", ug_Ctype=" + ug_Ctype + "]";
 	}
 	
 	
 	
 	
-
+	
+	
+	
 }
