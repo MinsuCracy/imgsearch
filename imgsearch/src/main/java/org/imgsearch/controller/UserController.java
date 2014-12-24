@@ -128,7 +128,7 @@ public class UserController {
 	public String userUpdate(UserVO vo, Model model){
 		String result;
 		result = us.userUpdate(vo);
-		
+		logger.info(vo.toString());
 		if(result.equals("fail")){
 			model.addAttribute("result", "fail");
 			return "redirect:/admin/user/fail";

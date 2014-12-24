@@ -49,7 +49,7 @@
 <script src="/resources/admin/theme/scripts/jquery-1.8.2.min.js"></script>
 
 <!-- Rader Chart  -->
-<script src="/resources/admin/theme/scripts/Chart.js"></script>
+<script src="/resources/js/Chart.js"></script>
 
 <!-- Modernizr -->
 <script src="/resources/admin/theme/scripts/modernizr.custom.76094.js"></script>
@@ -105,7 +105,7 @@
 															</tr>
 															<tr>
 														<th>
-															외모: 
+															미디어 노출: 
 															</th>
 															<td class="span2 center">${vo.ug_view }</td>
 														</tr>
@@ -118,7 +118,7 @@
 															지적성향: </th>
 															<td class="span2 center">${vo.ug_intell }</td></tr>
 														<tr><th>
-															얼굴: </th><td class="span2 center">${vo.ug_face }</td></tr>
+															외모: </th><td class="span2 center">${vo.ug_face }</td></tr>
 														
 														<tr><th>
 															사건사고: </th><td class="span2 center">${vo.ug_trouble }</td></tr>

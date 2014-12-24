@@ -47,7 +47,7 @@
 <!-- JQuery v1.8.2 -->
 <script src="/resources/admin/theme/scripts/jquery-1.8.2.min.js"></script>
 
-<script src="/resources/admin/theme/scripts/Chart.js"></script>
+<script src="/resources/js/Chart.js"></script>
 
 <!-- Modernizr -->
 <script src="/resources/admin/theme/scripts/modernizr.custom.76094.js"></script>
@@ -97,7 +97,7 @@
 														max="9" step="1" value="1" onchange="valueChange(this)">
 												</p>
 												<p>
-													외모: <input type="number" id="ug_view" name="ug_view" min="1"
+													미디어 노출: <input type="number" id="ug_view" name="ug_view" min="1"
 														max="9" step="1" value="1" onchange="valueChange(this)">
 												</p>
 												<p>
@@ -110,7 +110,7 @@
 														onchange="valueChange(this)">
 												</p>
 												<p>
-													얼굴: <input type="number" id="ug_face" name="ug_face" min="1"
+													외모: <input type="number" id="ug_face" name="ug_face" min="1"
 														max="9" step="1" value="1" onchange="valueChange(this)">
 												</p>
 												<p>

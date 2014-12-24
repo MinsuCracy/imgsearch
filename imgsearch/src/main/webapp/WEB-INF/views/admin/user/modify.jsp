@@ -48,7 +48,7 @@
 <!-- JQuery v1.8.2 -->
 <script src="/resources/admin/theme/scripts/jquery-1.8.2.min.js"></script>
 
-<script src="/resources/admin/theme/scripts/Chart.js"></script>
+<script src="/resources/js/Chart.js"></script>
 
 <!-- Modernizr -->
 <script src="/resources/admin/theme/scripts/modernizr.custom.76094.js"></script>
@@ -102,7 +102,7 @@
 																onchange="valueChange(this)">
 														</p>
 														<p>
-															외모: <input type="number" id="ug_view" name="ug_view"
+															미디어노출 : <input type="number" id="ug_view" name="ug_view"
 																min="1" max="9" step="1" value="1"
 																onchange="valueChange(this)">
 														</p>
@@ -117,7 +117,7 @@
 																onchange="valueChange(this)">
 														</p>
 														<p>
-															얼굴: <input type="number" id="ug_face" name="ug_face"
+															외모: <input type="number" id="ug_face" name="ug_face"
 																min="1" max="9" step="1" value="1"
 																onchange="valueChange(this)">
 														</p>
@@ -225,14 +225,20 @@
 									
 									<td><input type="text" name="u_age" class="span1"
 										style="border: 0"READONLY" value="${vo.u_age }"></td>
-									
-									<td><input type="radio" name="u_gender" value="f">여성
+									<c:choose>
+									<c:when  test="${vo.u_gender eq 'f' }">
+										<td><input type="radio" name="u_gender" value="f" checked>여성
 										<input type="radio" name="u_gender" value="m">남성</td>
-									
+									</c:when>
+									<c:otherwise>
+											<td><input type="radio" name="u_gender" value="f" >여성
+											<input type="radio" name="u_gender" value="m" checked>남성</td>
+									</c:otherwise>
+									</c:choose>
 									<td><input type="text" name="u_job" class="span1"
 										style="border: 0"READONLY" value="${vo.u_job }"></td>
 									
-									<td><input type="radio" name="u_type" value="n">일반사용자
+										<td><input type="radio" name="u_type" value="n">일반사용자
 										<input type="radio" name="u_type" value="s">가게관리자 <input
 										type="radio" name="u_type" value="a">통합관리자</td>
 								</tr>
@@ -256,6 +262,17 @@
 	</div>
 	</div>
 	<script>
+		var gender = "${vo.u_type}";
+		var radioType = document.getElementsByName("u_type");
+		
+		for(var i = 0; i < radioType.length; i++ ){
+			
+			if(radioType[i].value == gender){
+				radioType[i].checked = true;
+			}
+		}
+		
+	
 		var ug_age = document.getElementById("ug_age").value;
 		var ug_view = document.getElementById("ug_view").value;
 		var ug_kind = document.getElementById("ug_kind").value;
