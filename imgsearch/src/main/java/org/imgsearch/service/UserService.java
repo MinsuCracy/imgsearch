@@ -130,7 +130,7 @@ public class UserService implements UserDetailsService{
 		
 		
 	}
-private UserMapper userMapper;
+	private UserMapper userMapper;
 	
 	
 	public void setUserMapper(UserMapper userMapper){

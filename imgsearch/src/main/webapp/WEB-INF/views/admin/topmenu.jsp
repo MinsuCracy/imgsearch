@@ -29,9 +29,9 @@
 							class="icon-bar"></span>
 					</button>
 					<ul id="menu" class="hidden-phone">
-						<li <c:if test="${param.selected == 2}">class='active'</c:if>><a href="/admin/user" class="menuToggle">회원관리</a></li>
+						<li <c:if test="${param.selected == 2}">class='active'</c:if>><a href="/admin/user/" class="menuToggle">회원관리</a></li>
 						<li <c:if test="${param.selected == 3}">class='active'</c:if>><a href="/admin/store" class="menuToggle">가게관리</a></li> 
-						<li <c:if test="${param.selected == 4}">class='active'</c:if>><a href="/admin/ent" class="menuToggle">연예인관리</a></li> 
+						<li <c:if test="${param.selected == 4}">class='active'</c:if>><a href="/admin/ent/" class="menuToggle">연예인관리</a></li> 
 						<li <c:if test="${param.selected == 5}">class='active'</c:if>><a href="/admin/log" class="menuToggle">로그관리</a></li>
 					</ul> 
 				</div>

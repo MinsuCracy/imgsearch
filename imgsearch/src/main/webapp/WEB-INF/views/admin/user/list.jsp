@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +12,7 @@
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- Bootstrap -->
 <link href="/resources/admin/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -59,22 +60,17 @@
 
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
-<script>
-	function goInsertForm(){
-		location.href="/admin/ent/insert";
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
-                    <jsp:param name="selected" value="4"/>
+                    <jsp:param name="selected" value="2"/>
     </jsp:include>
 	<div class="container-fluid fixed">
 
 		<div id="content">
 			<div class="heading-buttons">
 				<h2>
-					연예인 관리<span>| Action is the foundational key to success</span>
+					<a href="list" style="text-decoration: none; color:#606060;">회원 관리</a><span>| Action is the foundational key to success</span>
 				</h2>
 			</div>
 			<div class="widget widget-4 widget-body-white">
@@ -84,19 +80,15 @@
 						<div class="row-fluid">
 							<div class="span6">
 								<div id="DataTables_Table_0_length" class="dataTables_length">
-									<label><select size="1"
-										name="DataTables_Table_0_length"
-										aria-controls="DataTables_Table_0"><option value="10"
-												selected="selected">10</option>
-											<option value="25">25</option>
-											<option value="50">50</option>
-											<option value="100">100</option></select> records per page</label>
 								</div>
 							</div>
 							<div class="span6">
 								<div class="dataTables_filter" id="DataTables_Table_0_filter">
-									<label>Search: <input type="text"
-										aria-controls="DataTables_Table_0"></label>
+								
+									<form action="inquiry" method="get">
+									<label>Search:
+									<input type="text" aria-controls="DataTables_Table_0" name="inputData" id="inputData">
+									<input type="submit" value="검색" class="btn btn-primary"></label></form>
 								</div>
 							</div>
 						</div>
@@ -105,50 +97,69 @@
 								<thead>
 									<tr>
 										<th class="center">번호</th>
-										<th>이름</th>
+										<th>아이디</th>
+										<th>성별</th>
 										<th>나이</th>
-										<th>외모</th>
-										<th>성격</th>
-										<th>지적</th>
+										<th>직업</th>
+										<th>이메일</th>
 									</tr>
 								</thead>
 								<tbody>
+								<ul>
+								
+		
+								<c:forEach var="list" items='${userList }'>
 									<tr>
-										<td class="center">1</td>
-										<td><a href="/admin/ent/read">Lorem ipsum dolor</a></td>
-										<td>Lorem ipsum dolor</td>
-										<td>Lorem ipsum dolor</td>
-										<td>Lorem ipsum dolor</td>
-										<td>Lorem ipsum dolor</td>
+										<td class="center">${list.u_no}</td>
+										<td><a href="view?u_no=${list.u_no}">${list.u_id}</a></td>
+										<td>${list.u_gender }</td>
+										<td>${list.u_age } </td>
+										<td>${list.u_job } </td>
+										<td> ${list.u_email }</td>
 									</tr>
-									
+										</c:forEach>
 								</tbody>
 							</table>
 						</div>
 						<div class="row-fluid">
-							<div class ="span2">
-								<button class="btn btn-block btn-primary" onclick="javascript:goInsertForm()">연예인 등록</button>
+							'<div class ="span2">
+								<button class="btn btn-block btn-primary" onclick="location.href='regist'">회원 등록</button>
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span8">
-								<div class="dataTables_paginate paging_bootstrap pagination">
+<!-- 							<div class="span8"> -->
+								<div class="pagination pagination-centered pagination-small">
 									<ul>
-										<li class="prev disabled"><a href="#">← Previous</a></li>
-										<li class="active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li class="next"><a href="#">Next → </a></li>
+										<c:if test='${cri.prePage eq true}'>
+										 <li class="prev"><a href="list?page=${cri.startPage-1}">← Previous</a></li>
+										</c:if>
+										<c:forEach varStatus="pageList" begin='${cri.startPage}' end='${cri.lastPage}'>
+										<c:choose>
+									
+											<c:when test="${cri.page eq pageList.index }"><li class="active">
+												<a href="list?page=${pageList.index }">${pageList.index }</a></li></c:when>
+									
+											<c:otherwise>
+											<li><a href="list?page=${pageList.index }">${pageList.index }</a></li>
+											</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										<c:if test="${cri.nextPage eq true }">
+										<li class="next"><a href="list?page=${cri.lastPage+1}">Next → </a></li>
+										</c:if>
 									</ul>
 								</div>
-							</div>
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<c:if test="${not empty inputData  }">
+		<script>
+			document.getElementById("inputData").defaultValue = "${inputData}";
+		</script>
+	</c:if>
 </body>
 </html>
