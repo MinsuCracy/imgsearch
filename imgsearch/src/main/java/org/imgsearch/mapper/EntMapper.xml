@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 30//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.imgsearch.mapper.EntMapper">
+	
+	<select id="entList" resultType="org.imgsearch.vo.EntVO" parameterType="org.imgsearch.common.Criteria">
+	
+			select e_no, e_name, e_Atype, e_Btype, e_Ctype 
+			from tbl_ent 
+			
+			<if test="type != null">
+				<choose>
+					<when test='type eq "N"'>
+						where e_name like concat('%', #{keyword}, '%')
+					</when>
+					<when test='type eq "A"'>
+						where e_Atype = #{keyword}
+					</when>
+					<when test='type eq "B"'>
+						where e_Btype = #{keyword}
+					</when>
+					<when test='type eq "C"'>
+						where e_Ctype = #{keyword}
+					</when>
+				</choose>
+			</if>
+			
+			order by e_no desc
+			limit #{dbLimit}, 10
+
+	</select>
+	
+	<select id="entTotalCount" resultType="java.lang.Integer" parameterType="org.imgsearch.common.Criteria">
+		select count(*) 
+		from (select e_no from tbl_ent
+			<if test="type != null">
+				<choose>
+					<when test='type eq "N"'>
+						where e_name like concat('%', #{keyword}, '%')
+					</when>
+					<when test='type eq "A"'>
+						where e_Atype = #{keyword}
+					</when>
+					<when test='type eq "B"'>
+						where e_Btype = #{keyword}
+					</when>
+					<when test='type eq "C"'>
+						where e_Ctype = #{keyword}
+					</when>
+				</choose>
+			</if>	
+		limit #{dbLimitTotal}, 101) as TBL
+	</select>
+	
+	<select id="entRead" resultType="org.imgsearch.vo.EntVO" parameterType="java.lang.Integer">
+		select * from tbl_ent where e_no=#{e_no}
+	</select>
+	
+	<insert id="entRegist" parameterType="org.imgsearch.vo.EntVO">
+		insert into tbl_ent 
+		(e_name, e_age, e_view, e_kind, e_intell, e_face, e_trouble, e_rumor, 
+		 e_Atype, e_Btype, e_Ctype, e_img) 
+		values 
+		(#{e_name}, #{e_age}, #{e_view}, #{e_kind}, #{e_intell}, #{e_face}, 
+		 #{e_trouble}, #{e_rumor}, #{e_Atype}, #{e_Btype}, #{e_Ctype}, #{e_img})
+	</insert>
+	
+	<update id="entModify" parameterType="org.imgsearch.vo.EntVO">
+		update tbl_ent 
+		set e_name=#{e_name}, e_age=#{e_age}, e_view=#{e_view}, e_kind=#{e_kind}, 
+			e_intell=#{e_intell}, e_face=#{e_face}, e_trouble=#{e_trouble}, e_rumor=#{e_rumor}, 
+			e_Atype=#{e_Atype}, e_Btype=#{e_Btype}, e_Ctype=#{e_Ctype}, e_img=#{e_img} 
+		where e_no=#{e_no}
+	</update>
+
+	<delete id="entRemove" parameterType="java.lang.Integer">
+		delete from tbl_ent where e_no=#{e_no}
+	</delete>
+	
+	<select id="entStore" resultType="org.imgsearch.vo.StoreVO" parameterType="java.lang.Integer">
+		select st.s_no, st.s_name, st.s_address
+		from tbl_se_match as se natural join tbl_store as st
+		where se.e_no = #{e_no};
+	</select>
+	
+</mapper>

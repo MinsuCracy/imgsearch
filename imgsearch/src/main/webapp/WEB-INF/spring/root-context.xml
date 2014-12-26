@@ -29,8 +29,36 @@
   	  <property name="dataSource" ref="dataSource" />
     </bean>
 	
+
 	<mybatis-spring:scan base-package="org.imgsearch.mapper"/>	
-		
-		
+	
+	
+	<security:http  auto-config="true">
+<!-- 		<security:intercept-url pattern="/user/location" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
+		<security:intercept-url pattern="/user/location" access="ROLE_USER"/>
+		<security:form-login login-page="/user/login" default-target-url="/user/location"
+			authentication-failure-url="/loginFail"
+			login-processing-url="/check"
+			username-parameter="username"
+			password-parameter="userpw"
+			/>
+		<security:logout logout-success-url="/user/location"/>
+		<security:session-management>
+			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
+		</security:session-management>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="UserService"/>
+	</security:authentication-manager>
+	
+	<bean id="UserService" class="org.imgsearch.service.UserService">
+		<property name="userMapper">
+			<bean  class="org.imgsearch.mapper.UserMapperImpl">
+				<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+			</bean>
+		</property>
+	</bean>	
+				
 		
 </beans>

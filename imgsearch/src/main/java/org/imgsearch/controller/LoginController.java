@@ -9,18 +9,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping("/user/*")
-public class ImgsearchController {
-
+public class LoginController {
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@RequestMapping("/location")
-	public String index(Principal principal, Model model)throws Exception{
-		model.addAttribute("id", principal.getName());
-		logger.info(" 로그인 아이디 : " + principal.getName());
+	@RequestMapping("/loginform")
+	public String loginForm(){
+		logger.info("로그인 컨트롤 입장");
+		return "/user/login";
+	}
+	@RequestMapping("/login")
+	public String login(Model model, Principal principal){
+		model.addAttribute("loginForm", true);
 		return "/user/location";
 	}
 }
-
