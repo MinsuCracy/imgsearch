@@ -54,7 +54,7 @@ public class AttachController {
 		}
 		
 		byte[] buffer = new byte[1024*8];
-		String fileName = UUID.randomUUID() +"_"+file.getOriginalFilename();
+		String fileName = file.getOriginalFilename(); //UUID.randomUUID() +"_"+file.getOriginalFilename();
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
 		

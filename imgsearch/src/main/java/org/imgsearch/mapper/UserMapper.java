@@ -65,6 +65,4 @@ public interface UserMapper {
 	public void userGrowUpdate(UserVO vo);
 
 
-
-	public String getUserPw(String userId);
 }

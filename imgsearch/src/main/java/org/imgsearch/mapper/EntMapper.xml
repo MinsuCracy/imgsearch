@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 30//EN"
 			select e_no, e_name, e_Atype, e_Btype, e_Ctype 
 			from tbl_ent 
 			
-			<if test="type != ''">
+			<if test="type != null">
 				<choose>
 					<when test='type eq "N"'>
 						where e_name like concat('%', #{keyword}, '%')

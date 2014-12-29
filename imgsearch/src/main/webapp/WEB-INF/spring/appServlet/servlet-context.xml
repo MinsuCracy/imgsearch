@@ -37,6 +37,6 @@
 	
 	<context:component-scan base-package="org.imgsearch.controller" />
 	
-	<context:component-scan base-package="org.imgsearch.service" />
+	
 	
 </beans:beans>
