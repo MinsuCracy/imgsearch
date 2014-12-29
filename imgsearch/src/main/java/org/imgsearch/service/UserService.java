@@ -1,18 +1,27 @@
 package org.imgsearch.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.imgsearch.mapper.UserMapper;
 import org.imgsearch.vo.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
@@ -124,5 +133,24 @@ public class UserService {
 		
 		
 	}
+	private UserMapper userMapper;
+	
+	
+	public void setUserMapper(UserMapper userMapper){
+		this.userMapper = userMapper;
+	}
+	
+	@Override
+	public UserDetails loadUserByUsername(String userName)
+			throws UsernameNotFoundException {
+		
+		String userPw = userMapper.getUserPw(userName);
+		
+		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 
+		UserDetails user = new User(userName, userPw , roles);
+		
+		return user;
+	}
 }

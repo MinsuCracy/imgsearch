@@ -1,9 +1,13 @@
 @CHARSET "EUC-KR";
 
-body{
-	background: #f6f6f6;
-}
 .main {
 	margin:auto;
 	padding-bottom: 20px;
+}
+.map2 {
+	width: 70%; 
+	height: 50%; 
+	margin: auto; 
+	padding-top: 90px";
+	border-radius: 5px;
 }

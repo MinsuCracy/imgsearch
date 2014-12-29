@@ -35,18 +35,13 @@ public class EntController {
 	public void entList(Model model, @ModelAttribute("cri") Criteria cri)throws Exception {		
 		cri.setTotalPage(entService.entTotal(cri));
 		model.addAttribute("entList", entService.entList(cri));
-		model.addAttribute("cri", cri);
 	}
 	
 	// 조회
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public void entRead(Model model, int e_no, @ModelAttribute("cri") Criteria cri) throws Exception {
-		
-		logger.info("view cri >>>>>>> " + cri.toString());
-		
 		model.addAttribute("ent", entService.entRead(e_no));
 		model.addAttribute("entStore", entService.entStore(e_no));
-		model.addAttribute("cri", cri);
 	}
 	
 	// 등록 화면
