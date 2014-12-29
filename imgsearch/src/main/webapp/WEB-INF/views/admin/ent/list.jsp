@@ -101,6 +101,8 @@ body {
 									<div class="dataTables_filter" id="DataTables_Table_0_filter">
 										<label>Search: <select class="span3" size="1"
 											name="type" aria-controls="DataTables_Table_0">
+												<option value=""
+													<c:if test="${cri.type eq ''}">selected="selected"</c:if>>선택</option>
 												<option value="N"
 													<c:if test="${cri.type eq 'N'}">selected="selected"</c:if>>이름</option>
 												<option value="A"
