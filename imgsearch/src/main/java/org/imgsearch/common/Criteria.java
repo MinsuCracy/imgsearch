@@ -5,26 +5,19 @@ public class Criteria {
 	private String type = "";
 	private String keyword = "";
 
-	// ���� ������
 	private int page;
 
-	// db�� limit ������ �� 10���� // ����Ʈ ��
 	private int dbLimit;
-	// db�� limit ������ �� 100���� // ����¡ ��
 	private int dbLimitTotal;
 
-	// ���κ��� ���� DbLimitTotal ��
-	private int totalPage; // ����¡
-
-	// jsp�� ������ ������
+	private int totalPage;
+	
 	private int startPage;
 	private int lastPage;
 
-	// jsp�� ������ ������
 	private boolean prePage;
 	private boolean nextPage;
 
-	// �������� �Ķ���Ͱ� ������ 1�������� ����
 	public Criteria() {
 		setPage(1);
 	}
@@ -33,7 +26,6 @@ public class Criteria {
 		return page;
 	}
 
-	// �������� �Ķ���͸� �ް� db�� ���� limit���� ����
 	public void setPage(int page) {
 		this.page = page;
 		setDbLimit(page);
@@ -44,7 +36,6 @@ public class Criteria {
 		return dbLimit;
 	}
 
-	// db�κ��� ���������� �����͸� ������ ���� ������������ 1�϶� db���� 0�� ����
 	public void setDbLimit(int page) {
 		this.dbLimit = (page - 1) * 10;
 	}
@@ -53,7 +44,6 @@ public class Criteria {
 		return totalPage;
 	}
 
-	// ��񿡰� ��û�� 101���� �������� ���Ϲ��� �������� ��
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 		setLastPage(totalPage);
@@ -63,7 +53,6 @@ public class Criteria {
 		return startPage;
 	}
 
-	// ���� ������ �������� ������������ ����
 	public void setStartPage(int page) {
 		this.startPage = (int) ((Math.floor(page / 10.000001)) * 10 + 1);
 		setPrePage();
@@ -74,7 +63,6 @@ public class Criteria {
 		return lastPage;
 	}
 
-	// setTotalPage�� �������� ������������ ����
 	public void setLastPage(int totalPage) {
 		this.lastPage = (int) (Math.ceil((totalPage - 1) / 10.0000001))
 				+ (int) ((Math.floor(startPage / 10.0000001))) * 10;

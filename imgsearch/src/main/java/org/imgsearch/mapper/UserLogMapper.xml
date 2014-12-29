@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 30//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.imgsearch.mapper.UserLogMapper">
+	
+	<select id="userLogList" resultType="org.imgsearch.vo.UserLogVO" parameterType="org.imgsearch.common.Criteria">
+	
+			select 
+			<choose>
+			
+				<when test="keyword != ''">
+					tbl1.l_no, tbl1.u_no, tbl2.u_id, tbl1.l_logindate, tbl1.l_logoutdate 
+					 from tbl_user_log as tbl1 join tbl_user as tbl2 on tbl1.u_no = tbl2.u_no
+					  where tbl2.u_id = #{keyword}  
+				</when>
+				
+				<otherwise>
+					tbl1.l_no, tbl1.u_no, tbl2.u_id, tbl1.l_logindate, tbl1.l_logoutdate 
+					 from tbl_user_log as tbl1 join tbl_user as tbl2 on tbl1.u_no = tbl2.u_no
+				</otherwise>
+			
+			</choose>
+			 order by l_no desc
+			 limit #{dbLimit}, 10
+	</select>
+	
+	<select id="userLogTotalCount" resultType="java.lang.Integer" parameterType="org.imgsearch.common.Criteria">
+	
+				select count(*) from 
+				<choose>
+					<when test="keyword != '' ">
+						 tbl_user_log as tbl1 join  
+						(select u_id, u_no from tbl_user where u_id = #{keyword}) as tbl2
+						on tbl1.u_no = tbl2.u_no
+					</when>
+					<otherwise>
+						 tbl_user_log 
+					</otherwise>
+				</choose>
+				
+				 limit #{dbLimitTotal}, 101
+	
+	</select>
+	
+
+</mapper>
