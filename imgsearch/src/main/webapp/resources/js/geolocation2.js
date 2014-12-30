@@ -1,6 +1,7 @@
 
     $(document).ready(function()
     {
+    	
         $(window).on("beforeunload", function(event) {
             socket.emit("disconnect");
 
@@ -156,3 +157,11 @@
 
         crruntMap.setBounds(bounds);
     }
+    function changeVal(){
+    	var $fri_id = $("[name=fri_id]").val();
+    	socket.emit("fri_id", $fri_id);
+    		console.log("클릭 발생~!~~~");
+    };
+    
+    
+    

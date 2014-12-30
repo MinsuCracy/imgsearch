@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,8 +11,7 @@
 <script src="/resources/user/js/modernizr.custom.63321.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=967f12c12424311a073c2995f73cd4402bfcbd96"></script>
-<script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-<script src="/resources/js/geolocation2.js"></script>
+
 <!-- <link rel="stylesheet" type="text/css" href="/resources/css/map2.css"> -->
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap2.css">
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
@@ -73,21 +73,26 @@
 		<div class="logo">
 			<a href="#">로고</a>
 		</div>
-		<div class="menu"><jsp:include page="friInclude.jsp"></jsp:include></div>
+		<div class="menu"><jsp:include page="friInclude.jsp" flush="true">
+			<jsp:param value="${id}" name="id"/>
+			<jsp:param value="${uno}" name="uno"/>
+		</jsp:include></div>
 		
          
 		<div class="container">
-<!-- 			<div class="row"> -->
 				<div id="map" class="map2"></div>
-					<input type="hidden" name="id" value="${id}"> 
+					<input type="hidden" name="id" value="${id}">
+					<input type="hidden" name="fri_id" onchange="changeVal()">
 					<input type="hidden" name="store" value="${store}">
 					<input type="hidden" name="loginForm" value="${loginForm}">
 					<div class="mapbutton">
 						<button class="btn" onclick="setBounds()">친구 한눈에 보기</button>
 						<button class="btn btn-danger" onclick="()">연결 끊기</button>
 					</div>
-<!-- 			</div> -->
 		</div>
+		
 	</div>
+<script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script src="/resources/js/geolocation2.js"></script>
 </body>
 </html>

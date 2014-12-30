@@ -22,8 +22,8 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
 	}
 
 	@Override
-	public String getUserPw(String userid) {
-		return (String)getSqlSession().selectOne("org.imgsearch.mapper.UserMapper.getUserPw", userid);
+	public UserVO getUser(String userid) {
+		return (UserVO)getSqlSession().selectOne("org.imgsearch.mapper.UserMapper.getUser", userid);
 	}
 
 	@Override
@@ -76,6 +76,24 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
 
 	@Override
 	public void userGrowUpdate(UserVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<UserVO> getFriendList(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserVO exist(UserVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertFriend(UserVO vo) {
 		// TODO Auto-generated method stub
 		
 	}

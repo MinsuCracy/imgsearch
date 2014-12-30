@@ -124,14 +124,20 @@
 		<div class="search">
 			<form class="form-search">
 				<input type="text" class="input-medium search-query"
-					name="addFriend" />
-				<button class="btn">추가</button>
+					name="f_uid" />
 			</form>
+				<button class="btn" onclick="addFriend()">추가</button>
 		</div>
 		<!-- 	</nav> -->
 	</div>
 
 <script>
+function addFriend(){
+	console.log("추가 클릭");
+	var $f_uid = $("[name=f_uid]").val();
+	$("[name=fri_id]").val($f_uid).change();
+}
+
 $("a").click(function(event){
 	event.preventDefault();
 	$(this).children().toggle();
@@ -150,7 +156,6 @@ function disableOther( button ) {
 		$(document).ready(function (){
 			
 			var loginForm = $("[name=loginForm]").val();
-			console.log(" 로그인 여부 : " + loginForm);
 			if(loginForm){
 				$("#login").trigger("click");
 			}
@@ -160,7 +165,7 @@ function disableOther( button ) {
 		loginOpen.onclick = function(){
 			$("#login").colorbox({
 				iframe:true, 
-				width:"40%", height:"50%",
+				width:"40%", height:"80%",
 				opacity: 0.5,
 				});
 		};
@@ -184,7 +189,7 @@ function disableOther( button ) {
 		};
 
 </script>
-
+	
 
 </body>
 </html>

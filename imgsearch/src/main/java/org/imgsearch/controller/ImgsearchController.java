@@ -2,6 +2,10 @@ package org.imgsearch.controller;
 
 import java.security.Principal;
 
+import javax.inject.Inject;
+
+import org.imgsearch.service.UserService;
+import org.imgsearch.vo.UserVO;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +20,22 @@ public class ImgsearchController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	@Inject
+	private UserService userService;
+	
 	@RequestMapping("/location")
 	public String index(Principal principal, Model model)throws Exception{
-		model.addAttribute("id", principal.getName());
-		logger.info(" 로그인 아이디 : " + principal.getName());
+		
+			logger.info("컨트롤로 입장 location");
+			logger.info("uno 값 : "  + userService.getUno());
+			model.addAttribute("uno" , userService.getUno());
+			model.addAttribute("id", principal.getName());
+			logger.info(" 로그인 아이디 : " + principal.getName());
 		return "/user/location";
+	}
+	@RequestMapping("/insertFriend")
+	public void insertFriend(UserVO vo)throws Exception{
+		userService.insertFriend(userService.existFriend(vo));
 	}
 }
 

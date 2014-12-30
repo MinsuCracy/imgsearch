@@ -2,6 +2,9 @@ package org.imgsearch.controller;
 
 import java.security.Principal;
 
+import javax.inject.Inject;
+
+import org.imgsearch.service.UserService;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user/*")
 public class LoginController {
 	
+	
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	@RequestMapping("/loginform")
@@ -21,7 +26,7 @@ public class LoginController {
 		return "/user/login";
 	}
 	@RequestMapping("/login")
-	public String login(Model model, Principal principal){
+	public String login(Model model){
 		model.addAttribute("loginForm", true);
 		return "/user/location";
 	}

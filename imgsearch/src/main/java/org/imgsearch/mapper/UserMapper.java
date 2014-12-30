@@ -66,5 +66,16 @@ public interface UserMapper {
 
 
 
-	public String getUserPw(String userId);
+	
+	public List<UserVO> getFriendList(String userId);
+	
+	//친구 등록전 친구존재 여부 파악
+	public UserVO exist(UserVO vo);
+	
+	public void insertFriend(UserVO vo);
+	
+	//로그인 
+	public UserVO getUser(String userId);
+	
+	
 }
