@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.imgsearch.common.Criteria;
 import org.imgsearch.mapper.UserMapper;
+import org.imgsearch.service.SearchLogService;
 import org.imgsearch.service.UserService;
 import org.imgsearch.vo.UserVO;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class UserTest {
 	
 	@Inject
 	UserService us;
+
 	
 //	1. 매퍼 단을 테스트하기 위한 부분
 	

@@ -20,6 +20,10 @@ public class AdminController {
 	public void user()throws Exception{
 		
 	}
+	@RequestMapping(value="/userlog")
+	public void userlog()throws Exception{
+	
+	}
 	@RequestMapping(value="/user/read")
 	public String userRead()throws Exception{
 		return "admin/userRead";

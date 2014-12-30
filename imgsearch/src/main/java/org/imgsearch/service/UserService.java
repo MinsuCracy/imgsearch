@@ -30,7 +30,6 @@ public class UserService implements UserDetailsService{
 	
 //	유저 생성을 위한 서비스
 	public String userInsert(UserVO vo){
-//		아래를 통과하지 못하면 여기서 걸러줍니다.
 		String result = "fail";
 		
 		if(vo.getU_id() != null && 
@@ -156,7 +155,6 @@ public class UserService implements UserDetailsService{
 		
 		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
 		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-
 		UserDetails user = new User(userName, userPw, roles);
 
 		return user;

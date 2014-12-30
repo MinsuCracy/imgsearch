@@ -65,7 +65,6 @@ public interface UserMapper {
 	public void userGrowUpdate(UserVO vo);
 
 
-
 	
 	public List<UserVO> getFriendList(String userId);
 	

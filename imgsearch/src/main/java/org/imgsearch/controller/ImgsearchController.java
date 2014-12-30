@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/user/*")
+@RequestMapping("/img")
 public class ImgsearchController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+
 	@Inject
 	private UserService userService;
 	
@@ -33,9 +34,15 @@ public class ImgsearchController {
 			logger.info(" 로그인 아이디 : " + principal.getName());
 		return "/user/location";
 	}
+
+	@RequestMapping("/index")
+	public void index()throws Exception{}
+		
+
 	@RequestMapping("/insertFriend")
 	public void insertFriend(UserVO vo)throws Exception{
 		userService.insertFriend(userService.existFriend(vo));
 	}
+
 }
 

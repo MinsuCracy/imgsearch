@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,7 +13,7 @@
 	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 <!-- Bootstrap -->
 <link href="/resources/admin/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" />
@@ -60,17 +61,22 @@
 
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
+<script>
+	function goInsertForm(){
+		location.href="/admin/store/regist";
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
-                    <jsp:param name="selected" value="2"/>
+                    <jsp:param name="selected" value="3"/>
     </jsp:include>
 	<div class="container-fluid fixed">
 
 		<div id="content">
 			<div class="heading-buttons">
 				<h2>
-					<a href="list" style="text-decoration: none; color:#606060;">회원 관리</a><span>| Action is the foundational key to success</span>
+					<a href="/admin/store/storelist">가게관리</a><span>| Action is the foundational key to success</span>
 				</h2>
 			</div>
 			<div class="widget widget-4 widget-body-white">
@@ -82,98 +88,82 @@
 								<div id="DataTables_Table_0_length" class="dataTables_length">
 								</div>
 							</div>
+							
+						
+								
 							<div class="span6">
 								<div class="dataTables_filter" id="DataTables_Table_0_filter">
 								
-									<form action="inquiry" method="get">
-									<label>Search:
-									<input type="text" aria-controls="DataTables_Table_0" name="inputData" id="inputData">
-									<input type="submit" value="검색" class="btn btn-primary"></label></form>
+									 
+									<form action="" method = "get">											<select class="span2" name= "type">
+ 												<option value="s_name" <c:if test="${cri.type eq 's_name'}">selected="selected"</c:if>>상호</option>	
+ 												<option value="s_homepage" <c:if test="${cri.type eq 's_homepage'}">selected="selected"</c:if>>홈페이지</option>
+ 												<option value="s_address" <c:if test="${cri.type eq 's_address'}">selected="selected"</c:if>>주소</option> 
+											</select>
+											<input class="span4" type="text" aria-controls="DataTables_Table_0" name="keyword" value= "${cri.keyword}">
+										<input class="span2"  aria-controls="DataTables_Table_0" type="submit" value="검색" >
+									</form>
+									
+									
+									
+									
 								</div>
 							</div>
+							
 						</div>
 						<div class="widget-body" style="padding: 10px 0 0;">
 							<table class="table table-bordered table-primary">
 								<thead>
 									<tr>
-										<th class="center">번호</th>
-										<th>아이디</th>
-										<th>성별</th>
-										<th>나이</th>
-										<th>직업</th>
-										<th>이메일</th>
+										<th class="center">＃</th>
+										<th>상호</th>
+										<th>홈페이지</th>
+										<th>위도</th>
+										<th>경도</th>
+										<th>주소</th>
 									</tr>
 								</thead>
-								<tbody>
-								<ul>
 								
-								<c:choose>
-								<c:when test="${!empty userList }">
-								<c:forEach var="list" items='${userList }'>
+								<c:forEach  var = "vo" items = "${list}" >
+								<tbody>
 									<tr>
-										<td class="center">${list.u_no}</td>
-										<td><a href="view?u_no=${list.u_no}">${list.u_id}</a></td>
-										<td>${list.u_gender }</td>
-										<td>${list.u_age } </td>
-										<td>${list.u_job } </td>
-										<td> ${list.u_email }</td>
+										<td class="center">${vo.s_no}</td>
+										<td><a href="/admin/store/view?s_no=${vo.s_no}">${vo.s_name}</a></td>
+										<td>${vo.s_homepage }</td>
+										<td>${vo.s_lat }</td>
+										<td> ${vo.s_lng}</td>
+										<td>${vo.s_address}</td>
 									</tr>
-										</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-										<td class="center" colspan="6">결과 값이 없습니다.</td>
-									</tr>
-								</c:otherwise>
-								</c:choose>
+									
 								</tbody>
+								</c:forEach>
 							</table>
 						</div>
 						<div class="row-fluid">
-							'<div class ="span2">
-								<button class="btn btn-block btn-primary" onclick="location.href='regist'">회원 등록</button>
+							<div class ="span2">
+								<button class="btn btn-block btn-primary" onclick="javascript:goInsertForm()">가게 등록</button>
 							</div>
 						</div>
 						<div class="row-fluid">
-<!-- 							<div class="span8"> -->
-								<div class="pagination pagination-centered pagination-small">
+							<div class="span8">
+								<div class="dataTables_paginate paging_bootstrap pagination">
 									<ul>
-										<c:if test='${cri.prePage eq true}'>
-										 <li class="prev"><a href="list?page=${cri.startPage-1}">← Previous</a></li>
-										</c:if>
-										
-										<c:if test="${empty inputData}">
-										
-										<c:forEach varStatus="pageList" begin='${cri.startPage}' end='${cri.lastPage}'>
-										<c:choose>
-											<c:when test="${cri.page eq pageList.index }"><li class="active">
-												<a href="list?page=${pageList.index }">${pageList.index }</a></li>
-											</c:when>
-											<c:otherwise>
-											<li><a href="list?page=${pageList.index }">${pageList.index }</a></li>
-											</c:otherwise>
-											</c:choose>
+										<c:if test="${cri.prePage == true }"><li class="prev disabled"><a href="/admin/store/storelist?page=${cri.startPage - 10 }&type=${cri.type}&keyword=${cri.keyword}">← Previous</a></li></c:if>
+										<c:forEach var = "p"  begin="${cri.startPage}" end="${cri.startPage + cri.lastPage -1}">
+											<li><a href="/admin/store/storelist?page=${p}&type=${cri.type}&keyword=${cri.keyword}">${p}</a></li>
 										</c:forEach>
-										</c:if>
-										
-										<c:if test="${cri.nextPage eq true }">
-										<li class="next"><a href="list?page=${cri.lastPage+1}">Next → </a></li>
-										</c:if>
+										<c:if test="${cri.nextPage == true }"><li class="next"><a href="/admin/store/storelist?page=${cri.startPage + cri.lastPage + 1 }&type=${cri.type}&keyword=${cri.keyword}">Next → </a></li></c:if>
 									</ul>
 								</div>
- 							</div> 
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<c:if test="${not empty inputData  }">
-		<script>
-			document.getElementById("inputData").defaultValue = "${inputData}";
-		</script>
-		
-	</c:if>
+	
+	
 	
 	
 </body>
