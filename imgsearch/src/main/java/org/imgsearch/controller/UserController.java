@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller
-@RequestMapping("admin/user/*")	
+@RequestMapping("admin/user/*")
 public class UserController {
 	
 	@Inject
@@ -38,7 +39,7 @@ public class UserController {
 	public void list(Model model, @ModelAttribute("cri") Criteria cri){
 		cri.setTotalPage(us.userCount(cri.getDbLimitTotal()));
 
-		logger.info("result       "+cri.getDbLimit());
+		logger.info("result"+cri.getDbLimit());
 		logger.info("total : "+ cri.getTotalPage());
 		logger.info("start : "+ cri.getStartPage());
 		logger.info("last  :"+cri.getLastPage());
@@ -60,9 +61,7 @@ public class UserController {
 //	유저 생성을 위한 컨트롤러
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String userInsert(UserVO vo){
-		logger.info(vo.toString());
 		String result = us.userInsert(vo);
-		logger.info(result);
 		
 		if(result=="fail"){
 			return "redirect:/admin/user/fail";
@@ -140,8 +139,6 @@ public class UserController {
 	
 	
 //	회원 정보 삭제를 위한 컨트롤러
-	
-	
 	
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	public String userDelete(UserVO vo){
