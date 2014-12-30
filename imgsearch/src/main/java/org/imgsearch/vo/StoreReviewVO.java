@@ -2,13 +2,22 @@ package org.imgsearch.vo;
 
 import java.sql.Date;
 
-public class StoreRVVO {
+public class StoreReviewVO {
 
 	private int s_no;
 	private int r_no;
 	private String u_id;
 	private String r_comment;
 	private Date r_regdate;
+	private int r_score;
+	
+	
+	public int getR_score() {
+		return r_score;
+	}
+	public void setR_score(int r_score) {
+		this.r_score = r_score;
+	}
 	public int getS_no() {
 		return s_no;
 	}
@@ -42,8 +51,11 @@ public class StoreRVVO {
 	@Override
 	public String toString() {
 		return "StoreRVVO [s_no=" + s_no + ", r_no=" + r_no + ", u_id=" + u_id
-				+ ", r_comment=" + r_comment + ", r_regdate=" + r_regdate + "]";
+				+ ", r_comment=" + r_comment + ", r_regdate=" + r_regdate
+				+ ", r_score=" + r_score + "]";
 	}
+	
+	
 	
 	
 	

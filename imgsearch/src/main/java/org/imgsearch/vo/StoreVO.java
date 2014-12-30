@@ -5,18 +5,28 @@ public class StoreVO {
 	private int s_no;
 	private String s_name;
 	private String s_homepage;
-	private Double s_lat;
-	private Double s_lng;
+	private double s_lat;
+	private double s_lng;
 	private String s_address;
+	private String s_img;
 	
 	
 	
 	
 	
 	
-	
-	
-	
+	public String getS_img() {
+		return s_img;
+	}
+	public void setS_img(String s_img) {
+		this.s_img = s_img;
+	}
+	public void setS_lat(double s_lat) {
+		this.s_lat = s_lat;
+	}
+	public void setS_lng(double s_lng) {
+		this.s_lng = s_lng;
+	}
 	public int getS_no() {
 		return s_no;
 	}

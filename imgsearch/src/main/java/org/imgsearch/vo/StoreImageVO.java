@@ -1,10 +1,11 @@
 package org.imgsearch.vo;
 
-public class StoreIVO {
+public class StoreImageVO {
 
 	private int s_no;
 	private int si_no;
 	private String si_img;
+	
 	public int getS_no() {
 		return s_no;
 	}

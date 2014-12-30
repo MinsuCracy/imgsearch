@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		
 		var firstEnter = $("#first").val();
 		console.log("처음 들어올때 : " + firstEnter);
@@ -15,7 +15,7 @@
 			location.href = "/admin/user";
 		}
 		
-	});
+	}); */
 </script>
 </head>
 <body>
