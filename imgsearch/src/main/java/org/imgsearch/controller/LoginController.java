@@ -1,16 +1,12 @@
 package org.imgsearch.controller;
 
-import java.security.Principal;
-
-import javax.inject.Inject;
-
-import org.imgsearch.service.UserService;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/user/*")
@@ -23,12 +19,12 @@ public class LoginController {
 	@RequestMapping("/loginform")
 	public String loginForm(){
 		logger.info("로그인 컨트롤 입장");
-		return "/user/login";
+		return "redirect:/user/login";
 	}
 	@RequestMapping("/login")
-	public String login(Model model){
-		model.addAttribute("loginForm", true);
-		return "/user/location";
+	public void login(Model model){
+		logger.info("로그인 fasdfasdfasdf");
+//		model.addAttribute("loginForm", true);
 	}
 }
 

@@ -32,9 +32,10 @@
 	<mybatis-spring:scan base-package="org.imgsearch.mapper"/>	
 	
 	<security:http  auto-config="true">
-<!-- 		<security:intercept-url pattern="/user/location" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
+		<security:intercept-url pattern="/img/main" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/user/location" access="ROLE_USER"/>
-		<security:form-login login-page="/user/login" default-target-url="/user/location"
+		
+		<security:form-login login-page="/user/login" default-target-url="/img/main"
 			authentication-failure-url="/loginFail"
 			login-processing-url="/check"
 			username-parameter="username"

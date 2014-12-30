@@ -6,19 +6,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-
-<!-- <script -->
-<!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script> -->
-
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 <!-- 친구찾기 버튼 -->
-<link rel="stylesheet" type="text/css" href="/resources/main/menu/css/default.css" />
-<link rel="stylesheet" type="text/css" href="/resources/main/menu/css/component.css" />
-<script src="/resources/main/menu/js/classie.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/user/default.css" />
+<link rel="stylesheet" type="text/css" href="/resources/user/component3.css" />
 <link rel="stylesheet" type="text/css" href="/resources/colorbox/colorbox.css" />
+<script src="/resources/user/classie.js"></script>
 <script src="/resources/colorbox/jquery.colorbox.js"></script>
-<!-- Font Awesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
 
 <style type="text/css">
 #navs {
@@ -32,8 +29,7 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  font-family: 'Nanum Gothic';
-  color: black; 
+  color: #fff;
   cursor: pointer;
 }
 
@@ -44,9 +40,9 @@
   top: 0;
   width: 100%;
   height: 100%;
-  border-radius: 20%;
-  -webkit-border-radius: 20%;
-  background-color: #3d9167; /* #51fcf7; */
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  background-color: #e74c3c;
 }
 
 #navs>li {
@@ -58,8 +54,8 @@
 #navs:after {
   content: attr(data-close);
   z-index: 1;
-  border-radius: 20%;
-  -webkit-border-radius: 20%;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
 }
 
 
@@ -67,43 +63,23 @@
   width: 40px;
   height: 40px;
   display: inline-block;
-  border-radius: 30%;
-  -webkit-border-radius: 30%;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
   text-decoration: none;
   color: #fff;
   font-size: 0.8em;
 }
-
-#toTop{
-	display:none;
-	position:fixed;
-	bottom:5px;
-	right:5px;
-	width:64px;
-	height:64px;
-	background-image:url(/images/up.png);
-	background-repeat:no-repeat;
-	opacity:.6;
-	filter:alpha(opacity=60);
-	}
-	
-#toTop:hover{
-	opacity:1;
-	filter:alpha(opacity=100);
-}
-
-
 </style>
 </head>
 <body>
 
 
-<ul id="navs" class="hi-icon hi-icon-images" style="color: #fff;" data-open="-" data-close="메뉴">
-  <li><a id="login" href="/user/loginform"><i class="fa fa-sign-out fa-lg"></i></a></li>
-  <li><a><i class="fa fa-info-circle fa-lg"></i></a></li>
-  <li><a id="friend"><i class="fa fa-users fa-lg"></i></a></li>
-  <li><a href="/user/location">친구찾기</a></li>
-  <li><a><i class="fa fa-cog fa-lg"></i></a></li>
+<ul id="navs" data-open="-" data-close="+">
+  <li><a id="login" href="/user/loginform">login</a></li>
+  <li><a>memb</a></li>
+  <li><a id="friend">friend</a></li>
+  <li><a>menu</a></li>
+  <li><a>menu</a></li>
 </ul>
 
 <script type="text/javascript">
@@ -126,7 +102,7 @@
 	});
 })($);
 </script>
-		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+	<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 		<!-- 	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2"> -->
 		<h3>
 			친구목록<span><button class="close" id="menuclose"/></span>
@@ -155,7 +131,6 @@
 		<!-- 	</nav> -->
 	</div>
 
-
 <script>
 function addFriend(){
 	console.log("추가 클릭");
@@ -167,6 +142,7 @@ $("a").click(function(event){
 	event.preventDefault();
 	$(this).children().toggle();
 });
+
 
 function disableOther( button ) {
 	if( button !== 'showRight' ) {
@@ -193,9 +169,10 @@ function disableOther( button ) {
 				opacity: 0.5,
 				});
 		};
-
+		
 		var friendOpen = document.getElementById( 'friend' );
 		var friendClose = document.getElementById( 'menuclose');
+		
 		
 		friendOpen.onclick = function() {
 			
@@ -212,6 +189,7 @@ function disableOther( button ) {
 		};
 
 </script>
+	
 
 </body>
 </html>
