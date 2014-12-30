@@ -28,7 +28,7 @@ public class SearchLogController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchLogController.class);
 	
 	@RequestMapping("/")
-	public String sendList(){
+	public String sendSearchLogList(){
 		return "redirect:/admin/searchlog/list";
 	}
 	
@@ -46,28 +46,7 @@ public class SearchLogController {
 		model.addAttribute("favoriteEntList", fEnt);
 		model.addAttribute("favoriteKeyList", fKey);
 		
-		
-		
-		
-		
-		ArrayList<Integer> test = new ArrayList();
-		test.add(1);
-		test.add(2);
-		test.add(3);
-		
-		model.addAttribute("test", test);
-		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

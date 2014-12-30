@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.service.UserLogService;
 import org.imgsearch.vo.UserLogVO;
+import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
