@@ -20,8 +20,22 @@ public class UserVO {
 	private int ug_Atype;
 	private int ug_Btype;
 	private int ug_Ctype;
+	private int f_uno;
+	private String f_uid;
 	
 	
+	public int getF_uno() {
+		return f_uno;
+	}
+	public void setF_uno(int f_uno) {
+		this.f_uno = f_uno;
+	}
+	public String getF_uid() {
+		return f_uid;
+	}
+	public void setF_uid(String f_uid) {
+		this.f_uid = f_uid;
+	}
 	public int getU_no() {
 		return u_no;
 	}
@@ -139,8 +153,10 @@ public class UserVO {
 				+ ug_kind + ", ug_intell=" + ug_intell + ", ug_face=" + ug_face
 				+ ", ug_trouble=" + ug_trouble + ", ug_rumor=" + ug_rumor
 				+ ", ug_Atype=" + ug_Atype + ", ug_Btype=" + ug_Btype
-				+ ", ug_Ctype=" + ug_Ctype + "]";
+				+ ", ug_Ctype=" + ug_Ctype + ", f_uno=" + f_uno + ", f_uid="
+				+ f_uid + "]";
 	}
+
 	
 	
 	

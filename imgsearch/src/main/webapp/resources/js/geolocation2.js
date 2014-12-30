@@ -1,7 +1,7 @@
 
-
     $(document).ready(function()
     {
+    	
         $(window).on("beforeunload", function(event) {
             socket.emit("disconnect");
 
@@ -10,7 +10,7 @@
     });
 
 
-    var socket = io.connect('61.72.15.156:5555/');
+    var socket = io.connect('localhost:5555/');
     	
     navigator.geolocation.getCurrentPosition(firstLocation, handleLocationError, {enableHighAccuracy:true});
     navigator.geolocation.watchPosition(updateLocation, handleLocationError, {enableHighAccuracy:true});
@@ -94,14 +94,13 @@
     var userid = $("[name=id]").val();
     
     socket.on("change", function(data){
-        client.HVALS(userid, function (err, data) {
+    	console.log(data);
 	        for (var i in data) {
 	
 	            var json = JSON.stringify(data[i]);
 	
 	            var json2 = JSON.parse(data[i]);
-	            console.log(json2);
-	
+	        
 	            if(json2.connected == true) {
 	
 	                var imageSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png'; // 마커이미지의 주소입니다
@@ -142,7 +141,7 @@
 	            }
 	        }
         boundsSet();
-        });
+        
     });
 
 
@@ -158,3 +157,11 @@
 
         crruntMap.setBounds(bounds);
     }
+    function changeVal(){
+    	var $fri_id = $("[name=fri_id]").val();
+    	socket.emit("fri_id", $fri_id);
+    		console.log("클릭 발생~!~~~");
+    };
+    
+    
+    

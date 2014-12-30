@@ -1,18 +1,27 @@
 package org.imgsearch.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.imgsearch.mapper.UserMapper;
 import org.imgsearch.vo.UserVO;
-import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService{
+	
+	String userPw = null;
+	int uno = 0;
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
@@ -123,5 +132,51 @@ public class UserService {
 		
 		
 	}
+	private UserMapper userMapper;
+	
+	
+	public void setUserMapper(UserMapper userMapper){
+		this.userMapper = userMapper;
+	}
+	
+	
+	//로그인
+	@Override
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		
+		
+//		String userPw = userMapper.getUserPw(userName);
+		UserVO vo = userMapper.getUser(userName);
+		
+		uno = vo.getU_no();
+		userPw = vo.getU_pw();
+			
+		setUno(uno);
+		
+		Collection<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+		roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+		UserDetails user = new User(userName, userPw, roles);
 
+		return user;
+	}
+	//유저 uno
+	public void setUno(int uno)
+    {
+        this.uno = uno;
+    }
+	//유저 uno
+    public int getUno()
+    {
+        return uno;
+    }
+    
+    //친구 등록 하기전에 존재여부
+	public UserVO existFriend(UserVO vo) {
+		return um.exist(vo);
+	}
+
+	public void insertFriend(UserVO vo) {
+		um.insertFriend(vo);
+		
+	}
 }

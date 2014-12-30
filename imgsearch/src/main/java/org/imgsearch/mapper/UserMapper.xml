@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.imgsearch.mapper.UserMapper">
+	<resultMap type="org.imgsearch.vo.UserVO" id="friend">
+		<result property="u_no" column="u_no"/>
+		<result property="u_id" column="f_uid"/>
+	</resultMap>
+	
+	<select id = "getUser" resultType="org.imgsearch.vo.UserVO">
+		select * from tbl_user where u_id = #{userId}
+	</select>
+	
+	<insert id="insertFriend" parameterType="org.imgsearch.vo.UserVO">
+		insert into tbl_user_friend (u_no, u_id, f_uno, f_uid)values(#{u_no},#{u_id},#{f_uno},#{f_uid})
+	</insert>
+		
+	<select id="exist" parameterType="org.imgsearch.vo.UserVO" resultMap="friend">
+		select u_no, u_id from tbl_user where u_id = #{f_uid} 
+	</select>
+	
+</mapper>
