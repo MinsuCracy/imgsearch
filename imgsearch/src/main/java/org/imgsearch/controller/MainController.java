@@ -1,5 +1,6 @@
 package org.imgsearch.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -34,8 +36,10 @@ public class MainController {
 	}
 	
 	@RequestMapping("/main")
-	public void main(@ModelAttribute("cri") Criteria cri){
-	
+	public void main(@ModelAttribute("cri") Criteria cri, Principal principal, Model model)throws Exception{
+		if(principal != null){
+			model.addAttribute("id", principal.getName());
+		}
 	}
 	
 		

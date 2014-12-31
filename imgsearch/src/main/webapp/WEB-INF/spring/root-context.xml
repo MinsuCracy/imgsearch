@@ -4,8 +4,8 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
@@ -41,7 +41,7 @@
 			username-parameter="username"
 			password-parameter="userpw"
 			/>
-		<security:logout logout-success-url="/user/location"/>
+		<security:logout logout-success-url="/img/main"/>
 		<security:session-management>
 			<security:concurrency-control max-sessions="1" expired-url="/login_duplicate"/>
 		</security:session-management>

@@ -10,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/user/css/style.css" />
 <script src="/resources/user/js/modernizr.custom.63321.js"></script>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=967f12c12424311a073c2995f73cd4402bfcbd96"></script>
 
 <!-- <link rel="stylesheet" type="text/css" href="/resources/css/map2.css"> -->
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap2.css">
@@ -81,10 +80,8 @@
          
 		<div class="container">
 				<div id="map" class="map2"></div>
-					<input type="hidden" name="id" value="${id}">
-					<input type="hidden" name="fri_id" onchange="changeVal()">
+<%-- 					<input type="hidden" name="id" value="${id}"> --%>
 					<input type="hidden" name="store" value="${store}">
-					<input type="hidden" name="loginForm" value="${loginForm}">
 					<div class="mapbutton">
 						<button class="btn" onclick="setBounds()">친구 한눈에 보기</button>
 						<button class="btn btn-danger" onclick="()">연결 끊기</button>
@@ -92,7 +89,6 @@
 		</div>
 		
 	</div>
-<script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-<script src="/resources/js/geolocation2.js"></script>
+
 </body>
 </html>

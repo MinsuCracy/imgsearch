@@ -20,22 +20,18 @@ public class ImgsearchController {
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	@Inject
-	private UserService userService;
 	
 	@RequestMapping("/location")
 	public String index(Principal principal, Model model)throws Exception{
 		
 			logger.info("컨트롤로 입장 location");
-			logger.info("uno 값 : "  + userService.getUno());
-			model.addAttribute("uno" , userService.getUno());
 			model.addAttribute("id", principal.getName());
 			logger.info(" 로그인 아이디 : " + principal.getName());
 		return "/user/location";
 	}
-	@RequestMapping("/insertFriend")
-	public void insertFriend(UserVO vo)throws Exception{
-		userService.insertFriend(userService.existFriend(vo));
-	}
+//	@RequestMapping("/insertFriend")
+//	public void insertFriend(UserVO vo)throws Exception{
+//		userService.insertFriend(userService.existFriend(vo));
+//	}
 }
 

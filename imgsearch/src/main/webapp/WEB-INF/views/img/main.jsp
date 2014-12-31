@@ -8,8 +8,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-
-
+<link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap2.css">
+<link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/bbs/css/style.css" /> -->
 <!-- <script src="/resources/main/bbs/js/modernizr.custom.63321.js"></script> -->
 
@@ -321,7 +321,11 @@ html,body{
 	
 	
 	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="max-height: 100%;"></a></div>
-	<div class="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
+	<div class="menu">
+		<jsp:include page="menubutton.jsp">
+			<jsp:param value="${id}" name="id"/>
+		</jsp:include>
+	</div>
 	
 	
 	<div id="mainGridWrap">

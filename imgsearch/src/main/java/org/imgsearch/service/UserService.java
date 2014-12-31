@@ -8,8 +8,6 @@ import javax.inject.Inject;
 
 import org.imgsearch.mapper.UserMapper;
 import org.imgsearch.vo.UserVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,13 +15,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class UserService implements UserDetailsService{
 	
 	String userPw = null;
 	int uno = 0;
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	@Inject
 	UserMapper um;

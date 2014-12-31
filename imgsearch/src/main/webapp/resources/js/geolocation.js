@@ -11,7 +11,9 @@
 
 
     var socket = io.connect('localhost:5555/');
-    	
+    
+    
+    
     navigator.geolocation.getCurrentPosition(firstLocation, handleLocationError, {enableHighAccuracy:true});
     navigator.geolocation.watchPosition(updateLocation, handleLocationError, {enableHighAccuracy:true});
 
@@ -54,7 +56,7 @@
 //        document.getElementById("acc").innerHTML=acc;
         var container = document.getElementById('map');
 
-        var userid = $("[name=id]").val();
+        var userid = $("[name=myid]").val();
         console.log(userid);
         socket.emit("id",userid);
 
@@ -91,7 +93,7 @@
     var friMarker;
     var markerCnt = 0;
     var infowindow;
-    var userid = $("[name=id]").val();
+//    var userid = $("[name=id]").val();
     
     socket.on("change", function(data){
     	console.log(data);
@@ -157,11 +159,31 @@
 
         crruntMap.setBounds(bounds);
     }
-    function changeVal(){
-    	var $fri_id = $("[name=fri_id]").val();
-    	socket.emit("fri_id", $fri_id);
-    		console.log("클릭 발생~!~~~");
-    };
+    function addFriend(){
+    	console.log("추가 클릭");
+    	var $f_uid = $("[name=f_uid]").val();
+    	socket.emit("fri_id", $f_uid);
+    }
+    socket.on("requestFriend", function(result){
+    	requestFriend(result.name,result.state);
+    	
+    });
+    $("#agree").click(function(e){
+    	this.slideDown();
+    	
+    });
+    function accept(event){
+    	
+//    	socket.emit("agree",name);
+//    	$('#'+name).slideDown('slow');
+//    	console.log("클릭2");
+    }
+//    	socket.on("addFriendSuccess", function(success){
+//    		if(success ==1){
+//    			var div = "<div class='rfd'><h5>"+name+"님이 추가 되었습니다.</h5><button class='btn'>확인</button></div>";
+//    			$("body").append(div);
+//    		}
+//    	});
     
     
     

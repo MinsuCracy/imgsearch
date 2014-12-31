@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -13,13 +14,15 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- 친구찾기 버튼 -->
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/default.css" />
-<link rel="stylesheet" type="text/css" href="/resources/main/menu/css/component.css" />
+<link rel="stylesheet" type="text/css" href="/resources/user/component3.css" />
 <script src="/resources/main/menu/js/classie.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/colorbox/colorbox.css" />
 <script src="/resources/colorbox/jquery.colorbox.js"></script>
 <!-- Font Awesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=967f12c12424311a073c2995f73cd4402bfcbd96"></script>
+<script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script src="/resources/js/geolocation.js"></script>
 <style type="text/css">
 #navs {
   position: fixed;
@@ -91,19 +94,31 @@
 	opacity:1;
 	filter:alpha(opacity=100);
 }
-
-
+.rfd{
+	width:170px;
+	height:100px;
+	background-color: gray;
+	position: fixed;
+	right:0px;
+	bottom:-100px;
+	text-align: center;
+}
 </style>
 </head>
 <body>
 
 
 <ul id="navs" class="hi-icon hi-icon-images" style="color: #fff;" data-open="-" data-close="메뉴">
-  <li><a id="login" href="/user/loginform"><i class="fa fa-sign-out fa-lg"></i></a></li>
+<%--   <sec:authorize ifNotGranted="ROLE_USER"> --%>
+  <li><a id="login" href="/user/loginform"><i class="fa fa-sign-in fa-lg"></i></a></li>
+<%--   </sec:authorize> --%>
+<%--   <sec:authorize ifAnyGranted="ROLE_USER"> --%>
+  <li><a id="login" href="/j_spring_security_logout"><i class="fa fa-sign-out fa-lg"></i></a></li>
   <li><a><i class="fa fa-info-circle fa-lg"></i></a></li>
   <li><a id="friend"><i class="fa fa-users fa-lg"></i></a></li>
   <li><a href="/user/location">친구찾기</a></li>
   <li><a><i class="fa fa-cog fa-lg"></i></a></li>
+<%--   </sec:authorize> --%>
 </ul>
 
 <script type="text/javascript">
@@ -133,7 +148,7 @@
 		</h3>
 		<div class="friList">
 			<a href="#"><i class="icon-ok" style="display: none"></i>강민수</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
+					<a id="friendOne" href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
 					<a href="#"><i class="icon-ok" style="display: none"></i>전태환</a> 
 					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
 					<a href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
@@ -147,6 +162,7 @@
 		</div>
 		<div class="search">
 			<form class="form-search">
+				<input type="hidden" value="${id}" name="myid"></input>
 				<input type="text" class="input-medium search-query"
 					name="f_uid" />
 			</form>
@@ -154,16 +170,15 @@
 		</div>
 		<!-- 	</nav> -->
 	</div>
-
+	
+<!-- 	<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="request-Friend"> -->
+<!-- 		<h3>requestFriend</h3> -->
+<!-- 	</div> -->
 
 <script>
-function addFriend(){
-	console.log("추가 클릭");
-	var $f_uid = $("[name=f_uid]").val();
-	$("[name=fri_id]").val($f_uid).change();
-}
 
-$("a").click(function(event){
+
+$("#friendOne").click(function(event){
 	event.preventDefault();
 	$(this).children().toggle();
 });
@@ -191,7 +206,10 @@ function disableOther( button ) {
 				iframe:true, 
 				width:"40%", height:"80%",
 				opacity: 0.5,
-				});
+				onClosed: function() {
+					location.reload();
+				}
+			});
 		};
 
 		var friendOpen = document.getElementById( 'friend' );
@@ -210,8 +228,16 @@ function disableOther( button ) {
 			classie.toggle( menuRight, 'cbp-spmenu-open' );
 			disableOther( 'showRight' );
 		};
+		function requestFriend(name,state){
+			console.log("requestFriend 실행: " +name+", 상태 : "+state);
+			var div = "<div class='rfd' id='"+name+"'><h5>"+name+"님이<br/> 친구 요청을 하셨습니다.</h5><button class='btn' style='margin-right:10px'>거절</button><button id='agree' class='btn'>수락</button></div>";
+			$("body").append(div);
+			$('#'+name).animate({ bottom:'0px'},1000);
+		}
 
 </script>
+
+
 
 </body>
 </html>

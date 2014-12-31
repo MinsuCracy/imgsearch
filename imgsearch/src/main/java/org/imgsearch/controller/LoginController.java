@@ -18,12 +18,10 @@ public class LoginController {
 	
 	@RequestMapping("/loginform")
 	public String loginForm(){
-		logger.info("로그인 컨트롤 입장");
 		return "redirect:/user/login";
 	}
 	@RequestMapping("/login")
 	public void login(Model model){
-		logger.info("로그인 fasdfasdfasdf");
 //		model.addAttribute("loginForm", true);
 	}
 }
