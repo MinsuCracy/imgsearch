@@ -287,12 +287,12 @@ html,body{
 </style>
 </head>
 <body>
-<!-- 	<form name="MainForm"> -->
-<!-- 		<input type="hidden" name="keyword" > -->
-<!-- 		<input type="hidden" name="e_no"> -->
-<!-- 		<input type="hidden" name="page"> -->
+	<form name="MainForm">
+		<input type="hidden" name="keyword" value="${cri.keyword }">
+		<input type="hidden" name="e_no" value="${cri.e_no }">
+		<input type="hidden" name="page" value="${cri.page }">
 <!-- 		<input type="hidden" name="s_no" > -->
-<!-- 	</form> -->
+	</form>
 	
 	
 	
@@ -301,7 +301,7 @@ html,body{
 		<div>
 		
 			<form>
-				<input type="text" name="endKeyword" placeholder="연예인이름">
+				<input type="text" name="entKeyword" placeholder="연예인이름">
 				<input type="submit" values="검색">			
 			</form>
 				
@@ -312,11 +312,12 @@ html,body{
 	
 <div class="wrap"> 
 	
-	<div id="mainBar">
-		<form style="text-align: center; ">
+	<div id="mainBar" style="text-align: center;">
+<!-- 		<form style="text-align: center; "> -->
 			<input style="height:30px; width:25%; margin-top:10px; " Stype="text" name="topSearch" value="">
-			<input style="height:30px; width:5%; margin-top:10px;" type="submit" vlaue="검색">
-		</form>
+			<button>aaaa</button>
+<!-- 			<input style="height:30px; width:5%; margin-top:10px;" type="submit1" vlaue="검색"> -->
+<!-- 		</form> -->
 	
 	</div>
 	
@@ -422,10 +423,10 @@ html,body{
 	<div id="searchGrid">
 <!-- 		<div id="searchBar" > -->
 		<div>
-			<input  type="text" name="keyword" placeholder="search" value="" >
+			<input  type="text" name="searchKeyword" placeholder="search" value="" >
 			<input type="hidden" name="e_no" value="">
 			
-			<input  type="submit" value="검색" >
+			<button >검색</button>
 		</div>
 <!-- 		</div> -->
 	</div>
@@ -599,11 +600,21 @@ $("#popup2 button").on("click",function(){
 
 
 var searchKey ="";
-//검색버튼 클릭시..search함수 실행
-$("#searchGrid input[type='submit']").on("click", function(){
-// 	$("#searchList").remove();
-	gosearch($("[name=keyword]").val(),($("[name=e_no]").val()),1);
-	searchKey = $("[name=keyword]").val()
+
+// 상단 검색버튼 클릭시..search함수 실행
+$("#mainBar button").on("click", function(){
+	gosearch($("[name=topSearch]").val(),($("[name=e_no]").val()),1);
+	searchKey = $("[name=topSearch]").val();
+	$("[name=keyword]").val(searchKey);
+	
+});//end function
+
+
+// 하단 검색버튼 클릭시..search함수 실행
+$("#searchGrid button").on("click", function(){
+	gosearch($("[name=searchKeyword]").val(),($("[name=e_no]").val()),1);
+	searchKey = $("[name=searchKeyword]").val();
+	$("[name=keyword]").val(searchKey);
 	
 });//end function
 
@@ -611,6 +622,12 @@ $("#searchGrid input[type='submit']").on("click", function(){
 function vp_GoTo(scroll){
    
     $('html, body').animate({ scrollTop: scroll }, 'slow');
+       
+}//end function
+
+function vp_GoListView(){
+	 var target = document.getElementById("searchList");
+	 target.scrollIntoView(true);
        
 }//end function
 
@@ -685,7 +702,7 @@ function entImg(){
 }//end function
 
 
-
+var bbsList = false;
 // 도큐먼트 레디... 서치 바 조정 및 이미지 애니매이션
 $(document).ready(function() {
 	
@@ -700,13 +717,14 @@ $(document).ready(function() {
 	}
 	
 	if('${cri.keyword}' !=  "" && '${cri.e_no}' != null){
+		bbsList = true;
 		gosearch('${cri.keyword}','${cri.e_no}','${cri.page}');
 		searchKey = '${cri.keyword}';
-		$("[name=keyword]").val(searchKey);
+		$("[name=searchKeyword]").val(searchKey);
 		$("[name=topSearch]").val(searchKey);
+		
 	}
 	
-// 	$(".searchBar").css({width : ($(document).width()) * 0.3,	height : ($(document).height()) * 0.05	});
 		var Grid = $("#mainGrid").children();
 		
 		Grid.each(function(index,target){
@@ -724,8 +742,8 @@ $(document).ready(function() {
 				$target.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "translateZ(0px)"});
 			});//end target on
 		});// end each	
+		
 }); // end function
-	
 
 
 //윈도우 리사이즈... 서치 바 조정 및 이미지 애니매이션
@@ -756,7 +774,7 @@ $(document).ready(function() {
 
 
 
-var bbsList = false;
+
 // 함수 실행시 하단에 게시판 생성..
 function gosearch(keyword,e_no,page){
 	
@@ -767,6 +785,12 @@ function gosearch(keyword,e_no,page){
 	$("#searchList").remove();
 	$(document.body).append("<div id='searchList'></div>");
 	
+	if(bbsList == false){
+		vp_GoTo(hei);
+	}else{
+		vp_GoListView();
+	}
+	
 	$.ajax({
 		url:"/img/storeList?keyword="+keyword+"&e_no="+e_no+"&page="+page,
 		type:"get",
@@ -774,6 +798,7 @@ function gosearch(keyword,e_no,page){
 		success:function(data){
 			
 			$("#searchList").append(data);
+			
 			
 // 			if(bbsList == false){
 // 				$(document.body).append(""
@@ -814,8 +839,9 @@ function gosearch(keyword,e_no,page){
 // 					+" <\/script> "
 // 				);
 
-
-			vp_GoTo(hei);
+		
+			
+			
 			
 		}// end success
 	});// end ajax
@@ -865,7 +891,11 @@ var page=1;
 <script>
 function goPage(page){
 	
-	gosearch('${cri.keyword}','${cri.e_no}',page);
+	location.href="/img/main?keyword="+$("[name=keyword]").val()
+					+"&e_no="+$("[name=e_no]").val()
+					+"&page="+page;
+	
+// 	gosearch('${cri.keyword}','${cri.e_no}',page);
 	
 	
 }
