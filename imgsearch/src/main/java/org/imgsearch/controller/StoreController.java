@@ -9,10 +9,10 @@ import org.imgsearch.service.StoreService;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreCVO;
 import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreIVO;
 import org.imgsearch.vo.StoreKVO;
 import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreReviewVO;
+import org.imgsearch.vo.StoreRVVO;
 import org.imgsearch.vo.StoreVO;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
@@ -66,7 +66,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String storeregist(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreImageVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo, StoreCVO cvo) {
+	public String storeregist(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreIVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo, StoreCVO cvo) {
 		
 		logger.info("regist vo :"+ vo);
 		
@@ -111,11 +111,11 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public void storeview(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreImageVO ivo, Model model) {
+	public void storeview(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreIVO ivo, Model model) {
 		
 		vo = storeservice.storeview(vo);
 		logger.info("vo :"+vo);
-		List<StoreImageVO> ivolist = storeservice.storeiview(vo);
+		List<StoreIVO> ivolist = storeservice.storeiview(vo);
 		logger.info("ivolist :"+ivolist);
 		List<StoreEVO> evolist = storeservice.storeseview(vo);
 		logger.info("evolist :"+evolist);
@@ -189,7 +189,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		
 		vo = storeservice.storeview(vo);
 		logger.info("vo :"+vo);
-		List<StoreImageVO> ivolist = storeservice.storeiview(vo);
+		List<StoreIVO> ivolist = storeservice.storeiview(vo);
 		logger.info("ivolist :"+ivolist);
 		List<StoreEVO> evolist = storeservice.storeseview(vo);
 		logger.info("evolist :"+evolist);
@@ -266,7 +266,7 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String storemodify(@ModelAttribute("cri") Criteria cri,StoreVO vo, StoreImageVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo){
+	public String storemodify(@ModelAttribute("cri") Criteria cri,StoreVO vo, StoreIVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo){
 		
 		storeservice.storemodify(vo);
 		
@@ -323,7 +323,7 @@ logger.info("regist vo :"+ vo);
 	
 	@RequestMapping(value = "/review")
 	@ResponseBody
-	public List<StoreReviewVO> storereview(StoreVO vo, Model model)
+	public List<StoreRVVO> storereview(StoreVO vo, Model model)
 	{	
 		
 		

@@ -1,11 +1,10 @@
 package org.imgsearch.vo;
 
 public class StoreVVO {
-	
-	private int sv_no;
+
 	private int s_no;
+	private int sv_no;
 	private int u_no;
-	
 	public int getS_no() {
 		return s_no;
 	}

@@ -10,10 +10,10 @@ import org.imgsearch.common.Criteria;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreCVO;
 import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreIVO;
 import org.imgsearch.vo.StoreKVO;
 import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreReviewVO;
+import org.imgsearch.vo.StoreRVVO;
 import org.imgsearch.vo.StoreVO;
 
 
@@ -50,16 +50,16 @@ public interface StoreMapper {
 	//review
 	
 	@Select("select * from tbl_store_review where s_no= #{s_no} order by s_no desc")
-	public List<StoreReviewVO> storereview(StoreVO vo);
+	public List<StoreRVVO> storereview(StoreVO vo);
 	
 	
 	//image
 	
 	@Select("select * from tbl_store_image where s_no= #{s_no} order by s_no desc")
-	public List<StoreImageVO> storeiview(StoreVO vo);
+	public List<StoreIVO> storeiview(StoreVO vo);
 	
 	@Insert("insert into tbl_store_image ( s_no, si_img ) values (#{s_no}, #{si_img}) ")
-	public void storeiregist(StoreImageVO ivo);
+	public void storeiregist(StoreIVO ivo);
 	
 	//ent
 	@Select("select e_no, e_name from tbl_ent")

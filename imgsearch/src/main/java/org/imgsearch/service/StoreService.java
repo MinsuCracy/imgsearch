@@ -9,10 +9,10 @@ import org.imgsearch.mapper.StoreMapper;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreCVO;
 import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreIVO;
 import org.imgsearch.vo.StoreKVO;
 import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreReviewVO;
+import org.imgsearch.vo.StoreRVVO;
 import org.imgsearch.vo.StoreVO;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
@@ -80,7 +80,7 @@ public class StoreService implements StoreMapper {
 	//review
 	
 	@Override
-	public List<StoreReviewVO> storereview(StoreVO vo){
+	public List<StoreRVVO> storereview(StoreVO vo){
 		
 		
 		
@@ -89,12 +89,12 @@ public class StoreService implements StoreMapper {
 	
 	
 	//image
-	public List<StoreImageVO> storeiview(StoreVO vo){
+	public List<StoreIVO> storeiview(StoreVO vo){
 		
 		return storemapper.storeiview(vo);
 	}
 
-	public void storeiregist(StoreImageVO ivo){
+	public void storeiregist(StoreIVO ivo){
 		
 		storemapper.storeiregist(ivo);
 	}

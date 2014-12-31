@@ -15,7 +15,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<context:component-scan base-package="org.imgsearch.controller"></context:component-scan>
+	<context:component-scan base-package="org.imgsearch.controller" />
 	<context:component-scan base-package="org.imgsearch.service" />
 		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -48,10 +48,10 @@
 	</security:http>
 	
 	<security:authentication-manager>
-		<security:authentication-provider user-service-ref="UserService"/>
+		<security:authentication-provider user-service-ref="LoginService"/>
 	</security:authentication-manager>
 	
-	<bean id="UserService" class="org.imgsearch.service.UserService">
+	<bean id="LoginService" class="org.imgsearch.service.LoginService">
 		<property name="userMapper">
 			<bean  class="org.imgsearch.mapper.UserMapperImpl">
 				<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
