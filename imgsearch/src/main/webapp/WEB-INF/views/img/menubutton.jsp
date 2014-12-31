@@ -19,7 +19,7 @@
 
 <!-- 친구찾기 버튼 -->
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/default.css" />
-<link rel="stylesheet" type="text/css" href="/resources/user/component3.css" />
+<link rel="stylesheet" type="text/css" href="/resources/main/menu/css/component.css" />
 <script src="/resources/main/menu/js/classie.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/colorbox/colorbox.css" />
 <script src="/resources/colorbox/jquery.colorbox.js"></script>
