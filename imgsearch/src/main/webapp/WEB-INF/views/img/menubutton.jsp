@@ -10,7 +10,12 @@
 <!-- <script -->
 <!-- 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script> -->
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!-- 제이쿼리가 잇으면 뷰페이지에서 다른 스크립트 오류남 -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+
+
+
 <!-- 친구찾기 버튼 -->
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/default.css" />
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/component.css" />
@@ -106,7 +111,7 @@
   <li><a><i class="fa fa-cog fa-lg"></i></a></li>
 </ul>
 
-<script type="text/javascript">
+<script >
 (function(){
 	var ul=$("#navs"),li=$("#navs li"),i=li.length,n=i-1,r=120;
 	ul.click(function(){
@@ -132,18 +137,18 @@
 			친구목록<span><button class="close" id="menuclose"/></span>
 		</h3>
 		<div class="friList">
-			<a href="#"><i class="icon-ok" style="display: none"></i>강민수</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>전태환</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>강민수</a>
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>전태환</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
+					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
 		</div>
 		<div class="search">
 			<form class="form-search">
@@ -163,7 +168,7 @@ function addFriend(){
 	$("[name=fri_id]").val($f_uid).change();
 }
 
-$("a").click(function(event){
+$(".friend").click(function(event){
 	event.preventDefault();
 	$(this).children().toggle();
 });

@@ -295,8 +295,9 @@ html,body{
 <!-- 	</form> -->
 	
 	
-	<div id="popup2">
-		<button sytle="text-align : left">닫기</button>
+	
+		<div id="popup2">
+			<button sytle="text-align : left">닫기</button>
 		<div>
 		
 			<form>
@@ -412,7 +413,7 @@ html,body{
 					<img id="grid16_1_1" src="/resources/images/etc/search.png" >
 				</div>
 				<div id="grid16_2" style="width:45%; height:45%;;margin-left:10%;background-color: #cdd4d4;border-radius:30%;">
-					<img id="grid16_2_1" src="/resources/images/etc/refresh1.png" >
+					<img id="grid16_2_1" src="/resources/images/etc/refresh.png" >
 				</div>
 			</div>
 		</div>

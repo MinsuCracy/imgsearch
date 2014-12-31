@@ -100,6 +100,10 @@ public class MainController {
 	}
 	
 	
+	@RequestMapping("/menuView")
+	public void menuView(Model model,@ModelAttribute("cri") Criteria cri){
+		
+	}
 	
 	
 	
