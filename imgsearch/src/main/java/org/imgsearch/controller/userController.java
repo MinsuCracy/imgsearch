@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/admin/user/*")
-public class UserController {
+public class userController {
 	
 	@Inject
 	UserService us;

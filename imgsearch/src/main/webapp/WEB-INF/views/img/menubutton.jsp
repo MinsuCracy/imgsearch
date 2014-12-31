@@ -122,7 +122,7 @@
   <li><a><i class="fa fa-info-circle fa-lg"></i></a></li>
   <li><a id="friend"><i class="fa fa-users fa-lg"></i></a></li>
   <li><a href="/user/location">친구찾기</a></li>
-  <li><a><i class="fa fa-cog fa-lg"></i></a></li>
+  <li><a href="/admin/main"><i  class="fa fa-cog fa-lg"></i></a></li>
 <%--   </sec:authorize> --%>
 </ul>
 
