@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.service.MainService;
 import org.imgsearch.vo.EntVO;
+import org.imgsearch.vo.StoreMenuVO;
 import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 import org.springframework.stereotype.Controller;
@@ -99,11 +100,16 @@ public class MainController {
 	
 	
 	@RequestMapping("/review")
-	public @ResponseBody List<StoreReviewVO> storeReview(Model model,@ModelAttribute("cri") Criteria cri){
+	public @ResponseBody List<StoreReviewVO> storeReview(@ModelAttribute("cri") Criteria cri){
 		return service.storeReview(cri); 
 	}
 	
 	
+	@RequestMapping("/menuView")
+	public void menuView(Model model,@ModelAttribute("cri") Criteria cri){
+		
+		model.addAttribute("menuList", service.storeMenuList(cri));
+	}
 	
 	
 	

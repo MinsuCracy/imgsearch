@@ -8,6 +8,7 @@ import org.imgsearch.common.Criteria;
 import org.imgsearch.mapper.MainMapper;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreMenuVO;
 import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 import org.slf4j.Logger;
@@ -139,15 +140,22 @@ public class MainService {
 		
 	}
 	
+	// 가게 리뷰보기
 	public List<StoreReviewVO> storeReview(Criteria cri){
 		
 		return mapper.storeReview(cri);
 	}
 	
+	// 가게 리뷰 갯수보기
 	public int storeReviewTotal(Criteria cri){
 		
 		return mapper.storeReviewTotal(cri);
 		
+	}
+	
+	// 가게 메뉴보기
+	public List<StoreMenuVO> storeMenuList(Criteria cri){
+		return mapper.storeMenuList(cri);
 	}
 	
 }

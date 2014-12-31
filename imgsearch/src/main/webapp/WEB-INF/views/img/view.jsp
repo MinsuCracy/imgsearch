@@ -13,6 +13,14 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js"></script>
 
+
+<!-- 메뉴뷰 관련 -->
+<!-- <link rel="stylesheet" type="text/css" href="/resources/main/menuView/css/style1.css" /> -->
+<script type="text/javascript" src="/resources/main/menuView/js/modernizr.custom.79639.js"></script>
+
+
+
+
 <!-- Prettyprint -->
 <link
 	href="https://google-code-prettify.googlecode.com/svn/loader/prettify.css"
@@ -240,6 +248,8 @@ body {
 	background-color: red;
 	
 }
+
+
 /* pre { */
 /* 	tab-size: 4; */
 /* 	overflow-x: auto; */
@@ -359,6 +369,21 @@ body {
 		<input type="hidden" name="page" value="">
 	</form>
 
+<!-- #popup2{ -->
+<!--  	position :fixed;; -->
+<!--  	text-align: center; -->
+<!-- 	width: 50%; -->
+<!-- 	height:50%; -->
+<!-- 	left:25%; -->
+<!--  	top:25%;  -->
+<!--   	display: none;      -->
+<!-- 	z-index:100; -->
+<!-- 	background-color: red; -->
+	
+<!-- } -->
+
+	
+	
 	<!-- Logo -->
 	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="max-height: 100%;"></a></div>
 	
@@ -374,6 +399,10 @@ body {
 	
 	<div id="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
 	
+<!-- 	<div style="position:finxed; width : 100%; height:80%; background-color: red;"> -->
+		
+<!-- 	<div> -->
+	
 	<div class='store'>
 		<ul>
 			<li class='menu'><h1>{ STORE }</h1></li>
@@ -384,7 +413,7 @@ body {
 					<li><img src='/file/view?path=address2.png'> ${vo.s_address}</li>
 					<li><img src='/file/view?path=homepage2.png'> ${vo.s_homepage}</li>
 					<li><button id="reservButton"style="float:right; margin:20px;">찜하기</button>
-						<button style="float:right; margin:20px;">메뉴보기</button></li>
+						<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -429,7 +458,11 @@ body {
 /* 		box-shadow: 0 0 4em 1em white; */
 	}
 	</style>
+	
+	<script src="/resources/colorbox/jquery.colorbox.js"></script>
 	<script>
+
+	
 		$(function() {
 			if ($.fn.reflect) {
 				$('#preview-coverflow .cover').reflect();	// only possible in very specific situations
@@ -460,7 +493,39 @@ body {
 				}
 			});
 		});
+		
+		
+		// 메뉴박스 만들기
+		var menuOpen = document.getElementById( 'menubutton' );
+		
+		menuOpen.onclick = function(){
+			
+			
+			$("#menubutton").colorbox({
+				href:"/img/menuView?s_no="+${cri.s_no },
+				iframe:true, 
+				width:"80%", height:"80%",
+				opacity: 0.5,
+			});
+			
+// 				$(document).ready(function(){
+					
+// 				$.ajax({
+// 					url:"/img/menuView",
+// 					type:"get",
+// 					success:function(data){
+// 						$(document.body).append(data);
+						
+// 						}					
+// 					});
+// 				});
+		};
+		
+	
+		
 	</script>
+	
+	
 			</div>
 		</div>
 	</div>
@@ -499,8 +564,6 @@ body {
 		<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
 		MIT Open Source license applies.</div>
 		
-		
-		
 
 	
 	
@@ -538,11 +601,13 @@ body {
 
 
 <script>
-
+	
+	// 찜하기 버튼
 	$("#reservButton").on("click",function(){
 		$("#reserv").css({"display" : "inherit" , "z-index":"100"});		
 	});
 
+	// 찜버튼 닫기
 	$("#reservClose").on("click",function(){
 		console.log("aaaaaa");
 		$("#reserv").css({"display" : "none" , "z-index":"-100"});
@@ -552,12 +617,14 @@ body {
 	$(document).ready(function(){
 		
 		$.ajax({
-			url:"/img/review?s_no="+'${cri.s_no}',
+			url:"/img/review?s_no="+${cri.s_no},
 			type:"get",
 			dataType:"json",
 			success:function(data){
-								
+				console.log(data);		
 				$(data).each(function(index,target){
+					
+					// JSON.stringify(target); 걍보려고 테스트
 					var data = JSON.stringify(target);
 					
 					$(".reviewBox").append("<div style='width:100%; height:9%; border-bottom: 2px solid black; margin-top:1%; '>"
@@ -572,6 +639,7 @@ body {
 										+"<div>"+"r_comment :"+target.r_comment+"</div> "
 									+"</div>");
 				});//end each
+				$(".reviewBox").append("${pageCri.toString()}");
 					
 			}//end success
 						
