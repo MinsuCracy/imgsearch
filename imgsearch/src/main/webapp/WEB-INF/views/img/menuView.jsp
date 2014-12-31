@@ -96,6 +96,8 @@
 							<div class="rm-inner">
 								<div class="rm-content">
 									<h4>Main Courses</h4>
+									
+										<h5>${menuList }</h5>
 <!-- 									<dl> -->
 <!-- 										<dt><a href="http://herbivoracious.com/2009/03/panfried-gnocchi-with-arugula-recipe.html" class="rm-viewdetails" data-thumb="images/11.jpg">Crispy Gnocchi with Arugula</a></dt> -->
 <!-- 										<dd>Pan-fried potato gnocchi with arugula salad</dd> -->

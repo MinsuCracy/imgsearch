@@ -154,10 +154,14 @@ public class Criteria {
 
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", DbLimit=" + dbLimit
-				+ ", DbLimitTotal=" + dbLimitTotal + ", totalPage=" + totalPage
-				+ ", startPage=" + startPage + ", lastPage=" + lastPage
-				+ ", prePage=" + prePage + ", nextPage=" + nextPage + "]";
+		return "Criteria [type=" + type + ", keyword=" + keyword + ", s_no="
+				+ s_no + ", u_no=" + u_no + ", e_no=" + e_no + ", page=" + page
+				+ ", dbLimit=" + dbLimit + ", dbLimitTotal=" + dbLimitTotal
+				+ ", totalPage=" + totalPage + ", startPage=" + startPage
+				+ ", lastPage=" + lastPage + ", prePage=" + prePage
+				+ ", nextPage=" + nextPage + "]";
 	}
+
+	
 
 }

@@ -413,7 +413,7 @@ body {
 					<li><img src='/file/view?path=address2.png'> ${vo.s_address}</li>
 					<li><img src='/file/view?path=homepage2.png'> ${vo.s_homepage}</li>
 					<li><button id="reservButton"style="float:right; margin:20px;">찜하기</button>
-						<a id="menubutton" href="/img/menuView"style="float:right; margin:20px;">메뉴보기</a></li>
+						<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -502,6 +502,7 @@ body {
 			
 			
 			$("#menubutton").colorbox({
+				href:"/img/menuView?s_no="+${cri.s_no },
 				iframe:true, 
 				width:"80%", height:"80%",
 				opacity: 0.5,
@@ -600,11 +601,13 @@ body {
 
 
 <script>
-
+	
+	// 찜하기 버튼
 	$("#reservButton").on("click",function(){
 		$("#reserv").css({"display" : "inherit" , "z-index":"100"});		
 	});
 
+	// 찜버튼 닫기
 	$("#reservClose").on("click",function(){
 		console.log("aaaaaa");
 		$("#reserv").css({"display" : "none" , "z-index":"-100"});
@@ -614,12 +617,14 @@ body {
 	$(document).ready(function(){
 		
 		$.ajax({
-			url:"/img/review?s_no="+'${cri.s_no}',
+			url:"/img/review?s_no="+${cri.s_no},
 			type:"get",
 			dataType:"json",
 			success:function(data){
-								
+				console.log(data);		
 				$(data).each(function(index,target){
+					
+					// JSON.stringify(target); 걍보려고 테스트
 					var data = JSON.stringify(target);
 					
 					$(".reviewBox").append("<div style='width:100%; height:9%; border-bottom: 2px solid black; margin-top:1%; '>"
@@ -634,6 +639,7 @@ body {
 										+"<div>"+"r_comment :"+target.r_comment+"</div> "
 									+"</div>");
 				});//end each
+				$(".reviewBox").append("${pageCri.toString()}");
 					
 			}//end success
 						

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Update;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreMenuVO;
 import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 
@@ -200,7 +201,8 @@ public interface MainMapper {
 	public int storeReviewTotal(Criteria cri);
 	
 	
-	
+	@Select("select sm_menu,sm_price from tbl_store_menu where s_no= #{s_no} ")
+	public List<StoreMenuVO> storeMenuList(Criteria cri);
 	
 	
 }

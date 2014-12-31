@@ -603,9 +603,15 @@ var searchKey ="";
 
 // 상단 검색버튼 클릭시..search함수 실행
 $("#mainBar button").on("click", function(){
-	gosearch($("[name=topSearch]").val(),($("[name=e_no]").val()),1);
-	searchKey = $("[name=topSearch]").val();
-	$("[name=keyword]").val(searchKey);
+	
+	location.href="/img/main?keyword="+$("[name=topSearch]").val()
+					+"&e_no="+$("[name=e_no]").val()
+					+"&page=1";
+	
+// 	gosearch($("[name=topSearch]").val(),($("[name=e_no]").val()),1);
+// 	searchKey = $("[name=topSearch]").val();
+// 	console.log(searchKey);
+// 	$("[name=keyword]").val(searchKey);
 	
 });//end function
 
@@ -715,6 +721,7 @@ $(document).ready(function() {
 	}else{
 		$("#rank").prop("checked",true);
 	}
+	
 	
 	if('${cri.keyword}' !=  "" && '${cri.e_no}' != null){
 		bbsList = true;
