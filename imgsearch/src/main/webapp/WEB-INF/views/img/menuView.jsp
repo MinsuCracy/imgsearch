@@ -3,94 +3,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>test</title>
-<!--         <meta name="description" content="A responsive folded flyer-like restaurant menu with some 3D" /> -->
-<!--         <meta name="keywords" content="css3, perspective, 3d, jquery, transform3d, responsive, template, restaurant, menu, leaflet, folded, flyer, concept" /> -->
-<!--         <meta name="author" content="Codrops" /> -->
-<!--         <link rel="shortcut icon" href="../favicon.ico">  -->
-        <link rel="stylesheet" type="text/css" href="/resources/main/menuView/css/style.css" />
-<!-- 		<link href='http://fonts.googleapis.com/css?family=Raleway:300,500|Arvo:700' rel='stylesheet' type='text/css'> -->
-		<script type="text/javascript" src="/resources/main/menuView/js/modernizr.custom.79639.js"></script> 
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	
+	<title>MENU</title>
+	
+	<link rel="stylesheet" type="text/css" href="/resources/main/menuView/css/style.css" />
+	
+	<script type="text/javascript" src="/resources/main/menuView/js/modernizr.custom.79639.js"></script> 
+	
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
 		
-		<!--[if lte IE 8]><style>.support-note .note-ie{display:block;}</style><![endif]-->
+<style>
 
-		
+body {
+  font-family: 'Nanum Barun Gothic', sans-serif;
+}
+
+.rm-store-name {
+	font-size: 1.5em; 
+	margin-top: 30%;
+}
+
+</style>
+	
 </head>
     
-    
-    <body>
-<!--         <div class="container"> -->
-		
-<!-- 		<br><br> -->
-			
-			<section class="main">
+<body>
 
-				<div id="rm-container" class="rm-container">
+	<section class="main">
+		<div id="rm-container" class="rm-container">
+			<div class="rm-wrapper">
+				<div class="rm-cover">
+					<div class="rm-front">
+						<div class="rm-content">
 
-					<div class="rm-wrapper">
+							<div class="rm-logo"><i style="color: #fff; margin-top: 25px;" class="fa fa-cutlery fa-4x"></i></div>
+							<div class="rm-store-name">${store}</div>
+							
+							<a href="#" class="rm-button-open" style="margin-top: 30%;">View the Menu</a>
 
-						<div class="rm-cover">
+						</div><!-- /rm-content -->
+					</div><!-- /rm-front -->
 
-							<div class="rm-front">
-								<div class="rm-content">
+					<div class="rm-back">
+						<div class="rm-content">
+							<h4>Appetizers</h4>
+ 							<dl>
+								<dt>Bella's Artichokes</dt>
+								<dd>Roasted artichokes with chipotle aioli and cream cheese</dd>
 
-									<div class="rm-logo"></div>
-									<h2>가게이름</h2>
-									<h3>test</h3>
+								<dt>Bruschetta Blue Delight</dt>
+								<dd>Blue cheese and citrus bruschetta</dd>
 
-									<a href="#" class="rm-button-open">View the Menu</a>
-<!-- 									<div class="rm-info"> -->
-<!-- 										<p> -->
-<!-- 										<strong>Gourmet Castle Restaurant</strong><br> -->
-<!-- 										246 Wonderful Paradise Ln.<br> -->
-<!-- 										Pasadena, CA 91101<br> -->
-<!-- 										<strong>Phone</strong> 626.511.1170<br> -->
-<!-- 										<strong>Fax</strong> 626.992.1020</p> -->
-<!-- 									</div> -->
+								<dt>Pomme Dulse</dt>
+								<dd>Baked potatoes with crisped dulse</dd>
 
-								</div><!-- /rm-content -->
-							</div><!-- /rm-front -->
-
-							<div class="rm-back">
-								<div class="rm-content">
-									<h4>Appetizers</h4>
-<!-- 									<dl> -->
-<!-- 										<dt>Bella's Artichokes</dt> -->
-<!-- 										<dd>Roasted artichokes with chipotle aioli and cream cheese</dd> -->
-
-<!-- 										<dt>Bruschetta Blue Delight</dt> -->
-<!-- 										<dd>Blue cheese and citrus bruschetta</dd> -->
-
-<!-- 										<dt>Pomme Dulse</dt> -->
-<!-- 										<dd>Baked potatoes with crisped dulse</dd> -->
-
-<!-- 										<dt><a href="http://herbivoracious.com/2011/11/crostini-with-young-pecorino-grilled-figs-and-arugula-mint-pesto-recipe.html" class="rm-viewdetails" data-thumb="images/1.jpg">Green Love Crostini</a></dt> -->
-<!-- 										<dd>Crostini with young pecorino, grilled figs and arugula &amp; mint pesto</dd> -->
+								<dt><a href="http://herbivoracious.com/2011/11/crostini-with-young-pecorino-grilled-figs-and-arugula-mint-pesto-recipe.html" class="rm-viewdetails" data-thumb="images/1.jpg">Green Love Crostini</a></dt>
+								<dd>Crostini with young pecorino, grilled figs and arugula &amp; mint pesto</dd>
 										
-<!-- 										<dt>Focaccia di Carciofi</dt> -->
-<!-- 										<dd>Artichoke focaccia with fresh thyme</dd> -->
-<!-- 									</dl> -->
+								<dt>Focaccia di Carciofi</dt>
+								<dd>Artichoke focaccia with fresh thyme</dd>
+							</dl>
 
-<!-- 									<h4>Salads &amp; More</h4> -->
-<!-- 									<dl> -->
-<!-- 										<dt>Green Delight</dt> -->
-<!-- 										<dd>Watercress, frisee and avocado salad</dd> -->
+							<h4>Salads &amp; More</h4>
+							<dl>
+								<dt>Green Delight</dt>
+								<dd>Watercress, frisee and avocado salad</dd>
 
-<!-- 										<dt><a href="http://herbivoracious.com/2010/02/thai-tofu-salad-recipe.html" class="rm-viewdetails" data-thumb="images/13.jpg">Gourmet Yam Taohu</a></dt> -->
-<!-- 										<dd>Thai tofu salad yam taohu</dd> -->
+								<dt><a href="http://herbivoracious.com/2010/02/thai-tofu-salad-recipe.html" class="rm-viewdetails" data-thumb="images/13.jpg">Gourmet Yam Taohu</a></dt>
+								<dd>Thai tofu salad yam taohu</dd>
 
-<!-- 										<dt>Panini Deluxe</dt> -->
-<!-- 										<dd>Buffalo mozzarella basil panini</dd> -->
-<!-- 									</dl> -->
-								</div><!-- /rm-content -->
-								<div class="rm-overlay"></div>
+								<dt>Panini Deluxe</dt>
+								<dd>Buffalo mozzarella basil panini</dd>
+							</dl>
+						</div><!-- /rm-content -->
+						
+						<div class="rm-overlay"></div>
 
-							</div><!-- /rm-back -->
+					</div><!-- /rm-back -->
 
-						</div><!-- /rm-cover -->
+				</div><!-- /rm-cover -->
 
 						<div class="rm-middle">
 							<div class="rm-inner">

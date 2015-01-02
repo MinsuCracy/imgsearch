@@ -2,6 +2,7 @@ package org.imgsearch.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -193,16 +194,27 @@ public interface MainMapper {
 	public List<StoreImageVO> storeImgList(Criteria cri);
 	
 	
-	// ¸®ºä¸®½ºÆ®
-	@Select("select * from tbl_store_review where s_no=#{s_no} limit #{dbLimit},10")
-	public List<StoreReviewVO> storeReview(Criteria cri);
-	
-	@Select("select count(r_no) from (select r_no from tbl_store_review where s_no=1 limit #{dbLimit},101)as result ")
-	public int storeReviewTotal(Criteria cri);
-	
-	
 	@Select("select sm_menu,sm_price from tbl_store_menu where s_no= #{s_no} ")
 	public List<StoreMenuVO> storeMenuList(Criteria cri);
 	
+	// ¸®ºä¸®½ºÆ®
+	@Select("select * from tbl_store_review where s_no=#{s_no} order by r_no desc limit #{dbLimit},10 ")
+	public List<StoreReviewVO> storeReview(Criteria cri);
+	 
+	// ¸®ºä°¹¼ö
+	@Select("select count(r_no) from (select r_no from tbl_store_review where s_no=#{s_no} limit #{dbLimit},101)as result ")
+	public int storeReviewTotal(Criteria cri);
+	 
+	// ¸®ºä¾²±â
+	@Insert("insert into tbl_store_review (s_no,u_id,r_comment,r_score) values (#{s_no},'tester', #{r_comment},5)")
+	public void storeReviewWrite(StoreReviewVO rvo);
+	
+	// ¸®ºäÁö¿ì±â
+	 @Delete("delete from tbl_store_review where r_no = #{r_no}")
+	 public void storeReviewDelete(StoreReviewVO rvo);
+	 
+	 // ¸®ºä¼öÁ¤ÇÏ±â
+	 @Update("update tbl_store_review set r_comment = #{r_comment} , r_regdate = current_timestamp where r_no = #{r_no}")
+	 public void storeReviewModify(StoreReviewVO rvo);
 	
 }

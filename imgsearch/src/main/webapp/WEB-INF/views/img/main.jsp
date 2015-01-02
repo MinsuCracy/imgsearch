@@ -221,69 +221,6 @@ html,body{
 	margin-top:40px;
 }
 
-#container{
- 	position:absolute;
-	list-style: none;
-	
-	height:100%;
-	width:80%;
- 	margin:5% 10% 0 10%; 
-	
-}
-
-.grid{ 
-	border-bottom : 0.2em solid white;
-	width:100%;
-	height:28%;
-	margin-top:3%;
-}
-
-.grid .first{
- 	position:inherit; 
-	width:100%;
-	height:100%;
-/* 	background-color: red; */
-	
-}
-.grid .first ul{
- 	list-style: none;
- 	position:inherit; 
- 	width:100%;
-	height:100%;
-	
-	
-}
-.grid .first .num{
-	float:left;
-	width:15%;
-	height:100%;
-}
-.grid .first .mainImg{
-	float:left;
-	width:20%;
-	height:100%;
-}
-.grid .first .title{
-	float:left;
-	width:65%;
-	height:40%;
-	border-bottom : 0.2em solid rgb(0, 205, 205);
-}
-.grid .first .content{
-	float:left;
-	width:65%;
-	height:60%;
-}
-
-.grid .first .mainImg img{
-/* 	position: inherit; */
-	height:80%;
-	width:80%;
- 	top:10%;
- 	left:10%;
-	border-radius:15%;
-}
-
 </style>
 </head>
 <body>

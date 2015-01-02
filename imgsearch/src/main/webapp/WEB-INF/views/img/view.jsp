@@ -39,8 +39,8 @@ body {
 	font-family: "Segoe UI", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 90%;
 	color: #fff;
-	
 }
+
 *{
 	margin:0;
 	padding:0;
@@ -55,19 +55,8 @@ body {
 
 #menu {
 	width:100%;
-	height: 10px; /* 50px; */
-	/* margin-botton: 5px; */
+	height: 10px;
 }
-
-/* #preview { */
-/* /* 	background-color : white; */ */
-/* /* 	height:100%; */ */
-/* 	border: solid thin silver; */
-/* /* 	padding: 3em; */ */
-/* /*  	margin: 0 5% 3% 5%;  */ */
-/* /* 	text-align: center; */ */
-/* 	box-shadow: 0 0 2em silver; */
-/* } */
 
 .chapter {
 
@@ -85,27 +74,21 @@ body {
 
 .store {
 	width: 100%;
-	height: 25%; /* 15%; */
-/*  margin-bottom: 20px;  */
-	background-color: #71c39a;
+	height: 45%;
+	margin-bottom: 20px;
  	padding:1%; 
+ 	padding-top: 5px;
+ 	padding-bottom: 0;
 }
-
-/* .store ul {
-	list-style: none;
-	position: inherit;
- 	margin: 3% 10% 0 10%; 
-	width: 80%;
-	height: 100%;
-	border-bottom : 0.2em solid white;
-} */
 
 .store ul {
 	list-style: none;
 	position: inherit;
  	margin: 0% 10% 0 10%; 
+ 	padding: 1% 0 1% 0;
 	width: 80%;
 	height: 100%;
+	background-color: #71c39a;
 }
 
 .store .menu{
@@ -116,78 +99,139 @@ body {
 }
 .store .title{
 	float:left;
-	width: 60%;/* 50%; */
-	height: 30%; /* 40%; */
-	border-bottom : 0.15em solid #fff; /* 0.2em solid rgb(0, 205, 205); */
+	width: 60%;
+	height: 20%;
+	border-bottom : 0.15em dashed #fff;
 }
 .store .category{
 	float:left;
-	width: 20%; /* 30%; */
-	height: 30%; /* 40%; */	
-/* 	border-bottom : 0.2em solid rgb(0, 205, 205); */
+	width: 20%; 
+	height: 30%;
 }
+
+.store .category font {
+	margin: 20% 0 0 20%;
+}
+
 .store .content{
-	/* float:left; */
 	width:80%;
-	height: 70%;/* 60%; */
+	height: 70%;
 }
 
 .storeContent{
-	list-style: none;
+	color: #fff;
 }
 
 .photo {
-	width: 100%;
+	width: 78.5%;
 	height: 45%;
 	padding:1%;
-	background-color: #c7c7c7;
+	margin: auto;
+	background-color: #364157; /*  #c7c7c7; */
 }
 
 .photoTitle{
 	position:inherit;
- 	margin:0 10%;
+ 	margin:0;
 	width:80%;
-	height: 15%; /* 20%; */
-	text-align: center;
+	height: 15%;
+	text-align: left;
+	align: left;
 }
+
 .photoSlide{
 	position:inherit;
 	margin:0 10%;
 	width:80%;
 	height:80%;
-/*  background-color:white;  */
 }
 
 .review{
 	margin: 0 10%;
-	width: 80%;
-/* 	height: 180%; */
+	width: 78.5%;
+	height: 130%;
+	margin: auto;
  	margin-top: 20px;
+ 	background-color: white;
 }
 
 .reviewTitle{
-	position:inherit;
-	
-	width:100%;
-	height:10%; 
- 	text-align: center;
+	position: inherit;
+	padding: 1%;
+ 	text-align: left;
+ 	align: left;
+ 	color: #1d9d74;
 }
 
 .reviewBox{
 	position:inherit;
-	margin:3% 5% 0 5%;
-	width:90%;
+	margin:3% auto 0 auto;
+	width:70%;
 	height:80%;
 	background-color: white; 
 	color: #3d9167;
 }
 
+.review_write{
+	width:100%; 
+/* 	height:9%;  */
+	border-bottom: 0.1em solid gray; 
+	margin-top:1%;
+}
+
+.reviewBox ul li {
+	position: relative;
+	padding: 0;
+	border-bottom: 1px solid #f2f2f2;
+	vertical-align: top;
+	list-style: none;
+	text-align: -webkit-match-parent;
+}
+
+.review_section {
+	margin: 5px 0 3px;
+	display: block;
+}
+
+.review_user_id{
+	padding-right: 1px;
+	color: #3d3d3d;
+	font-size: 14px;
+}
+
+.review_regdate{
+	vertical-align: top;
+	padding-top: 0.7%;
+	padding-left: 2%;
+	display: inline-block;
+	font-size: 10px;
+	color: #88888c;
+	vertical-align: middle;
+}
+
+.review_section2 {
+	display: block;
+	position: absolute;
+	top: 2px;
+	right: -0px;
+	height: 15px;
+	padding-left: 6px;
+}
+
+.review_comment {
+	padding: 10px 0 10px 1px;
+	color: #4a4a4a;
+	line-height: 20px;
+	display: block;
+}
+
+
 #paging{
-	list-style: none; 
-	width:60%; 
-	height:10%;
-	margin-left:20%;
-	margin-bottom:40px;
+	list-style: none;
+	width: 60%;
+	height: 5%;
+	margin-left: 25%;
+	padding-top: 20px;
 }
 
 #paging li{
@@ -248,37 +292,6 @@ body {
 	background-color: red;
 	
 }
-
-
-/* pre { */
-/* 	tab-size: 4; */
-/* 	overflow-x: auto; */
-/* 	background-color: #eee; */
-/* 	-webkit-column-break-inside: avoid; */
-/* } */
-
-/* h1, h2 {	 */
-/* position:inherit; */
-/* 	width: 80%; */
-/* 	margin: 5% 10% 3% 10%; */
-/* 	background: black; */
-/* 	color: white; */
-/* 	padding: .2em .4em; */
-/* } */
-
-/* h1 { */
-/* /* 	width: 80%; */ */
-/* /* 	margin: 0 10% 0% 10%; */ */
-/* } */
-
-/* h2 { */
-/* 	background: gray; */
-/* } */
-
-/* hr { */
-/* 	border-top: double; */
-/* 	margin: 2em 25%; */
-/* } */
 
 </style>
 <script>
@@ -368,25 +381,14 @@ body {
 		<input type="hidden" name="e_no" value="${cri.e_no}">
 		<input type="hidden" name="page" value="">
 	</form>
+	
+	<!-- logo -->
+	<div class="logo">
+		<a href="/img/">
+			<img src="/file/view?path=logo2.png" style="max-height: 100%;">
+		</a>
+	</div>
 
-<!-- #popup2{ -->
-<!--  	position :fixed;; -->
-<!--  	text-align: center; -->
-<!-- 	width: 50%; -->
-<!-- 	height:50%; -->
-<!-- 	left:25%; -->
-<!--  	top:25%;  -->
-<!--   	display: none;      -->
-<!-- 	z-index:100; -->
-<!-- 	background-color: red; -->
-	
-<!-- } -->
-
-	
-	
-	<!-- Logo -->
-	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="max-height: 100%;"></a></div>
-	
 	<div id="reserv">
 		<button id="reservClose" sytle="text-align : left">닫기</button>
 		<div>
@@ -399,22 +401,37 @@ body {
 	
 	<div id="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
 	
-<!-- 	<div style="position:finxed; width : 100%; height:80%; background-color: red;"> -->
-		
-<!-- 	<div> -->
-	
 	<div class='store'>
 		<ul>
-			<li class='menu'><h1>{ STORE }</h1></li>
-			<li class='title storeName'><h1> ${vo.s_name}</h1></li>
-			<li class='category'>&nbsp; <font style="float: right;">${category[0]} > ${category[1]} > ${category[2]}</font></li>
+			<li class='menu'><h1 style="color: #fff; margin-left: 5%;">{ STORE }</h1></li>
+			<li class='title storeName'><h1 style="color: #fff;"> ${vo.s_name}</h1></li>
+			<li class='category'> </li>
 			<li class='content'>
-				<ul class="storeContent">
-					<li><img src='/file/view?path=address2.png'> ${vo.s_address}</li>
-					<li><img src='/file/view?path=homepage2.png'> ${vo.s_homepage}</li>
-					<li><button id="reservButton"style="float:right; margin:20px;">찜하기</button>
-						<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a></li>
-				</ul>
+				<table class="storeContent">
+					<tr>
+						<td><img src="/file/view?path=address2.png"></td>
+						<td>${vo.s_address}</td>
+					</tr>
+					<tr>
+						<td><img src="/file/view?path=tel2.png"></td>
+						<td>전~화~번~호</td>
+					</tr>
+					<tr>
+						<td><img src="/file/view?path=homepage2.png"></td>
+						<td><a href="${vo.s_homepage}" target="_new" style="color: #fff;"><i class="fa fa-home fa-lg"></i></a></td>
+					</tr>
+					<tr>
+						<td><img src="/file/view?path=match2.png"></td>
+						<td>여기 연예인 들어갈거야아아아</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td style="text-align: right;">
+							<button id="reservButton"style="float:right; margin:20px;">찜하기</button>
+							<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a>
+						</td>
+					</tr>
+				</table>
 			</li>
 		</ul>
 	</div>
@@ -422,7 +439,7 @@ body {
 	
 <!-- 	사진스크롤 -->
 	<div class='photo'>
-		<div class="photoTitle"><h1 align="left">{ PHOTO }</h1></div>
+		<div class="photoTitle"><h1 style="color: #fff;">{ PHOTO }</h1></div>
 		
 		<div class="photoSlide">
 		<div id="preview">
@@ -434,13 +451,12 @@ body {
 										  
 				</c:forEach>
 			</div>
+			
 	<style>
-	#preview {
 	
-/*  		padding:5% 0 5% 0;  */
+	#preview {
   		height: 100%; 
   		width:100%;
-/*   		background-color: green; */
 	}
 	
 	#preview-coverflow .cover {
@@ -448,15 +464,15 @@ body {
 		cursor: pointer;
 		width: 25%;
 		height: 25%;
-/* 		box-shadow: 0 0 4em 1em white; */
 	}
+	
 	#preview-coverflow .cover img {
 		position:inherit;
 		cursor: pointer;
 		width: 100%;
 		height: 100%;
-/* 		box-shadow: 0 0 4em 1em white; */
 	}
+
 	</style>
 	
 	<script src="/resources/colorbox/jquery.colorbox.js"></script>
@@ -502,26 +518,13 @@ body {
 			
 			
 			$("#menubutton").colorbox({
-				href:"/img/menuView?s_no="+${cri.s_no },
+				href:"/img/menuView?s_no="+${cri.s_no} + "&name=" + '${vo.s_name}',
 				iframe:true, 
 				width:"80%", height:"80%",
 				opacity: 0.5,
 			});
 			
-// 				$(document).ready(function(){
-					
-// 				$.ajax({
-// 					url:"/img/menuView",
-// 					type:"get",
-// 					success:function(data){
-// 						$(document.body).append(data);
-						
-// 						}					
-// 					});
-// 				});
 		};
-		
-	
 		
 	</script>
 	
@@ -530,76 +533,36 @@ body {
 		</div>
 	</div>
 		
-<!-- 		리뷰 -->
+	<!-- 리뷰 -->
 	<div class="review">
-		<div class="reviewTitle" style="color: #71c39a;"><h1 align="left">{ REVIEW }</h1></div>
+	
+		<div class="reviewTitle"><h1>{ REVIEW }</h1></div>
 		
-		<div class="reviewBox">
+		<div class="reviewWrite"> </div>
 		
-<%-- 			${reviewList } --%>
+		<div class="reviewBox">	
 		
+			<div class="review_write">
+				<input type='text' name='reviewData' value=''>
+				<button onclick='javascript:reviewWrite()'>등록</button>
+			</div>
+
+			<ul></ul>
+			
 		</div>
+
+		<ul id="paging" style="margin-top: 1%;"></ul>
 		
 	</div>	
-	
-		
 
-	<ul id="paging">
-<%-- 			<c:if test="${cri.prePage == 'true' }"> --%>
-<%-- 				<li><a href="javascript:goPage(${cri.startPage-1 });" style="font-color:black">pre</a></li> --%>
-<%-- 			</c:if> --%>
-<%-- 		<c:forEach var="page" begin="${cri.startPage }" end="${cri.lastPage }"> --%>
-			
-<%-- 			<li><a href="javascript:goPage(${page });">${page}</a></li> --%>
 	
-<%-- 		</c:forEach> --%>
-			
-<%-- 			<c:if test="${cri.nextPage == 'true' }"> --%>
-<%-- 				<li><a href="javascript:goPage(${cri.lastPage+1 });">next</a></li> --%>
-<%-- 			</c:if> --%>
-	</ul>
 	
 	<button onclick="goList(${cri.page})">현재목록</button>
 	<button onclick="goList(1)">최신목록</button>
 		<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
 		MIT Open Source license applies.</div>
 		
-
-	
-	
-	
-<!-- 게시글 -->
-<!-- 	<div ID="book"> -->
-<!-- 		<div id="readme"></div> -->
-
-<!-- 		<h1>소개</h1> -->
-<!-- 		<div id="examples" class="chapter"> -->
-<%-- 			${vo} --%>
-<!-- 			<h2>가게정보</h2> -->
-<!-- 				<h4>안알랴줌... -->
-<!-- 				안알랴줌...1 -->
-<!-- 				안알랴줌...1 -->
-<!-- 				안알랴줌...1 -->
-<!-- 				안알랴줌... -->
-<!-- 				안알랴줌...11 -->
-<!-- 				안알랴줌... -->
-<!-- 				안알랴줌...1 -->
-<!-- 				안알랴줌... -->
-<!-- 				안알랴줌...</h4> -->
-<!-- 			<h2>영업비밀</h2> -->
-<!-- 			<h2>영업시간</h2> -->
-<!-- 			<h2>결혼유무</h2> -->
-			
-<!-- 		</div> -->
-<%-- 		<button class="menuList" id="${vo.s_no }">메뉴보기</button> --%>
-<!-- 		<h1>여긴 리뷰넣을곳..</h1> -->
-<!-- 		<div id="unittest" class="chapter"> -->
-<!-- 			리뷰를 넣어라.... -->
-			
-<!-- 		</div> -->
-<!-- 	</div> -->
-
-
+		
 <script>
 	
 	// 찜하기 버튼
@@ -616,49 +579,156 @@ body {
 	
 	$(document).ready(function(){
 		
-		$.ajax({
-			url:"/img/review?s_no="+${cri.s_no},
-			type:"get",
-			dataType:"json",
-			success:function(data){
-				console.log(data);		
-				$(data).each(function(index,target){
-					
-					// JSON.stringify(target); 걍보려고 테스트
-					var data = JSON.stringify(target);
-					
-					$(".reviewBox").append("<div style='width:100%; height:9%; border-bottom: 2px solid black; margin-top:1%; '>"
-// 										+"<span>"+"r_no :"+target.r_no+"</span>"
-// 										+"<span>"+"s_no :"+target.s_no+"</span>"
-// 										+"<span>"+"순번 :"+index+"</span>"
-// 										+"<span>"+"r_regdate :"+target.r_regdate+"</span> "
-										+"<span>"+"u_id :"+target.u_id+"</span> "
-										+"<span>"+"r_score :"+target.r_score+"</span> "		
-										+"<span><button id='"+target.r_no+"'>수정</button></span> "
-										+"<span><button id='"+target.r_no+"'>삭제</button></span> "
-										+"<div>"+"r_comment :"+target.r_comment+"</div> "
-									+"</div>");
-				});//end each
-				$(".reviewBox").append("${pageCri.toString()}");
-					
-			}//end success
-						
-		});//end ajax
-		
+		goReview(1);
 		
 	});
 	
-// 	$(".menulist").on("click",function(){
+	var curPage ='';
+	
+	function goReview(page){
 		
+		curPage = page;
+	 
+	 	$.ajax({
+	 		url:"/img/store/review?s_no="+${cri.s_no}+"&page="+page,
+	 		type:"get",
+	 		success:function(data){
+	 			
+				$(".reviewBox ul").children().remove();
+	 
+	 			$(data).each(function(index,target){
+	 				
+					$(".reviewBox ul").append("<li> <div class=\"review_section\">"
+										+ "<span class=\"review_user_id\"><strong>"+ target.u_id +"</strong></span>"
+										+ "<span class=\"review_regdate\">"+ target.r_regdate +"</span></div>"
+										+ "<div class=\"review_section2\">"
+										+ "<span><a href='javascript:reviewModify("+target.r_no+")'><i class=\"fa fa-pencil\"></i></a></span>"
+										+ "<span style=\"padding-left: 10px;\"><a href='javascript:reviewDelete("+target.r_no+")'><i class=\"fa fa-times\"></i></a></span></div>"
+										+ "<div id='"+ target.r_no +"' class=\"review_comment\">"+ target.r_comment +"</div></li>");
+
+	 			});//end each
+	 			
+	 			$(".reviewBox").append("${pageCri.toString()}");
+	 
+	 		}//end success
+	 
+		 });//end ajax
+	 
+	 
+	 	$.ajax({
+	 		url:"/img/store/reviewTotal?s_no="+${cri.s_no}+"&page="+page,
+	 		type:"get", 
+			success:function(cri){
+				
+				$("#paging").children().remove();
+				
+				var code = "";
+				var page=0;
+				
+				for(page = cri.startPage; page <= cri.lastPage ; page ++){
+					if(cri.prePage == true && page == cri.startPage){
+					code +="<li><a href='javascript:goReview("+(cri.startPage-1)+");' >pre</a></li>";
+					}
+				
+					code += "<li><a href='javascript:goReview("+page+");'>"+page+"</a></li>";
+				
+					if(cri.nextPage == true && page == cri.lastPage){
+						code +="<li><a href='javascript:goReview("+(cri.lastPage+1)+");' >n</a></li>";
+					}
+				}
+			
+				$("#paging").append(code);
+	 
+	 		}//end success
+	 
+	 	});//end ajax
+	 
+	}//end function goReview
+	
+	function reviewWrite(){
 		
-// 	});
+		var writeData = {r_comment :$("[name=reviewData]").val() , s_no :'${cri.s_no}'};
+		 
+		$.ajax({
+			url:"/img/store/reviewWrite",
+			type:"post",
+			data:writeData,
+			success:function(data){
+				$("[name=reviewData]").val("");
+				goReview(1);
+			}
+		
+		});
+		 
+	}// end function reviewWrite()
+	
+	
+	function reviewDelete(rno){
+		 
+		 var target = {r_no : rno};
+		 
+		 $.ajax({
+		 url:"/img/store/reviewDelete",
+		 type:"post",
+		 data:target,
+		 success:function(data){
+		 goReview(curPage);
+		 
+		 }// end success
+		 
+		 });//end ajax
+		 
+		}// end function reviewWrite()
+
+
+
+		var textData = '';
+		// 댓글 수정 진입
+		function reviewModify(rno){
+		 
+		 var $target = $("#"+rno+"");
+		 textData = $target.contents(":first-child").text();
+		 
+		 $target.contents(":first-child").remove();
+		 
+		 $target.append("<input type='text' name='reviewModifyData' value='"+textData+"' \/>"
+		 +"<a href='javascript:reviewModifySubmit("+rno+")'>완료</a>"
+		 +"<a href='javascript:reviewModifyCancel("+rno+")'>취소</a>");
+		 
+		}
+		//댓글 수정 완료
+		function reviewModifySubmit(rno){
+
+		 var modifyData = {r_no : rno, r_comment : $("[name=reviewModifyData]").val()}
+		 
+		 console.log(modifyData);
+		 
+		 $.ajax({
+		 url:"/img/store/reviewModify",
+		 type:"post",
+		 data:modifyData,
+		 success:function(data){
+		 goReview(curPage);
+		 
+		 }
+		 
+		 });
+
+		}
+		//댓글 수정 취소
+		function reviewModifyCancel(rno){
+		 var $target = $("#"+rno+"");
+		 console.log($target);
+		 $target.children().remove();
+		 $target.append(textData);
+		}
+	
 	
 	function goList(page){
 		document.listForm.method="get";
 		document.listForm.action="/img/main";
 		document.listForm.page.value=page;
 		document.listForm.submit();
-		
 	}
 
 
