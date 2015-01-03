@@ -142,11 +142,11 @@ html,body{
 							<table style="margin-top: 1%;">
 								<tr>
 									<td><img src='/file/view?path=address.png'></td>
-									<td style="color: #116139;">${store.s_address}</td>
+									<td style="color: #323b4c/* #116139 */;">${store.s_address}</td>
 								</tr>
 								<tr>
 									<td><img src='/file/view?path=tel.png'></td>
-									<td style="color: #116139;"> 전~화~번~호 </td>
+									<td style="color: #323b4c /* #116139 */;">${store.s_tel}</td>
 								</tr>
 							</table>
 						</li>

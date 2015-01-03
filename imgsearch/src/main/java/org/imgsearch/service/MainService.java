@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.imgsearch.common.Criteria;
 import org.imgsearch.mapper.MainMapper;
+import org.imgsearch.vo.CategoryVO;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreImageVO;
 import org.imgsearch.vo.StoreMenuVO;
@@ -167,6 +168,16 @@ public class MainService {
 	// 리뷰수정
 	public void storeReviewModify(StoreReviewVO rvo) {
 		mapper.storeReviewModify(rvo);
+	}
+	
+	// 매칭 연예인
+	public List<EntVO> storeEntMatch(Criteria cri) {
+		return mapper.storeEntMatch(cri);
+	}
+	
+	// 가게 카테고리
+	public List<CategoryVO> storeCategory(Criteria cri) {
+		return mapper.storeCategory(cri);
 	}
 
 }

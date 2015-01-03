@@ -77,7 +77,7 @@ body {
 	height: 45%;
 	margin-bottom: 20px;
  	padding:1%; 
- 	padding-top: 5px;
+/*  	padding-top: 5px; */
  	padding-bottom: 0;
 }
 
@@ -106,7 +106,7 @@ body {
 .store .category{
 	float:left;
 	width: 20%; 
-	height: 30%;
+	height: 20%;
 }
 
 .store .category font {
@@ -114,12 +114,21 @@ body {
 }
 
 .store .content{
-	width:80%;
-	height: 70%;
+	width: 45%;
+	height: 60%;
+	float: left;
 }
 
 .storeContent{
 	color: #fff;
+	margin-top: 2%;
+}
+
+.storeButton {
+	float: left;
+	width: 15%;
+	height: 60%;
+	text-align: right;
 }
 
 .photo {
@@ -405,16 +414,22 @@ body {
 		<ul>
 			<li class='menu'><h1 style="color: #fff; margin-left: 5%;">{ STORE }</h1></li>
 			<li class='title storeName'><h1 style="color: #fff;"> ${vo.s_name}</h1></li>
-			<li class='category'> </li>
+			<li class='category' style="text-align: center; color: #fff;">
+				<c:forEach var="cate" items="${cateList}" varStatus="status">
+					${cate.c_category}
+					<c:if test="${status.last == false}"> > </c:if>
+				</c:forEach>
+			</li>
 			<li class='content'>
 				<table class="storeContent">
 					<tr>
 						<td><img src="/file/view?path=address2.png"></td>
 						<td>${vo.s_address}</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td><img src="/file/view?path=tel2.png"></td>
-						<td>전~화~번~호</td>
+						<td>${vo.s_tel}</td>
 					</tr>
 					<tr>
 						<td><img src="/file/view?path=homepage2.png"></td>
@@ -422,16 +437,36 @@ body {
 					</tr>
 					<tr>
 						<td><img src="/file/view?path=match2.png"></td>
-						<td>여기 연예인 들어갈거야아아아</td>
+						<td id="storeContent-Ent"> 
+							<c:forEach var="ent" items="${entList}" varStatus="status">
+								${ent.e_name}
+								<c:if test="${status.last == false}">, </c:if>
+							</c:forEach>
+						</td>
+						<td></td>
 					</tr>
-					<tr>
+<!-- 					<tr>
 						<td></td>
 						<td style="text-align: right;">
 							<button id="reservButton"style="float:right; margin:20px;">찜하기</button>
 							<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
+			</li>
+			<li class="storeButton">
+				<table>
+					<tr><td></td></tr>
+					<tr><td> <button id="reservButton"style="float:right; margin:20px;">찜하기</button> </td></tr>
+					<tr><td> <a id="menubutton" style="float:right; margin:20px;">메뉴보기</a> </td></tr>
+					<tr><td> 즐겨찾기 </td></tr>
+				</table>
+<!-- 				<ul>
+					<li> 여백의 미 </li>
+					<li> <button id="reservButton"style="float:right; margin:20px;">찜하기</button> </li>
+					<li> <a id="menubutton" style="float:right; margin:20px;">메뉴보기</a> </li>
+					<li> 세번째 버튼 </li>
+				</ul> -->
 			</li>
 		</ul>
 	</div>

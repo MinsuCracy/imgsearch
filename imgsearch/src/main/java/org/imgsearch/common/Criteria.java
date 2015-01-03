@@ -6,11 +6,11 @@ public class Criteria {
 	private String keyword = "";
 
 	
-	// ê°€ê²Œë²ˆí˜¸
+	// °¡°Ô ¹øÈ£
 	private int s_no;	
-	// ìœ ì €ë²ˆí˜¸
+	// À¯Àú ¹øÈ£
 	private int u_no;
-	// ì—°ì˜ˆì¸ë²ˆí˜¸
+	// ¿¬¿¹ÀÎ ¹øÈ£
 	private int e_no;
 	
 	private int page;
@@ -25,8 +25,6 @@ public class Criteria {
 
 	private boolean prePage;
 	private boolean nextPage;
-	
-	
 
 	public int getS_no() {
 		return s_no;

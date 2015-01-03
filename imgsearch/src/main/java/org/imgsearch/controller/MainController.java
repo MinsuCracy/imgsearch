@@ -89,6 +89,8 @@ public class MainController {
 	public void storeView(Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("vo", service.storeView(cri));
 		model.addAttribute("imgList", service.storeImgList(cri));
+		model.addAttribute("cateList", service.storeCategory(cri));
+		model.addAttribute("entList", service.storeEntMatch(cri));
 	}
 
 	@RequestMapping("/menuView")
@@ -119,14 +121,12 @@ public class MainController {
 	@RequestMapping(value = "/store/reviewDelete", method = RequestMethod.POST)
 	@ResponseBody
 	public void storeReviewDelete(StoreReviewVO rvo) {
-
 		service.storeReviewDelete(rvo);
 	}
 
 	@RequestMapping(value = "/store/reviewModify", method = RequestMethod.POST)
 	@ResponseBody
 	public void storeReviewModify(StoreReviewVO rvo) {
-
 		service.storeReviewModify(rvo);
 	}
 

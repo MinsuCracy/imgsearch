@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.service.StoreService;
 import org.imgsearch.vo.EntVO;
-import org.imgsearch.vo.StoreCVO;
-import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreIVO;
-import org.imgsearch.vo.StoreKVO;
-import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreRVVO;
+import org.imgsearch.vo.CategoryVO;
+import org.imgsearch.vo.SEmatchVO;
+import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.SKmatchVO;
+import org.imgsearch.vo.StoreMenuVO;
+import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 @Controller
 @RequestMapping("/admin/store/*")
@@ -44,51 +43,41 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	public  String storelist( @ModelAttribute("cri") Criteria cri, Model model) {
 		
 		int total = storeservice.storecount(cri);
+		
 		cri.setTotalPage(total);
 		List<StoreVO> list = storeservice.storelist(cri);
-		logger.info("cri:"+cri);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("cri", cri);
-				return "/admin/store/storelist";
+		
+		return "/admin/store/storelist";
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public void storeregist(@ModelAttribute("cri") Criteria cri, @ModelAttribute("vo") StoreVO vo, EntVO evo, Model model) {
-	List<EntVO> elist = storeservice.entlistview();
-		logger.info("elist:"+ elist);
-	List<StoreKVO> kvolist = storeservice.keylistview();
-		logger.info("kvolist:"+kvolist);
-	List<StoreCVO> cvolist = storeservice.catelistview();
-		logger.info("cvolist"+cvolist);
+		
+		List<EntVO> elist = storeservice.entlistview();
+		List<SKmatchVO> kvolist = storeservice.keylistview();		
+		List<CategoryVO> cvolist = storeservice.catelistview();
+		
 		model.addAttribute("elist", elist);
 		model.addAttribute("kvolist", kvolist);
 		model.addAttribute("cvolist", cvolist);
+		
 	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String storeregist(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreIVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo, StoreCVO cvo) {
-		
-		logger.info("regist vo :"+ vo);
+	public String storeregist(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreImageVO ivo, int entno1, int entno2, int entno3, StoreMenuVO mvo, CategoryVO cvo) {
 		
 		storeservice.storeregist(vo);
 		StoreVO newvo = storeservice.storelast();
-		logger.info("regist newvo :"+ newvo );
-		ivo.setS_no(newvo.getS_no());
-		logger.info("regist ivo :"+ ivo );
+		
+		ivo.setS_no(newvo.getS_no());		
 		storeservice.storeiregist(ivo);
 		
-//		EntVO newentvo1 = storeservice.entnumfinder(entvo1);
-//		EntVO newentvo2 = storeservice.entnumfinder(entvo2);
-//		EntVO newentvo3 = storeservice.entnumfinder(entvo3);
-		
-		logger.info("entvo1:" + entno1);
-		logger.info("entvo2:" + entno2);
-		logger.info("entvo3:" + entno3);
-		
-		
-		StoreEVO newevo1 = new StoreEVO();
-		StoreEVO newevo2 = new StoreEVO();
-		StoreEVO newevo3 = new StoreEVO();
+		SEmatchVO newevo1 = new SEmatchVO();
+		SEmatchVO newevo2 = new SEmatchVO();
+		SEmatchVO newevo3 = new SEmatchVO();
 		
 		newevo1.setS_no(newvo.getS_no());
 		newevo2.setS_no(newvo.getS_no());
@@ -107,29 +96,25 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		
 		cvo.setS_no(newvo.getS_no());
 		storeservice.storecregist(cvo);
+		
 		return "redirect:/admin/store/storelist";
 	}
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public void storeview(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreIVO ivo, Model model) {
+	public void storeview(@ModelAttribute("cri") Criteria cri, StoreVO vo, StoreImageVO ivo, Model model) {
 		
 		vo = storeservice.storeview(vo);
-		logger.info("vo :"+vo);
-		List<StoreIVO> ivolist = storeservice.storeiview(vo);
-		logger.info("ivolist :"+ivolist);
-		List<StoreEVO> evolist = storeservice.storeseview(vo);
-		logger.info("evolist :"+evolist);
-	  String e_name1 = storeservice.entnamefinder(evolist.get(0).getE_no());
-	  String e_name2 = storeservice.entnamefinder(evolist.get(1).getE_no());
-	  String e_name3 = storeservice.entnamefinder(evolist.get(2).getE_no());
-	  	logger.info("e_name1:"+e_name1);
-		logger.info("e_name2:"+e_name2);
-		logger.info("e_name3:"+e_name3);
-		   
+		
+		List<StoreImageVO> ivolist = storeservice.storeiview(vo);
+		List<SEmatchVO> evolist = storeservice.storeseview(vo);
+		
+		String e_name1 = storeservice.entnamefinder(evolist.get(0).getE_no());
+		String e_name2 = storeservice.entnamefinder(evolist.get(1).getE_no());
+		String e_name3 = storeservice.entnamefinder(evolist.get(2).getE_no());
 	  
-	  	StoreEVO newevo1 = new StoreEVO();
-	  	StoreEVO newevo2 = new StoreEVO();
-	  	StoreEVO newevo3 = new StoreEVO();
+	  	SEmatchVO newevo1 = new SEmatchVO();
+	  	SEmatchVO newevo2 = new SEmatchVO();
+	  	SEmatchVO newevo3 = new SEmatchVO();
 	  	
 	  	newevo1.setE_no(evolist.get(0).getE_no());
 	  	newevo1.setE_name(e_name1);
@@ -141,34 +126,24 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 	  	newevo3.setE_name(e_name3);
 	  	evolist.set(2, newevo3);
 		
-		
-	  	List<StoreMVO> mvolist =storeservice.storemview(vo);
-	  	logger.info("mvolist:"+mvolist);
-	  	
-	  	
-	  
-	  	
-	  	
-	  	
+	  	List<StoreMenuVO> mvolist =storeservice.storemview(vo);
+
 	  	int reserv = storeservice.storersview(vo);
 	  	int menuview = storeservice.storemvview(vo);
 	  	int matchpoint = reserv*3 + menuview ;
-	  	logger.info("matchpoint:"+matchpoint);
 	  	
 	  	//category
-	  	 StoreCVO scvo =  storeservice.storescview(vo);
-	  	logger.info("scvo:"+scvo);
+	  	 CategoryVO scvo =  storeservice.storescview(vo);
 	  	scvo = storeservice.storecview(scvo);
-	  	logger.info("scvo:"+scvo);
-	  	StoreCVO scvop1 = new StoreCVO();
+
+	  	CategoryVO scvop1 = new CategoryVO();
 	  	scvop1.setC_no(scvo.getC_parent());
 	  	scvop1 = storeservice.storecview(scvop1);
-	  	StoreCVO scvop2 = new StoreCVO();
+	  	
+	  	CategoryVO scvop2 = new CategoryVO();
 	  	scvop2.setC_no(scvop1.getC_parent());
 	  	scvop2 = storeservice.storecview(scvop2);
-	  	
-	  	
-	  	
+
 		model.addAttribute("vo", vo);
 		model.addAttribute("ivolist", ivolist);
 		model.addAttribute("evolist", evolist);
@@ -177,55 +152,42 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		model.addAttribute("scvo", scvo);
 		model.addAttribute("scvop1", scvop1);
 		model.addAttribute("scvop2", scvop2);
-		
-		
-		
+
 	}
 
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void storemodify(@ModelAttribute("cri") Criteria cri, @ModelAttribute("vo") StoreVO vo, Model model){
-		
-		
-		
+
 		vo = storeservice.storeview(vo);
-		logger.info("vo :"+vo);
-		List<StoreIVO> ivolist = storeservice.storeiview(vo);
-		logger.info("ivolist :"+ivolist);
-		List<StoreEVO> evolist = storeservice.storeseview(vo);
-		logger.info("evolist :"+evolist);
-	  String e_name1 = storeservice.entnamefinder(evolist.get(0).getE_no());
-	  String e_name2 = storeservice.entnamefinder(evolist.get(1).getE_no());
-	  String e_name3 = storeservice.entnamefinder(evolist.get(2).getE_no());
-	  	logger.info("e_name1:"+e_name1);
-		logger.info("e_name2:"+e_name2);
-		logger.info("e_name3:"+e_name3);
-		   
-	  
-	  	StoreEVO newevo1 = new StoreEVO();
-	  	StoreEVO newevo2 = new StoreEVO();
-	  	StoreEVO newevo3 = new StoreEVO();
+
+		List<StoreImageVO> ivolist = storeservice.storeiview(vo);
+		List<SEmatchVO> evolist = storeservice.storeseview(vo);
+		
+		String e_name1 = storeservice.entnamefinder(evolist.get(0).getE_no());
+		String e_name2 = storeservice.entnamefinder(evolist.get(1).getE_no());
+		String e_name3 = storeservice.entnamefinder(evolist.get(2).getE_no());
+  
+	   	SEmatchVO newevo1 = new SEmatchVO();
+	  	SEmatchVO newevo2 = new SEmatchVO();
+	  	SEmatchVO newevo3 = new SEmatchVO();
 	  	
 	  	newevo1.setE_no(evolist.get(0).getE_no());
 	  	newevo1.setE_name(e_name1);
 		evolist.set(0, newevo1);
+		
 		newevo2.setE_no(evolist.get(1).getE_no());
 	  	newevo2.setE_name(e_name2);
 	  	evolist.set(1, newevo2);
+	  	
 	  	newevo3.setE_no(evolist.get(2).getE_no());
 	  	newevo3.setE_name(e_name3);
 	  	evolist.set(2, newevo3);
-		
-		
-	  	List<StoreMVO> mvolist =storeservice.storemview(vo);
-	  	logger.info("mvolist:"+mvolist);
-	  	
-	  	
-	  	
-	  	
+			
+	  	List<StoreMenuVO> mvolist =storeservice.storemview(vo);
+
 	  	int reserv = storeservice.storersview(vo);
 	  	int menuview = storeservice.storemvview(vo);
 	  	int matchpoint = reserv*3 + menuview ;
-	  	logger.info("matchpoint:"+matchpoint);
 	  	
 		model.addAttribute("vo", vo);
 		model.addAttribute("ivolist", ivolist);
@@ -233,27 +195,23 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		model.addAttribute("mvolist", mvolist);
 		model.addAttribute("matchpoint", matchpoint);
 		
-		
 		List<EntVO> elist = storeservice.entlistview();
-		logger.info("elist:"+ elist);
-		List<StoreKVO> kvolist = storeservice.keylistview();
-		logger.info("kvolist:"+kvolist);
-		List<StoreCVO> cvolist = storeservice.catelistview();
-		logger.info("cvolist"+cvolist);
+		List<SKmatchVO> kvolist = storeservice.keylistview();
+		List<CategoryVO> cvolist = storeservice.catelistview();
+
 		model.addAttribute("elist", elist);
 		model.addAttribute("kvolist", kvolist);
 		model.addAttribute("cvolist", cvolist);
 		
-		
 		//category
-	  	 StoreCVO scvo =  storeservice.storescview(vo);
-	  	logger.info("scvo:"+scvo);
+	  	 CategoryVO scvo =  storeservice.storescview(vo);
 	  	scvo = storeservice.storecview(scvo);
-	  	logger.info("scvo:"+scvo);
-	  	StoreCVO scvop1 = new StoreCVO();
+
+	  	CategoryVO scvop1 = new CategoryVO();
 	  	scvop1.setC_no(scvo.getC_parent());
 	  	scvop1 = storeservice.storecview(scvop1);
-	  	StoreCVO scvop2 = new StoreCVO();
+	  	
+	  	CategoryVO scvop2 = new CategoryVO();
 	  	scvop2.setC_no(scvop1.getC_parent());
 	  	scvop2 = storeservice.storecview(scvop2);
 	  	
@@ -261,32 +219,23 @@ private static final Logger logger = LoggerFactory.getLogger(HomeController.clas
 		model.addAttribute("scvop1", scvop1);
 		model.addAttribute("scvop2", scvop2);
 		
-		
-		
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String storemodify(@ModelAttribute("cri") Criteria cri,StoreVO vo, StoreIVO ivo, int entno1, int entno2, int entno3, StoreMVO mvo){
+	public String storemodify(@ModelAttribute("cri") Criteria cri,StoreVO vo, StoreImageVO ivo, int entno1, int entno2, int entno3, StoreMenuVO mvo){
 		
 		storeservice.storemodify(vo);
-		
-logger.info("regist vo :"+ vo);
-		
 		storeservice.storeregist(vo);
+		
 		StoreVO newvo = storeservice.storelast();
-		logger.info("regist newvo :"+ newvo );
-		ivo.setS_no(newvo.getS_no());
-		logger.info("regist ivo :"+ ivo );
-		storeservice.storeiregist(ivo);
 
-		logger.info("entvo1:" + entno1);
-		logger.info("entvo2:" + entno2);
-		logger.info("entvo3:" + entno3);
-		
-		
-		StoreEVO newevo1 = new StoreEVO();
-		StoreEVO newevo2 = new StoreEVO();
-		StoreEVO newevo3 = new StoreEVO();
+		ivo.setS_no(newvo.getS_no());
+
+		storeservice.storeiregist(ivo);
+	
+		SEmatchVO newevo1 = new SEmatchVO();
+		SEmatchVO newevo2 = new SEmatchVO();
+		SEmatchVO newevo3 = new SEmatchVO();
 		
 		newevo1.setS_no(newvo.getS_no());
 		newevo2.setS_no(newvo.getS_no());
@@ -302,13 +251,7 @@ logger.info("regist vo :"+ vo);
 		
 		mvo.setS_no(newvo.getS_no());
 		storeservice.storemregist(mvo);
-		
-		
-		
-		
-		
-		
-		
+
 		return "admin/store/storelist";
 		
 	}
@@ -323,42 +266,31 @@ logger.info("regist vo :"+ vo);
 	
 	@RequestMapping(value = "/review")
 	@ResponseBody
-	public List<StoreRVVO> storereview(StoreVO vo, Model model)
+	public List<StoreReviewVO> storereview(StoreVO vo, Model model)
 	{	
-		
-		
-		
 		 return storeservice.storereview(vo);
 		 
 	}
+	
 	@RequestMapping(value ="/category")
 	@ResponseBody
-	public List<StoreCVO> storecategory(StoreVO vo, int cno, Model model)
+	public List<CategoryVO> storecategory(StoreVO vo, int cno, Model model)
 	{
-		StoreCVO cvo = new StoreCVO();
-		
-		logger.info("cno:"+cno);
-		
-		
+		CategoryVO cvo = new CategoryVO();
+
 		cvo.setC_parent(cno);
 		
 		return storeservice.storecategory(cvo);
 		
 	}
+	
 	@RequestMapping(value="/keyword")
 	@ResponseBody
-	public List<StoreKVO> keywordchoice(StoreKVO kvo)
-	{
-	
-		
-		logger.info("kvo:"+kvo);
-		
-		List<StoreKVO> kvolist = storeservice.keywordchoice(kvo);
-		logger.info("kvolist:"+kvolist);
+	public List<SKmatchVO> keywordchoice(SKmatchVO kvo)
+	{		
+		List<SKmatchVO> kvolist = storeservice.keywordchoice(kvo);
 		
 		return kvolist;
-		
-		
 	}
 	
 	

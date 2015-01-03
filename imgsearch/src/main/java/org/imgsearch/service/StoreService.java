@@ -7,12 +7,12 @@ import javax.inject.Inject;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.mapper.StoreMapper;
 import org.imgsearch.vo.EntVO;
-import org.imgsearch.vo.StoreCVO;
-import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreIVO;
-import org.imgsearch.vo.StoreKVO;
-import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreRVVO;
+import org.imgsearch.vo.CategoryVO;
+import org.imgsearch.vo.SEmatchVO;
+import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.SKmatchVO;
+import org.imgsearch.vo.StoreMenuVO;
+import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
@@ -80,7 +80,7 @@ public class StoreService implements StoreMapper {
 	//review
 	
 	@Override
-	public List<StoreRVVO> storereview(StoreVO vo){
+	public List<StoreReviewVO> storereview(StoreVO vo){
 		
 		
 		
@@ -89,12 +89,12 @@ public class StoreService implements StoreMapper {
 	
 	
 	//image
-	public List<StoreIVO> storeiview(StoreVO vo){
+	public List<StoreImageVO> storeiview(StoreVO vo){
 		
 		return storemapper.storeiview(vo);
 	}
 
-	public void storeiregist(StoreIVO ivo){
+	public void storeiregist(StoreImageVO ivo){
 		
 		storemapper.storeiregist(ivo);
 	}
@@ -116,12 +116,12 @@ public class StoreService implements StoreMapper {
 		return storemapper.entnamefinder(e_no);
 	}
 	
-	public void storeeregist(StoreEVO evo){
+	public void storeeregist(SEmatchVO evo){
 		
 		storemapper.storeeregist(evo);
 	}
 	
-	public List<StoreEVO> storeseview(StoreVO vo){
+	public List<SEmatchVO> storeseview(StoreVO vo){
 		
 		return storemapper.storeseview(vo);
 	}
@@ -129,12 +129,12 @@ public class StoreService implements StoreMapper {
 	
 	
 	//menu
-	public void storemregist(StoreMVO mvo){
+	public void storemregist(StoreMenuVO mvo){
 		
 		storemapper.storemregist(mvo);
 	}
 	
-	public List<StoreMVO> storemview(StoreVO vo){
+	public List<StoreMenuVO> storemview(StoreVO vo){
 		
 		return storemapper.storemview(vo);
 	}
@@ -150,45 +150,45 @@ public class StoreService implements StoreMapper {
 	};
 	
 	//keyword
-	public List<StoreKVO> keylistview(){
+	public List<SKmatchVO> keylistview(){
 		
 		return storemapper.keylistview();
 		
 	};
 	
-	public List<StoreKVO> keywordchoice(StoreKVO kvo){
+	public List<SKmatchVO> keywordchoice(SKmatchVO kvo){
 		
 		return storemapper.keywordchoice(kvo);
 	};
 	
 	//category
-	public List<StoreCVO> catelistview(){
+	public List<CategoryVO> catelistview(){
 		
 		
 		
 		return storemapper.catelistview();
 	};
 	
-	public List<StoreCVO> storecategory(StoreCVO cvo){
+	public List<CategoryVO> storecategory(CategoryVO cvo){
 		
 		
 		return storemapper.storecategory(cvo);
 	};
 	
 	
-	public StoreCVO storecview(StoreCVO cvo){
+	public CategoryVO storecview(CategoryVO cvo){
 		
 		
 		return storemapper.storecview(cvo);
 	};
 	
-	public StoreCVO storescview(StoreVO vo){
+	public CategoryVO storescview(StoreVO vo){
 		
 		
 		return storemapper.storescview(vo);
 	};
 	
-	public void storecregist(StoreCVO cvo){
+	public void storecregist(CategoryVO cvo){
 		
 		storemapper.storecregist(cvo);
 	};
