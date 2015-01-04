@@ -68,6 +68,13 @@
 
 <!-- 게시판 보여주기 위한 스타일 -->
 <style>
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+
 .block{
 	display:block;
 }
@@ -78,6 +85,14 @@
 
 </head>
 <body>
+<script>
+var ulPage = 1;
+</script>
+
+
+
+
+</script>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
                     <jsp:param name="selected" value="5"/>
     </jsp:include>
@@ -94,43 +109,71 @@
 				<div class="widget-body" style="padding: 10px 0 0;">
 					<div id="DataTables_Table_0_wrapper"
 						class="dataTables_wrapper form-inline" role="grid">
-						<div class="row-fluid">
-							<div class="span6">
-								<div id="DataTables_Table_0_length" class="dataTables_length">
-								<table>
+						<table width=100%>
 								<tr>
 								<td>
+								<table class="table table-bordered ">
+								<tr>
+								<td colspan="2">선호 연예인</td>
+								</tr>
+								<c:forEach var="tblEnt" items="${favoriteEntList }">
+								<tr>
+								<td>${tblEnt.e_name } </td>
+								<td>${tblEnt.cnt }</td>
+								</tr>
+								</c:forEach>
+								</table>
+								</td>
+								<td >
 								<!-- 연예인 파이 데이터 차트 -->
 								<div id="canvas-holder">
-									<canvas id="chart-ent" width="300" height="300"/>
+									<canvas id="chart-ent" width="250" height="250"/>
 								</div>
 								</td>
 								<td>
+								<table class="table table-bordered ">
+								<tr>
+								<td colspan="2">선호 키워드</td>
+								</tr>
+									<c:forEach var="tblKey" items="${favoriteKeyList }">
+								<tr>
+								<td>${tblKey.sl_keyword } </td>
+								<td>${tblKey.cnt }</td>
+								</tr>
+								</c:forEach>
+								</table>
+								</td>
+								
+								<td>
 								<!-- 키워드 파이 데이터 차트 -->
 								<div id="canvas-holder">
-									<canvas id="chart-keyword" width="300" height="300"/>
+									<canvas id="chart-keyword" width="250" height="250"/>
 								</div>
 								</td>
 								</tr>
 								</table>
+						<div class="row-fluid">
+							<div class="span6">
+								<div id="DataTables_Table_0_length" class="dataTables_length">
+								
 							
 							
 									<label>
-									<select size="1" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" onchange="logSelect(this.value);">
-										<option value="userLog" selected="selected" >회원 로그</option>
-										<option value="searchLog" >검색 로그</option></select> 
-										records per page</label>
+									
+									<select style="width=50px;" size="1" id=real  name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" onchange="logSelect(this.value, ulPage);">
+										<option value="searchLog"  selected="selected" >검색 로그</option>
+										<option value="userLog">회원 로그</option></select> 
+										</label>
 								</div>
 							</div>
 							<div class="span6">
 								<div class="dataTables_filter" id="DataTables_Table_0_filter">
-								<!-- 	<label>Search: <input type="text"
-										aria-controls="DataTables_Table_0"></label> -->
+								
 								</div>
 							</div>
 						</div>
-<!-- 						회원 로그 -->
-						<div class="widget-body block" style="padding: 10px 0 0;" id="userLogList">
+						<!-- 	서치 로그 -->
+						<div class="widget-body block" style="padding: 10px 0 0;" id="searchLog">
 							<table class="table table-bordered table-primary">
 								<thead>
 									<tr>
@@ -165,11 +208,11 @@
 								</tbody>
 							</table>
 							<div class="row-fluid" >
-							<div class="span8" >
-								<div class="dataTables_paginate paging_bootstrap pagination " >
+							<div class="" >
+								<div class="paging_bootstrap pagination "  style="text-align:center;">
 									<ul >
 										<c:if test='${cri.prePage eq true}'>
-										 <li class="prev"><a href="list?page=${cri.startPage-1}">← Previous</a></li>
+										 <li class="prev"><a  href="list?page=${cri.startPage-1}">← Previous</a></li>
 										</c:if>
 										
 										<c:forEach varStatus="pageList" begin='${cri.startPage}' end='${cri.lastPage}'>
@@ -178,7 +221,7 @@
 												<a href="list?page=${pageList.index }">${pageList.index }</a></li>
 											</c:when>
 											<c:otherwise>
-											<li><a href="list?page=${pageList.index }">${pageList.index }</a></li>
+											<li><a  href= "list?page=${pageList.index }">${pageList.index }</a></li>
 											</c:otherwise>
 											</c:choose>
 										</c:forEach>
@@ -193,7 +236,44 @@
 						</div>
 						</div>
 						
+<!-- 						end 서치 로그 -->
+
+<!-- 	유저 로그 -->
+						<div class="widget-body none" style="padding: 10px 0 0;" id="userLog">
+							<table class="table table-bordered table-primary">
+								<thead>
+									<tr>
+										<th class="center">번호</th>
+										<th class="center">유저ID</th>
+										<th>로그인 날짜</th>
+										<th>로그아웃 날짜</th>
+										
+									</tr>
+								</thead>
+								<tbody id=listArea>
+									<c:if test="${empty userLogList[0] }">
+										<tr>
+											<td class="center" colspan="4">결과 값이 없습니다.</td>
+										</tr>
+									</c:if>
+								</tbody>
+							</table>
+							<div class="row-fluid" >
+							<div class="" >
+								<div class="paging_bootstrap pagination "  style="text-align:center;">
+									<ul id="ulpage">
+									
+										
+									</ul>
+								</div>
+							</div>
+						</div>
+						</div>
+						
 <!-- 						end 회원 로그 -->
+
+
+
 					</div>
 				</div>
 			</div>
@@ -204,13 +284,13 @@
 		var data = {};
 		var entData=[];
 		var i=0;
-		var color =["#F7464A", "#46BFBD", "#FDB45C",  "#949FB1", "#4D5360",];
-		var highlight=["#FF5A5E","#5AD3D1", "#FFC870", "#A8B3C5","#616774"];
-		<c:forEach var="test" items="${favoriteEntList}" >
-			data.value = ${test.cnt};
+		var color =[ "#bcebd3", "#70c299", "#575757", "#8a8a8a", "#c9c9c9",];
+		var highlight=["#a2e0df","#5AD3D1", "#4f9e9d", "#32a8a6","#166e6c"];
+		<c:forEach var="favoEnt" items="${favoriteEntList}" >
+			data.value = ${favoEnt.cnt};
 			data.color = color[i];
 			data.highlight = highlight[i];
-			data.label = "${test.e_name}";
+			data.label = "${favoEnt.e_name}";
 			var recive = data;
 			data={"yes":1};
 			entData[i] = recive;
@@ -225,8 +305,8 @@
 				data = {};
 				var keyData=[];
 				i=0;
-				color =["#F7464A", "#46BFBD", "#FDB45C",  "#949FB1", "#4D5360",];
-				highlight=["#FF5A5E","#5AD3D1", "#FFC870", "#A8B3C5","#616774"];
+				color =["#bcebd3", "#70c299", "#575757",  "#8a8a8a", "#c9c9c9",];
+				highlight=["#a2e0df","#5AD3D1", "#4f9e9d", "#32a8a6","#166e6c"];
 				<c:forEach var="test" items="${favoriteKeyList}" >
 					data.value = ${test.cnt};
 					data.color = color[i];
@@ -247,11 +327,107 @@
 				ctx = document.getElementById("chart-ent").getContext("2d");
 				window.myPie = new Chart(ctx).Pie(entData);
 			};
+			
+			
+		
+			function logSelect(data, userLogPage){
+				
+				if(data=="userLog"){
+					ulPage = userLogPage;
+					console.log("userLog 진입");
+					$.ajax({
+						url: "/admin/userlog/test",
+						type: "post",
+						data: {page: userLogPage},
+						success: function(result){
+							var str="";
+							console.log("성공 진입");
+							var i = result.startPage;
+							console.log(result.prePage);
+							if(result.prePage){
+								str+="<li class='prev'><a onclick=logSelect('userLog',"+(result.startPage-1)+")>← Previous</a></li>";
+							}
+							for(i; i <= result.lastPage; i++){
+								 
+								if(i == result.page){
+									str+="<li class='active'><a onclick=logSelect('userLog',"+i+")>"+i+"</a></li>";
+								}else{
+								str+="<li><a onclick=logSelect('userLog',"+i+")>"+i+"</a></li>";
+								}
+							}
+							console.log(result.nextPage);
+							if(result.nextPage){
+								str+="<li class='next'><a onclick=logSelect('userLog',"+(result.lastPage+1)+")>Next </a></li>";
+							}
+							console.log(str);
+							$("#ulpage").empty();
+							$("#ulpage").append(str);
+						}
+					
+					});
+					
+					
+					$.ajax({
+						
+						url: "/admin/userlog/list",
+						type: "post",
+						data: { page: userLogPage},
+						success :  function(result){
+							var str="";
+							var year;
+							var month;
+							var day;
+							var hour;
+							var min;
+							for(var i in result){
+								var date = new Date(result[i].l_logindate);
+								console.log(typeof date);
+								year = date.getFullYear();
+								month = date.getMonth();
+								day = date.getDay();
+								hour = date.getHours();
+								min = date.getMinutes();
+								str += "<tr><td class='center'>";
+								str += result[i].l_no;
+								str += "</td><td class='center'>";
+								str += result[i].u_id;
+								str += "</td><td>";
+								str += year+"-"+month+"-"+day+" "+hour+":"+min;
+								str += "</td>";
+								var date = new Date(result[i].l_logoutdate);
+								year = date.getFullYear();
+								month = date.getMonth();
+								day = date.getDay();
+								hour = date.getHours();
+								min = date.getMinutes();
+								str += "</td><td>";
+								str += year+"-"+month+"-"+day+" "+hour+":"+min;
+								str += "</td></tr>";
+								
+							}
+							console.log(result);
+							$("#listArea").empty();
+							$("#listArea").append(str);
+						}
+					});
+					
+					$("#userLog").removeClass("none");
+					$("#userLog").addClass("block");
+					$("#searchLog").removeClass("block");
+					$("#searchLog").addClass("none");
+				}else{
+					console.log("그 외 지역 진입");
+					$("#searchLog").removeClass("none");
+					$("#searchLog").addClass("block");
+					$("#userLog").removeClass("block");
+					$("#userLog").addClass("none");
+					
+				}
+			}
 
 
 
 	</script>
-
 	
 </body>
 </html>

@@ -85,4 +85,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 30//EN"
 		where se.e_no = #{e_no};
 	</select>
 	
+	<select id="entSearch" resultType="org.imgsearch.vo.EntVO" parameterType="java.lang.String">
+		select * from tbl_ent where e_name = #{e_name}
+	</select>
+	
 </mapper>

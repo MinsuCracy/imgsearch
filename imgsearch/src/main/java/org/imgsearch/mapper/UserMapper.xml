@@ -21,4 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u_no, u_id from tbl_user where u_id = #{f_uid} 
 	</select>
 	
+	<select id="getFriendList" resultType="org.imgsearch.vo.UserVO">
+		select f_uid from tbl_user_friend where u_id =#{userId}
+	</select>
 </mapper>

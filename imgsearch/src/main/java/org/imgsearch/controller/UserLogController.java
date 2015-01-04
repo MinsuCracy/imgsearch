@@ -7,15 +7,15 @@ import javax.inject.Inject;
 import org.imgsearch.common.Criteria;
 import org.imgsearch.service.UserLogService;
 import org.imgsearch.vo.UserLogVO;
-import org.junit.runner.Request;
+import org.imgsearch.web.HomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 @RequestMapping("admin/userlog/*")
@@ -26,25 +26,44 @@ public class UserLogController {
 	
 	UserLogVO vo = new UserLogVO();
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserLogController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@RequestMapping("/")
 	public String sendList(){
 		return "redirect:/admin/userlog/list";
 	}
 		
-	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public void list(Model model, @ModelAttribute("cri") Criteria cri){
+	//Ajax·Î userlog º¸³À´Ï´Ù.
+	@RequestMapping(value="/list", method=RequestMethod.POST)
+	@ResponseBody
+	public List list(@ModelAttribute("ucri") Criteria cri){
 		
 		 cri.setTotalPage(ls.userLogTotalCount(cri));
-		 
 		 List<UserLogVO> userLogList = ls.userLogList(cri);
 		 
-		 model.addAttribute("userLogList", userLogList);
+		 return userLogList;
 		
 	}
 	
+	@RequestMapping(value="/test", method=RequestMethod.POST)
+	@ResponseBody
+	public Criteria test(@ModelAttribute("ucri") Criteria cri){
+	
+		 cri.setTotalPage(ls.userLogTotalCount(cri));
+
+		 logger.info("dblimit : "+cri.getDbLimit());
+		 logger.info("dblimittotal : "+cri.getDbLimitTotal());
+		 logger.info("page : "+cri.getPage());
+		 logger.info("start : "+cri.getStartPage());
+		 logger.info("last : "+cri.getLastPage());
+		 logger.info("total : "+cri.getTotalPage());
+		 logger.info("pre : "+cri.isPrePage());
+		 logger.info("next : "+cri.isNextPage());
+		 
+		 
+		 return cri;
+		
+	}
 	
 
 }

@@ -62,6 +62,15 @@
 
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">

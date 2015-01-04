@@ -175,7 +175,7 @@
 							</div>
 						<div class="row-fluid">
 									<div class="span2">
-										<button class="btn btn-block btn-primary" onclick="location.href='list'">목록</button>
+										<button class="btn btn-block btn-primary" onclick="location.href='list?page=${page}'">목록</button>
 									</div>
 						</div>
 					</div>

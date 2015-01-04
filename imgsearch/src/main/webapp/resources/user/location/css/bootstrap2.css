@@ -165,9 +165,9 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: #7f7f7f;
-  background: #ffffff;
+  background-color: rgb(247, 245, 240);
 	
-	background: url(/resources/testImg/back.jpg) no-repeat center center fixed; 
+/* 	background: url(/resources/testImg/back.jpg) no-repeat center center fixed;  */
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -4930,7 +4930,7 @@ a.badge:hover {
 .search {
 	padding-left: 15px;
 	position:absolute; 
-	bottom:0px;
+	bottom:4px;
 }
 
 .friList{

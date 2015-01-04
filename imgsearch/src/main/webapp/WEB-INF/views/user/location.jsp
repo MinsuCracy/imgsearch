@@ -61,7 +61,7 @@
 	background: none; 
 	width: 100px; 
 	height: 5%; 
-	z-index:999;
+	z-index:1000;
 }
 </style>
 
@@ -84,11 +84,14 @@
 					<input type="hidden" name="store" value="${store}">
 					<div class="mapbutton">
 						<button class="btn" onclick="setBounds()">Ä£±¸ ÇÑ´«¿¡ º¸±â</button>
-						<button class="btn btn-danger" onclick="()">¿¬°á ²÷±â</button>
+						<button class="btn btn-danger" onclick="disconnect('${id}')">¿¬°á ²÷±â</button>
 					</div>
 		</div>
 		
 	</div>
+	
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
 
 </body>
 </html>

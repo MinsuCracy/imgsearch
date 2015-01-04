@@ -7,13 +7,14 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.imgsearch.common.Criteria;
+import org.imgsearch.vo.CategoryVO;
 import org.imgsearch.vo.EntVO;
-import org.imgsearch.vo.StoreCVO;
-import org.imgsearch.vo.StoreEVO;
-import org.imgsearch.vo.StoreIVO;
-import org.imgsearch.vo.StoreKVO;
-import org.imgsearch.vo.StoreMVO;
-import org.imgsearch.vo.StoreRVVO;
+import org.imgsearch.vo.KeywordVO;
+import org.imgsearch.vo.SEmatchVO;
+import org.imgsearch.vo.SKmatchVO;
+import org.imgsearch.vo.StoreImageVO;
+import org.imgsearch.vo.StoreMenuVO;
+import org.imgsearch.vo.StoreReviewVO;
 import org.imgsearch.vo.StoreVO;
 
 
@@ -50,16 +51,20 @@ public interface StoreMapper {
 	//review
 	
 	@Select("select * from tbl_store_review where s_no= #{s_no} order by s_no desc")
-	public List<StoreRVVO> storereview(StoreVO vo);
+	public List<StoreReviewVO> storereview(StoreVO vo);
 	
 	
 	//image
 	
 	@Select("select * from tbl_store_image where s_no= #{s_no} order by s_no desc")
-	public List<StoreIVO> storeiview(StoreVO vo);
+	public List<StoreImageVO> storeiview(StoreVO vo);
 	
 	@Insert("insert into tbl_store_image ( s_no, si_img ) values (#{s_no}, #{si_img}) ")
-	public void storeiregist(StoreIVO ivo);
+	public void storeiregist(StoreImageVO ivo);
+	
+	@Delete("delete from tbl_store_image where s_no= #{s_no}")
+	public void storeiremove(StoreVO vo);
+	
 	
 	//ent
 	@Select("select e_no, e_name from tbl_ent")
@@ -71,19 +76,29 @@ public interface StoreMapper {
 	@Select("select e_name from tbl_ent where e_no = #{e_no}")
 	public String entnamefinder(int e_no);
 	
-	
-	
 	@Insert("insert into tbl_se_match (s_no, e_no) values (#{s_no}, #{e_no})")
-	public void storeeregist(StoreEVO evo);
+	public void storeeregist(SEmatchVO evo);
 	
 	@Select("select * from tbl_se_match where s_no = #{s_no}")
-	public List<StoreEVO> storeseview(StoreVO vo);
+	public List<SEmatchVO> storeseview(StoreVO vo);
+	
+	@Update("update tbl_se_match set e_no = #{e_no} where s_no = #{s_no}")
+	public void storeemodify(SEmatchVO evo);
+	
+	@Delete("delete from tbl_se_match where s_no= #{s_no}")
+	public void storeeremove(StoreVO vo);
+	
+	
 	//menue
 	@Insert("insert into tbl_store_menu (s_no, sm_menu, sm_price) values (#{s_no}, #{sm_menu}, #{sm_price})")
-	public void storemregist(StoreMVO mvo);
+	public void storemregist(StoreMenuVO mvo);
 	
 	@Select("select * from tbl_store_menu where s_no = #{s_no}")
-	public List<StoreMVO> storemview(StoreVO vo);
+	public List<StoreMenuVO> storemview(StoreVO vo);
+	
+	@Delete("delete from tbl_store_menu where s_no= #{s_no}")
+	public void storemremove(StoreVO vo);
+	
 	
 	//point
 	@Select("select count(*) from tbl_store_reserv")
@@ -92,25 +107,47 @@ public interface StoreMapper {
 	@Select("select count(*) from tbl_store_menuview")
 	public int storemvview(StoreVO vo);
 	
+	
 	//keyword
 	@Select("select * from tbl_keyword")
-	public List<StoreKVO> keylistview();
+	public List<SKmatchVO> keylistview();
+	
 	@Select("select * from tbl_keyword where k_keyword LIKE concat('%',#{k_keyword},'%')")
-	public List<StoreKVO> keywordchoice(StoreKVO kvo);
+	public List<SKmatchVO> keywordchoice(SKmatchVO kvo);
+	
+	@Insert("insert into tbl_sk_match (s_no, k_no) values (#{s_no}, #{k_no})")
+	public void storeskmregist(SKmatchVO kvo);
+	
+	@Select("select * from tbl_sk_match where s_no = #{s_no}")
+	public List<KeywordVO> storeskmview(StoreVO vo);
+	
+	@Select("select * from tbl_keyword where k_no = #{k_no}")
+	public KeywordVO sotrekview(KeywordVO kvo);
+	
+	@Delete("delete from tbl_sk_match where s_no= #{s_no}")
+	public void storeskmremove(StoreVO vo);
+	
 	
 	//category
 	@Select("select * from tbl_category where c_parent = 0")
-	public List<StoreCVO> catelistview();
+	public List<CategoryVO> catelistview();
 	
 	@Select("select * from tbl_category where c_parent = #{c_parent}")
-	public List<StoreCVO> storecategory(StoreCVO cvo);
+	public List<CategoryVO> storecategory(CategoryVO cvo);
 	
 	@Select("select * from tbl_category where c_no = #{c_no}")
-	public StoreCVO storecview(StoreCVO cvo);
+	public CategoryVO storecview(CategoryVO cvo);
 	
 	@Select("select * from tbl_sc_match where s_no = #{s_no} limit 1")
-	public StoreCVO storescview(StoreVO vo);
+	public CategoryVO storescview(StoreVO vo);
 	
 	@Select("insert into tbl_sc_match (s_no, c_no) values (#{s_no}, #{c_no})")
-	public void storecregist(StoreCVO cvo);
+	public void storecregist(CategoryVO cvo);
+	
+	@Delete("delete from tbl_sc_match where s_no= #{s_no}")
+	public void storescmremove(StoreVO vo);
+	
+	@Update("update tbl_sc_match set c_no = #{c_no} where s_no = #{s_no}")
+	public void storescmmodify(CategoryVO cvo);
+	
 }

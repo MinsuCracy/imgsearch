@@ -1,6 +1,7 @@
 package org.imgsearch.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -21,17 +23,23 @@ public class ImgsearchController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	
+	@Inject
+	private UserService userService;
+	
 	@RequestMapping("/location")
 	public String index(Principal principal, Model model)throws Exception{
 		
-			logger.info("컨트롤로 입장 location");
 			model.addAttribute("id", principal.getName());
 			logger.info(" 로그인 아이디 : " + principal.getName());
 		return "/user/location";
 	}
-//	@RequestMapping("/insertFriend")
-//	public void insertFriend(UserVO vo)throws Exception{
-//		userService.insertFriend(userService.existFriend(vo));
-//	}
+	@RequestMapping("/friendlist")
+	@ResponseBody
+	public List<UserVO> friendList(Principal principal)throws Exception{
+		if(principal != null){
+			return userService.frienList(principal.getName());
+		}
+		return null;
+	}
 }
 

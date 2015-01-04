@@ -25,7 +25,7 @@
 <script src="/resources/colorbox/jquery.colorbox.js"></script>
 <!-- Font Awesome -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=967f12c12424311a073c2995f73cd4402bfcbd96"></script>
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=282059b054fbcbdcb74ec4e8253e98930616f874"></script>
 <script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 <script src="/resources/js/geolocation.js"></script>
 <style type="text/css">
@@ -100,13 +100,16 @@
 	filter:alpha(opacity=100);
 }
 .rfd{
-	width:170px;
-	height:100px;
-	background-color: gray;
+	width:240px;
+	height:130px;
+	padding:19px;
+	font-size:15px;
+	background-color: #3d9167;
 	position: fixed;
 	right:0px;
-	bottom:-100px;
+	bottom:-130px;
 	text-align: center;
+	z-index: 9999;
 }
 </style>
 </head>
@@ -152,28 +155,15 @@
 			친구목록<span><button class="close" id="menuclose"/></span>
 		</h3>
 		<div class="friList">
-			<a href="#"><i class="icon-ok" style="display: none"></i>강민수</a>
-					<a id="friendOne" href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>강민수</a>
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>김동영</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>전태환</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>노도연</a>
-					<a class="friend" href="#"><i class="icon-ok" style="display: none"></i>정소희</a> 
 		</div>
 		<div class="search">
-			<form class="form-search">
+			<button class="btn" onclick="javascript:locationShare()">위치 공유하기</button>
+			<form class="form-search" style='display: inline;'>
 				<input type="hidden" value="${id}" name="myid"></input>
 				<input type="text" class="input-medium search-query"
 					name="f_uid" />
 			</form>
-				<button class="btn" onclick="addFriend()">추가</button>
+				<button class="btn"  style='display: inline;' onclick="addFriend()">추가</button>
 		</div>
 		<!-- 	</nav> -->
 	</div>
@@ -185,10 +175,7 @@
 <script>
 
 
-$(".friend").click(function(event){
-	event.preventDefault();
-	$(this).children().toggle();
-});
+
 
 function disableOther( button ) {
 	if( button !== 'showRight' ) {
@@ -205,6 +192,29 @@ function disableOther( button ) {
 			if(loginForm){
 				$("#login").trigger("click");
 			}
+			$.ajax({
+				url:"/user/friendlist",
+				success:function(data){
+					var content = "";
+					$.each(data, function(idx, val){
+						content += "<a class='friend' href='#'><i class='icon-ok' data-id='"+val.f_uid+"' style='display: none'></i>"+val.f_uid+"</a>";
+					});
+					$(".friList").html(content);
+					
+					$(".friend").click(function(event){
+						event.preventDefault();
+						$(this).children().toggle("fast",function(){
+							if($(this).attr("data-check") == "checked"){
+								$(this).attr("data-check","");
+								return;
+							}
+							$(this).attr("data-check","checked");
+						});
+					});
+				}
+			});
+			
+			
 		});
 		
 		
@@ -237,14 +247,28 @@ function disableOther( button ) {
 		};
 		function requestFriend(name,state){
 			console.log("requestFriend 실행: " +name+", 상태 : "+state);
-			var div = "<div class='rfd' id='"+name+"'><h5>"+name+"님이<br/> 친구 요청을 하셨습니다.</h5><button class='btn' style='margin-right:10px'>거절</button><button id='agree' class='btn'>수락</button></div>";
+			var div = "<div class='rfd' id='"+name+"'><h5>"+name+"님이<br/> 친구 요청을 하셨습니다.</h5><button onclick='reject("+name+")' class='btn' style='margin-right:10px'>거절</button><button id='agree' onclick='javascript:accept("+name+");' class='btn'>수락</button></div>";
 			$("body").append(div);
-			$('#'+name).animate({ bottom:'0px'},1000);
+			$('#'+name).animate({ bottom:'1px'},1000);
 		}
-
+		function friendListAjax(){
+			$.ajax({
+				url:"/user/friendlist",
+				success:function(data){
+					var content = "";
+					$.each(data, function(idx, val){
+						content += "<a class='friend' href='#'><i class='icon-ok' style='display: none'></i>"+val.f_uid+"</a>";
+					});
+					$(".friList").html(content);
+				}
+			});
+		}
+		
+		
 </script>
 
-
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
 
 </body>
 </html>

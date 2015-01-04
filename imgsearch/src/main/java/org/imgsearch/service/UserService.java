@@ -1,18 +1,11 @@
 package org.imgsearch.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.imgsearch.mapper.UserMapper;
 import org.imgsearch.vo.UserVO;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -129,6 +122,10 @@ public class UserService{
 		return result;
 		
 		
+	}
+
+	public List<UserVO> frienList(String userId) {
+		return um.getFriendList(userId);
 	}
 	
 	

@@ -9,7 +9,7 @@ import org.imgsearch.vo.UserVO;
 
 public interface SearchLogMapper {
 	
-	@Select("select e_name, count(tbl1.e_no) as cnt from tbl_searchlog as tbl1 join tbl_ent as tbl2 on tbl1.e_no = tbl2.e_no group by tbl1.e_no order by cnt desc limit 0, 5")
+	@Select("select e_name, sum(tbl1.cnt) as cnt from tbl_eu_match as tbl1 natural join tbl_ent as tbl2 group by tbl1.e_no order by cnt desc limit 5")
 	public List<SearchLogVO> favoriteEnt();
 	
 	@Select("select sl_keyword, count(sl_keyword) as cnt from tbl_searchlog group by sl_keyword order by cnt desc limit 0, 5")

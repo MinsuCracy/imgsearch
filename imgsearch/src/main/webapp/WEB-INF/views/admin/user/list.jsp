@@ -60,6 +60,15 @@
 
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
@@ -112,7 +121,7 @@
 								<c:forEach var="list" items='${userList }'>
 									<tr>
 										<td class="center">${list.u_no}</td>
-										<td><a href="view?u_no=${list.u_no}">${list.u_id}</a></td>
+										<td><a href="view?u_no=${list.u_no}&page=${cri.page}">${list.u_id}</a></td>
 										<td>${list.u_gender }</td>
 										<td>${list.u_age } </td>
 										<td>${list.u_job } </td>

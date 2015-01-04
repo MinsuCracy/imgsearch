@@ -2,10 +2,12 @@ package org.imgsearch.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.imgsearch.common.Criteria;
+import org.imgsearch.vo.CategoryVO;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreImageVO;
 import org.imgsearch.vo.StoreMenuVO;
@@ -20,7 +22,7 @@ public interface MainMapper {
 //				+ " natural join ( select * from tbl_sk_match as sk "
 //						+ " natural join tbl_keyword as keyword where keyword.k_keyword = #{keyword}) as data2")
 	// 스크롤때메 연습
-	@Select("select s_no, s_name, s_homepage, s_lat, s_lng, s_address, si_no, si_img as s_img from tbl_store as store"
+	@Select("select s_no, s_name, s_homepage, s_lat, s_lng, s_address, s_tel, si_no, si_img as s_img from tbl_store as store"
 				+" natural join tbl_store_image as img"
 				+" where 1=1"
 				+" group by store.s_no limit #{dbLimit},100")
@@ -193,16 +195,35 @@ public interface MainMapper {
 	public List<StoreImageVO> storeImgList(Criteria cri);
 	
 	
-	// 리뷰리스트
-	@Select("select * from tbl_store_review where s_no=#{s_no} limit #{dbLimit},10")
-	public List<StoreReviewVO> storeReview(Criteria cri);
-	
-	@Select("select count(r_no) from (select r_no from tbl_store_review where s_no=1 limit #{dbLimit},101)as result ")
-	public int storeReviewTotal(Criteria cri);
-	
-	
-	@Select("select sm_menu,sm_price from tbl_store_menu where s_no= #{s_no} ")
+	@Select("select sm_menu,sm_price from tbl_store_menu where s_no= #{s_no} limit 15 ")
 	public List<StoreMenuVO> storeMenuList(Criteria cri);
 	
+	// 리뷰리스트
+	@Select("select * from tbl_store_review where s_no=#{s_no} order by r_no desc limit #{dbLimit},10 ")
+	public List<StoreReviewVO> storeReview(Criteria cri);
+	 
+	// 리뷰갯수
+	@Select("select count(r_no) from (select r_no from tbl_store_review where s_no=#{s_no} limit #{dbLimit},101)as result ")
+	public int storeReviewTotal(Criteria cri);
+	 
+	// 리뷰쓰기
+	@Insert("insert into tbl_store_review (s_no,u_id,r_comment,r_score) values (#{s_no},'tester', #{r_comment},5)")
+	public void storeReviewWrite(StoreReviewVO rvo);
 	
+	// 리뷰지우기
+	 @Delete("delete from tbl_store_review where r_no = #{r_no}")
+	 public void storeReviewDelete(StoreReviewVO rvo);
+	 
+	 // 리뷰수정하기
+	 @Update("update tbl_store_review set r_comment = #{r_comment} , r_regdate = current_timestamp where r_no = #{r_no}")
+	 public void storeReviewModify(StoreReviewVO rvo);
+	
+	 // 가게와 매칭되는 연예인 목록 가져오기
+	 @Select("select e_name from tbl_se_match natural join tbl_ent where s_no = #{s_no}")
+	 public List<EntVO> storeEntMatch(Criteria cri);
+	 
+	 // 카테고리 가져오기
+	 @Select("select c_category from tbl_sc_match natural join tbl_category where s_no = #{s_no} order by c_parent asc;")
+	 public List<CategoryVO> storeCategory(Criteria cri);
+	 
 }

@@ -8,8 +8,9 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap2.css">
+<link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/bbs/css/style.css" /> -->
 <!-- <script src="/resources/main/bbs/js/modernizr.custom.63321.js"></script> -->
 
@@ -22,7 +23,7 @@ html,body{
 	width: 100%;
 	height: 100%;
 	z-index:200; 
- 	background-color: rgb(247, 245, 240); 
+	background-color: rgb(247, 245, 240);
  	
 }
 
@@ -72,7 +73,7 @@ html,body{
 }
 #searchGrid div{ 
  	position: relative;
-	top:30%; 
+/* 	top:30%;  */
  	width:100%; 
  	height:40px; 
 } 
@@ -105,7 +106,7 @@ html,body{
 /* 	position:absolute; */
 /*  	padding-top:3%;  */
 /* 	margin:3% 10% 0 10%; */
-	padding-top:3%;
+	padding-top:60px;
 	padding-bottom:3%;
 	background-color: rgb(247, 245, 240); /* white; */
 	width: 100%;
@@ -160,6 +161,12 @@ html,body{
  	border-color : rgba(102,255,102,0.7); 
 /* 	box-shadow: 0 0 2em silver; */
 }
+
+#grid1 ul li{
+	height:30%;
+	width:60px;
+	text-align: center;
+}
 #grid16_1 img,
 #grid16_2 img{
 	width:100%;
@@ -185,29 +192,61 @@ html,body{
 	filter:alpha(opacity=100);
 }
 
-#popup{
- 	position :fixed;;
+#entView{
+	background-color : none;
+  	position :fixed;; 
  	text-align: center;
-	width: 90%;
-	height:90%;
-	left:5%;
- 	top:2%; 
-   	display: none;    
-	z-index:-100;
-	background-color: yellow;
-	
+	width: 25%; /* 50%; */
+	height: 50%;
+	left: 40%; /* 25%; */
+ 	top: 15%; 
+	z-index:-1000;
 }
+
 #popup2{
  	position :fixed;;
  	text-align: center;
-	width: 50%;
-	height:50%;
-	left:25%;
- 	top:25%; 
+	width: 300px;
+	height:150px;
+/* 	left:25%; */
+ 	top:30%; 
   	display: none;     
 	z-index:-100;
-	background-color: red;
+/*  	background-color: white; */
+/*  	border-radius : 10%;  */
+/*  	border : 0.1em black solid; 	 */
 	
+}
+
+#popup2 input{
+ 	position :inherit;
+ 	width:70%; 
+/*  	margin: 0 0 0 0;; */
+	
+}
+
+.closepopup{
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	background: url('/resources/testImg/cancel-32.png') no-repeat;
+	-webkit-appearance: none;
+	float:right; 
+	height:35px;
+	width:35px;
+}
+
+.closeentView{
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	background: url('/resources/testImg/cancel-32.png') no-repeat;
+	-webkit-appearance: none;
+	float:right; 
+	height:35px;
+	width:35px;
 }
 </style>
 
@@ -218,76 +257,13 @@ html,body{
  	position:absolute;
  	width: 100%;
 	height: 100%;	
-	margin-top:40px;
-}
-
-#container{
- 	position:absolute;
-	list-style: none;
-	
-	height:100%;
-	width:80%;
- 	margin:5% 10% 0 10%; 
-	
-}
-
-.grid{ 
-	border-bottom : 0.2em solid white;
-	width:100%;
-	height:28%;
-	margin-top:3%;
-}
-
-.grid .first{
- 	position:inherit; 
-	width:100%;
-	height:100%;
-/* 	background-color: red; */
-	
-}
-.grid .first ul{
- 	list-style: none;
- 	position:inherit; 
- 	width:100%;
-	height:100%;
-	
-	
-}
-.grid .first .num{
-	float:left;
-	width:15%;
-	height:100%;
-}
-.grid .first .mainImg{
-	float:left;
-	width:20%;
-	height:100%;
-}
-.grid .first .title{
-	float:left;
-	width:65%;
-	height:40%;
-	border-bottom : 0.2em solid rgb(0, 205, 205);
-}
-.grid .first .content{
-	float:left;
-	width:65%;
-	height:60%;
-}
-
-.grid .first .mainImg img{
-/* 	position: inherit; */
-	height:80%;
-	width:80%;
- 	top:10%;
- 	left:10%;
-	border-radius:15%;
+	margin-top:80px;
 }
 
 </style>
 </head>
-<body>
-	<form name="MainForm">
+<body >
+	<form name="MainForm" style="margin: 0 ;">
 		<input type="hidden" name="keyword" value="${cri.keyword }">
 		<input type="hidden" name="e_no" value="${cri.e_no }">
 		<input type="hidden" name="page" value="${cri.page }">
@@ -296,33 +272,51 @@ html,body{
 	
 	
 	
-		<div id="popup2">
-			<button sytle="text-align : left">닫기</button>
-		<div>
-		
-			<form>
-				<input type="text" name="entKeyword" placeholder="연예인이름">
-				<input type="submit" values="검색">			
-			</form>
-				
+		<div id="entView">
+			
+			<div class="imgFocus" style="border-radius:15%;width:100%; height:100%;-webkit-transform: scale(0.1) rotateX(-360deg);">
+				<div style="width:100%; height:90%;">
+					<button class="closeentView" sytle=""></button>
+					<img style="width:100%; height:100%;border-radius:15%;box-shadow: 0 0 4em 1em white;" src='' >
+				</div>
+			</div>
 		</div>
+		
+		<div id="popup2">
+			
+			
+			<div style="width:100%; height:35px;">
+				<span><button onclick="javascript:entSearchClose();"class="closepopup" sytle=""></button></span>
+			</div>
+	
+<!-- 			<div style="width:100%; height:20%; text-align: left"> </div> -->
+			
+			
+			<div style="width:100%; height:39px; border:2px solid black;  background-color: white; margin-bottom:5px; border-radius:5px;">
+				<input style="float:left;margin-left:10px;width:75%; height:35px; " type="text" name="entsearchkey" placeholder="연예인 이름으로 검색">
+				<button style="float:left;margin-left:10px;width:35px; height:35px;background-color: white; " id="entsubmit""><i class="fa fa-search fa-lg"></i></button>
+			</div>
+			
+			
+			<div id="returnText" style="width: 100%;  height: 35px; border-radius:5px;"><h1></h1></div>
+		
 	</div>
 	
 	
 	
-<div class="wrap"> 
+<div class="wrap" > 
 	
 	<div id="mainBar" style="text-align: center;">
 <!-- 		<form style="text-align: center; "> -->
 			<input style="height:30px; width:25%; margin-top:10px; " Stype="text" name="topSearch" value="">
-			<button>aaaa</button>
+			<button style="height:30px; width:30px; margin-top:10px; background-color: white; "><i class="fa fa-search fa-lg"></i></button>
 <!-- 			<input style="height:30px; width:5%; margin-top:10px;" type="submit1" vlaue="검색"> -->
 <!-- 		</form> -->
 	
 	</div>
 	
 	
-	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="max-height: 100%;"></a></div>
+	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="height:55px;width:100%;"></a></div>
 	<div class="menu">
 		<jsp:include page="menubutton.jsp">
 			<jsp:param value="${id}" name="id"/>
@@ -334,12 +328,11 @@ html,body{
 		<div id="mainGrid">
 			
 			<div id="grid1" >
-				<ul style="list-style: none; text-align: center; padding-top:20%;">
-					<li><input id="default" type="checkbox" name="type"><span>기본</span></li>
-					<li><input id="rank" type="checkbox" name="type"><span>랭크</span></li>
-					<li><input id="style" type="checkbox" name="type"><span>성향</span></li>
+				<ul style="list-style: none; text-align: center; float:right;padding-top:30%; padding-right: 10%; height:100%;">
+					<li><input id="default" type="checkbox" name="type"><span > 기본</span></li>
+					<li><input id="rank" type="checkbox" name="type"><span> 랭크</span></li>
+					<li><input id="style" type="checkbox" name="type"><span> 성향</span></li>
 				</ul>
-			
 			</div>
 			
 			
@@ -424,20 +417,22 @@ html,body{
 		</div>
 	</div>
 	
-	<div id="searchGrid">
-<!-- 		<div id="searchBar" > -->
-		<div>
+	<div id="searchGrid">	
+		<h1 style="padding-top:10px">연예인을 선택하세요</h1>
+		<div id="searchBar" style="z-index:-1000;">
 			<input  type="text" name="searchKeyword" placeholder="search" value="" >
 			<input type="hidden" name="e_no" value="">
 			
-			<button >검색</button>
+			<button style="height: 35px; width:35px;background-color: white;"><i class="fa fa-search fa-lg"></i></button>
 		</div>
-<!-- 		</div> -->
+
 	</div>
 </div>	
 	
 
 <script>
+
+
 
 
 var entType ='${cri.type}';
@@ -462,7 +457,7 @@ $("#grid1 ul li input").on("click",function(e){
 	ImgPage=1;
 	entImg();
 	
-})
+});
 
 
 
@@ -476,94 +471,141 @@ $("#mainGrid").on("click",function(e){
 	var $target = $(e.target);
 	var $targetId = $target.attr("id");
 	
-	if(e.target.localName != "img"){
 	
-		return;
+	if(e.target.localName != "img"){
+		return true;
 	}
 	
 	if($targetId == "grid16_2_1"){
+		
 		entImg();
 		return true;
 	}
 	
 	if($targetId == "grid16_1_1"){
+		
 		entSearch();
 		return true;
-	}
-	
-	
+	}	
 	// 타겟에서 제외할것들..
 	if($targetId == "grid16_2_1"||$targetId == "grid16_2"||$targetId == "grid16_1_1"||$targetId == "grid16_1" ||$targetId == "grid1" || $targetId == "grid16"){
 		return true;
 	}
 	
-	// 기존에 타겟이 선택된적 잇엇을때
-	if($grid != null){		
-		
-		// 타겟이 기존 타겟일때
-		if($grid.attr("id") == $target.attr("id")){
-			
-			var $array = $("#mainGrid div").children();
-			
-			$array.each(function(index,target){				
-				if(target.localName != "div"){
-					return true;
-				}				
-				var grid = $(target).contents(":first-child").attr("id");				
-				if(grid == "grid16_2_1"||grid == "grid16_2"||grid == "grid16_1_1"||grid == "grid16_1" ||grid == "grid1" || grid == "grid16"){
-					return true;
-				}
-				$(target).children().css({"z-index":"0","opacity":"1"});
-				$(target).css({"z-index":"0","opacity":"1"});
-			});	//end each		
-			
-			$("[name=e_no]").val("");
-			
-			$grid.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "rotateX(0deg) translateZ(0px)"});
-			$grid=null;
-			return true;
-		
-		// 타겟이 선택된적 있고 현재 선택한 타겟이 기존에 선택되지 않앗을때
-		}else{
-			
-			$grid.css({"z-index":"0","opacity":"0.3","-webkit-transition-duration" : "0.5s","-webkit-transform": "rotateX(0deg) translateZ(0px)"});
-			$target.parent().css({"opacity":"1"});
-			$target.css({"opacity":"1","-webkit-transition-duration" : "0.7s","-webkit-transform": "rotateX(360deg) translateZ(200px)"});
-			
-			$("[name=e_no]").val($target.parent().attr("id"));
-							
-			$grid = $target;
-		}//end if
 	
-	// 타겟이 선택된적 없을때	
-	}else{
-		
-		if($targetId == "grid16_2_1"||$targetId == "grid16_2"||$targetId == "grid16_1_1"||$targetId == "grid16_1"||$targetId == "mainGrid" ||$targetId == "grid1" || $targetId == "grid16"){
-			return true;
-		}//end if
-		
-		var $array = $("#mainGrid div").children();
-			
-		$array.each(function(index,target){
-			
-			if(target.localName != "div"){
-				return true;
-			}
-			var grid = $(target).contents(":first-child").attr("id");
-			
-			if(grid == $targetId || grid == "grid16_2_1"||grid == "grid16_2"||grid == "grid16_1_1"||grid == "grid16_1" ||grid == "grid1" || grid == "grid16"){
-				return true;
-			}
-			$(target).css({"z-index":"0","opacity":"0.3"});
-		});//end each
-		
-		$target.css({"-webkit-transition-duration" : "0.7s","-webkit-transform": "rotateX(360deg) translateZ(200px)"});
-		
-		$("[name=e_no]").val($target.parent().attr("id"));
-		
-		$grid = $target;
-	}//end else
+	$("[name=e_no]").val($target.parent().attr("id"));
+	
+	entFocusingView($target.attr("src"));
+	
+	
+
 });//end function
+
+
+
+// // 연예인 선택 기능
+// var $grid = null;
+
+// $("#mainGrid").on("click",function(e){
+	
+// 	$("#searchBar").css("z-index" , "1000");
+// 	$("#searchGrid").contents(":first-child").text("키워드를 입력해라");
+	
+// 	var $target = $(e.target);
+// 	var $targetId = $target.attr("id");
+	
+// 	if(e.target.localName != "img"){
+	
+// 		return;
+// 	}
+	
+// 	if($targetId == "grid16_2_1"){
+// 		entImg();
+// 		return true;
+// 	}
+	
+// 	if($targetId == "grid16_1_1"){
+// 		entSearch();
+// 		return true;
+// 	}
+	
+	
+// 	// 타겟에서 제외할것들..
+// 	if($targetId == "grid16_2_1"||$targetId == "grid16_2"||$targetId == "grid16_1_1"||$targetId == "grid16_1" ||$targetId == "grid1" || $targetId == "grid16"){
+// 		return true;
+// 	}
+	
+// 	// 기존에 타겟이 선택된적 잇엇을때
+// 	if($grid != null){		
+		
+// 		// 타겟이 기존 타겟일때
+// 		if($grid.attr("id") == $target.attr("id")){
+			
+// 			$("#searchBar").css("z-index" , "-1000");
+// 			$("#searchGrid").contents(":first-child").text("연예인를 선택해라");
+			
+			
+// 			var $array = $("#mainGrid div").children();
+			
+// 			$array.each(function(index,target){				
+// 				if(target.localName != "div"){
+// 					return true;
+// 				}				
+// 				var grid = $(target).contents(":first-child").attr("id");				
+// 				if(grid == "grid16_2_1"||grid == "grid16_2"||grid == "grid16_1_1"||grid == "grid16_1" ||grid == "grid1" || grid == "grid16"){
+// 					return true;
+// 				}
+// 				$(target).children().css({"z-index":"0","opacity":"1"});
+// 				$(target).css({"z-index":"0","opacity":"1"});
+// 			});	//end each		
+			
+// 			$("[name=e_no]").val("");
+			
+// 			$grid.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "rotateX(0deg) translateZ(0px)"});
+// 			$grid=null;
+// 			return true;
+		
+// 		// 타겟이 선택된적 있고 현재 선택한 타겟이 기존에 선택되지 않앗을때
+// 		}else{
+			
+// 			$grid.css({"z-index":"0","opacity":"0.3","-webkit-transition-duration" : "0.5s","-webkit-transform": "rotateX(0deg) translateZ(0px)"});
+// 			$target.parent().css({"opacity":"1"});
+// 			$target.css({"opacity":"1","-webkit-transition-duration" : "0.7s","-webkit-transform": "rotateX(360deg) translateZ(200px)"});
+			
+// 			$("[name=e_no]").val($target.parent().attr("id"));
+							
+// 			$grid = $target;
+// 		}//end if
+	
+// 	// 타겟이 선택된적 없을때	
+// 	}else{
+		
+// 		if($targetId == "grid16_2_1"||$targetId == "grid16_2"||$targetId == "grid16_1_1"||$targetId == "grid16_1"||$targetId == "mainGrid" ||$targetId == "grid1" || $targetId == "grid16"){
+// 			return true;
+// 		}//end if
+		
+// 		var $array = $("#mainGrid div").children();
+			
+// 		$array.each(function(index,target){
+			
+// 			if(target.localName != "div"){
+// 				return true;
+// 			}
+// 			var grid = $(target).contents(":first-child").attr("id");
+			
+// 			if(grid == $targetId || grid == "grid16_2_1"||grid == "grid16_2"||grid == "grid16_1_1"||grid == "grid16_1" ||grid == "grid1" || grid == "grid16"){
+// 				return true;
+// 			}
+// 			$(target).css({"z-index":"0","opacity":"0.3"});
+// 		});//end each
+		
+// 		$target.css({"-webkit-transition-duration" : "0.7s","-webkit-transform": "rotateX(360deg) translateZ(200px)"});
+		
+// 		$("[name=e_no]").val($target.parent().attr("id"));
+		
+// 		$grid = $target;
+// 	}//end else
+// });//end function
 
 
 
@@ -572,22 +614,82 @@ $("#mainGrid").on("click",function(e){
 // 	console.log("newImg");
 // }//end function
 
-// 연예인 검색
+// 연예인 검색팝업
 function entSearch(){
-	console.log("entSearch");
-	$("#mainGrid").css("opacity" , "0.5");
+	
+	$("#mainGrid").css("opacity" , "0.3");
 	$("#popup2").css({ "display": "inherit" , "z-index":"250","opacity" : "1" });
 		
 }//end function
 
 
 
-//연예인검색 닫기
-$("#popup2 button").on("click",function(){
+//연예인검색 팝업 닫기
+function entSearchClose(){
+
 	$("#popup2").css({"display" :"none", "z-index":"-100"});
 	$("#mainGrid").css("opacity" ,"1");
-});//end function
+	$("#returnText").css("background-color" , "");
+	$("#returnText h1").text("");
 
+}
+
+
+//연예인 검색서밋
+$("#entsubmit").on("click",function(){
+	
+	var ename = $("[name=entsearchkey]").val();
+	
+	entSearch
+	$.ajax({
+		url:"/img/entSearch?e_name="+ename,
+		type:"get",
+		success:function(data){
+			
+			
+			// 데이터가 왔을때
+			if(data != ""){
+				entSearchClose();
+				entFocusingView("/file/view?path="+data.e_img);
+			//데이터가 안왔을때	
+			}else{
+				$("#returnText").css("background-color" , "#80d9ab");
+			 	$("#returnText h1").text("일치하는 연예인이 없습니다");
+			}
+			$("[name=entsearchkey]").val("");
+		}
+	});
+	
+});
+
+// 사진선택
+function entFocusingView(enoImg){
+	console.log(enoImg);
+	$("#entView").css({ "display": "inherit" , "z-index":"250"});
+	
+	$(".imgFocus").css({ "-webkit-transition-duration" : "1s","-webkit-transform": "rotateX(0deg) translateZ(0px) scale(1.00) "});
+	
+	$("#mainGrid").css("opacity" ,"0.3");
+	
+	$("#entView div img").attr("src", enoImg);
+	
+	$("#searchBar").css("z-index" , "1000");
+	$("#searchGrid").contents(":first-child").text("키워드를 입력하세요");
+	
+	
+}//end function
+
+// 사진선택 닫기
+$("#entView button").on("click",function(){
+	
+	$("#searchBar").css("z-index" , "-1000");
+	$("#searchGrid").contents(":first-child").text("연예인을 선택하세요");
+	
+	$("#mainGrid").css("opacity" ,"1");
+	$("#entView").css({"z-index":"-100"});
+	$(".imgFocus").css({"display" : "", "-webkit-transition-duration" : "","-webkit-transform": "rotateX(-360deg) scale(0.1) "});
+	
+});//end function
 
 // 연예인 검색과 이미지 새로고침
 // $("#grid16").children().on("click",function(e){
@@ -626,6 +728,7 @@ $("#searchGrid button").on("click", function(){
 	searchKey = $("[name=searchKeyword]").val();
 	$("[name=keyword]").val(searchKey);
 	
+	
 });//end function
 
 //페이지 스크롤 (아래로)
@@ -643,6 +746,11 @@ function vp_GoListView(){
 
 // 스크롤시 지속적으로 함수 실행됨
 $(window).scroll(function(){
+	if($(window).scrollTop() < 100){
+		$("#entView").css("display","");
+	}else if($(window).scrollTop() > 100){
+		$("#entView").css("display","none");
+	}
 
 	if($(window).scrollTop()+50>$(window).height()){
 		$("#mainBar").css("z-index","500");
@@ -669,11 +777,16 @@ $("#popup button").on("click",function(){
 });//end function
 
 
+var firstConnect = true;
 var yDeg = 0;
 var ImgPage = 1;
 function entImg(){
 	
-	console.log("현재 페이지 :" +ImgPage);
+	
+// 	$("#mainGrid div .two").css({
+// 		"-webkit-transform":"translateZ(-1000px) rotateY(-360deg) translateY(-1000px)"
+// 	});
+	
 	var imgArray = [];
 	var total = '';
 	
@@ -687,6 +800,7 @@ function entImg(){
 				
 				target.contents(":first-child").attr("id",vo.e_no);
 				target.contents(":first-child").contents(":first-child").attr("src", "/file/view?path="+vo.e_img);
+			
 			});//end each
 			
 		}// end success
@@ -708,7 +822,47 @@ function entImg(){
 		}//end success
 	});//end ajax
 	
+	var Grid = $("#mainGrid").children();
 	
+	
+	
+
+	Grid.each(function(index,target){
+		
+		var time = (Math.random()*3)+1;
+		var $target = $(target).contents(":last-child");
+		
+		if( $target.parent().attr("id") == "grid16" || $target.parent().attr("id") == "grid1"){
+			return true;
+		}
+		
+		if(firstConnect == true){
+			
+			$target.css({"-webkit-transition-duration" : time+"s","-webkit-transform": "translateZ(-1000px) rotateY(-180deg) translateY(0px)"});
+			$target.on('webkitTransitionEnd', function(e){
+				
+				$target.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "translateZ(0px)"});
+				
+				
+			});//end target on
+		}else{
+			
+			$target.css({"-webkit-transition-duration" :"1s","-webkit-transform": "translateZ(-1000px) rotateY(-180deg) translateY(-2000px)"});
+			$target.on('webkitTransitionEnd', function(e){
+				
+				$target.css({"-webkit-transition-duration" : time/2+"s","-webkit-transform": "translateZ(-1000px) rotateY(-180deg) translateY(0px)"});
+				$target.on('webkitTransitionEnd', function(e){
+					
+					$target.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "translateZ(0px)"});
+					
+					
+				});//end target on
+				
+			});//end target on
+		}
+		
+	});// end each	
+
 }//end function
 
 
@@ -717,7 +871,11 @@ var bbsList = false;
 $(document).ready(function() {
 	
 	entImg();
-		
+	firstConnect = false;
+	
+	$("#popup2").css("left", (($(document.body).width()-300)/2)+"px");
+	
+	
 	if('${cri.type}' == "default"){
 		$("#default").prop("checked",true);
 	}else if('${cri.type}' == "rank"){
@@ -736,27 +894,15 @@ $(document).ready(function() {
 		
 	}
 	
-		var Grid = $("#mainGrid").children();
-		
-		Grid.each(function(index,target){
-			
-			var time = (Math.random()*3)+1;
-			var $target = $(target).contents(":last-child");
-			
-			if( $target.parent().attr("id") == "grid16" || $target.parent().attr("id") == "grid1"){
-				return true;
-			}
-					
-			$target.css({"-webkit-transition-duration" : time+"s","-webkit-transform": "translateZ(-1000px) rotateY(-180deg) translateY(0px)"});
-			$target.on('webkitTransitionEnd', function(e){
-				
-				$target.css({"-webkit-transition-duration" : "0.5s","-webkit-transform": "translateZ(0px)"});
-			});//end target on
-		});// end each	
+
 		
 }); // end function
 
 
+$(window).resize(function(){
+	
+	$("#popup2").css("left", (($(document.body).width()-300)/2)+"px");
+});
 //윈도우 리사이즈... 서치 바 조정 및 이미지 애니매이션
 // $(window).resize(function(){
 // 	$(".searchBar").css({width : ($(document.body).width()) * 0.3,	height : ($(document.body).height()) * 0.05	});
@@ -913,11 +1059,8 @@ function goPage(page){
 
 </script>	
 
-
+<link href="/resources/defualtFont.css"	rel="stylesheet" type="text/css" />
 </body>
 </html>
-
-
-
 
 

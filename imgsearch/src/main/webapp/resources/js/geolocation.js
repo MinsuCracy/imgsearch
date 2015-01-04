@@ -1,29 +1,31 @@
 
-    $(document).ready(function()
-    {
-    	
-        $(window).on("beforeunload", function(event) {
-            socket.emit("disconnect");
+   function disconnect(){
+	   var id = $("[name=myid]").val();
+	   console.log("id" + id);
+	   socket.emit("disconnect2", id);
+	   friMarker.setMap(null);
+	   infowindow.open(null);
+	   location.reload();
+   }
 
-            return "친구와의 접속을 끊으시겠습니까?";
-        });
-    });
+    
 
-
-    var socket = io.connect('localhost:5555/');
-    
-    
-    
+   
+    var socket = io.connect('61.72.45.117:5555/');    
+//   61.72.15.156
     navigator.geolocation.getCurrentPosition(firstLocation, handleLocationError, {enableHighAccuracy:true});
     navigator.geolocation.watchPosition(updateLocation, handleLocationError, {enableHighAccuracy:true});
 
     var crruntMap;
     var points=[];
     var myMarker;
+    var lng;
+    var lat;
+    var acc;
     function firstLocation(position){
-        var lng = position.coords.longitude;
-        var lat = position.coords.latitude;
-        var acc = position.coords.accuracy;
+        lng = position.coords.longitude;
+        lat = position.coords.latitude;
+        acc = position.coords.accuracy;
 
         var container = document.getElementById('map');
         var options = {
@@ -47,9 +49,9 @@
     }
     function updateLocation(position){
         var levelcnt = 0;
-        var lng = position.coords.longitude;
-        var lat = position.coords.latitude;
-        var acc = position.coords.accuracy;
+        lng = position.coords.longitude;
+        lat = position.coords.latitude;
+        acc = position.coords.accuracy;
 
 //        document.getElementById("lat").innerHTML=lat;
 //        document.getElementById("lng").innerHTML=lng;
@@ -94,9 +96,10 @@
     var markerCnt = 0;
     var infowindow;
 //    var userid = $("[name=id]").val();
-    
+    socket.on("change2" , function(data){
+    	console.log("수락한 사람 : " + data);
+    }); 
     socket.on("change", function(data){
-    	console.log(data);
 	        for (var i in data) {
 	
 	            var json = JSON.stringify(data[i]);
@@ -159,31 +162,100 @@
 
         crruntMap.setBounds(bounds);
     }
+    
+    
+    //친구 관련
     function addFriend(){
-    	console.log("추가 클릭");
     	var $f_uid = $("[name=f_uid]").val();
     	socket.emit("fri_id", $f_uid);
     }
+    socket.on("requestReady",function(data){
+    	var div = "<div class='rfd' id='ready'><h5>친구 요청 대기 중</h5><button onclick='divHide(ready)' class='btn'>확인</button></div>";
+		$("body").append(div);
+		$('#ready').animate({ bottom:'0px'},1000);
+    });
+    socket.on("alreadyExist",function(data){
+    	if(data){
+    		var div = "<div class='rfd' id='exist'><h5>이미 등록 된 친구입니다.</h5><button onclick='divHide(exist)' class='btn'>확인</button></div>";
+			$("body").append(div);
+			$('#exist').animate({ bottom:'0px'},1000);
+    	}
+    });
+    socket.on("notFound", function(data){
+    	if(data){
+    		var div = "<div class='rfd' id='notFound'><h5>존재하지 않는 회원입니다.</h5><button onclick='divHide(notFound)' class='btn'>확인</button></div>";
+			$("body").append(div);
+			$('#notFound').animate({ bottom:'0px'},1000);
+    	}
+    });
     socket.on("requestFriend", function(result){
     	requestFriend(result.name,result.state);
-    	
+    	var div = "<div class='rfd' id='"+name+"'><h5>"+name+"님이<br/> 친구 요청을 하셨습니다.</h5><button class='btn' style='margin-right:10px'>거절</button><button id='agree' onclick='javascript:accept("+name+");' class='btn'>수락</button></div>";
+		$("body").append(div);
+		$('#'+name).animate({ bottom:'0px'},1000);
     });
-    $("#agree").click(function(e){
-    	this.slideDown();
-    	
-    });
-    function accept(event){
-    	
-//    	socket.emit("agree",name);
-//    	$('#'+name).slideDown('slow');
-//    	console.log("클릭2");
+    function accept(name){
+    	var $id = $(name).prop("id")
+    	socket.emit("agree",$id);
+    	$('#'+$id).hide('slow');
+    	$('#'+$id).remove();
     }
-//    	socket.on("addFriendSuccess", function(success){
-//    		if(success ==1){
-//    			var div = "<div class='rfd'><h5>"+name+"님이 추가 되었습니다.</h5><button class='btn'>확인</button></div>";
-//    			$("body").append(div);
-//    		}
-//    	});
+    socket.on("addFriendSuccess", function(name){
+    	friendListAjax();
+    	var div = "<div class='rfd' id='"+name+"success'><h5>"+name+"님이 추가 되었습니다.</h5><button onclick='divHide("+name+"success)' class='btn'>확인</button></div>";
+    	$("body").append(div);
+    	$('#'+name+'success').animate({ bottom:'0px'},1000);
+    });
+    function divHide(target){
+    	var $id = $(target).prop("id")
+    	$('#'+$id).hide("slow");
+    	$('#'+$id).remove();
+    }
+    function reject(target){
+    	var $id = $(target).prop("id");
+    	socket.emit("reject", $id);
+    	$('#'+$id).hide("slow");
+    	$('#'+$id).remove();
+    }
     
-    
+    //위치 공유 하기
+    function locationShare(){
+    	var $checked = $('[data-check="checked"]');
+    	for(var i =0; i<$checked.length; i++){
+    		var $id = $($checked[i]).attr("data-id");
+    		socket.emit("requestLocation", $id);
+    		console.log($id);
+    	}
+    }
+    //위치 공유 요청중
+    socket.on("requestLocationing",function(data){
+    	var div = "<div class='rfd' id='locationReady'><h5>위치 공유 동의 확인 중</h5><button onclick='divHide(locationReady)' class='btn'>확인</button></div>";
+		$("body").append(div);
+		$('#locationReady').animate({ bottom:'0px'},1000);
+    });
+    //위치 공유 동의 확인
+    socket.on("requestFriendLocationing", function(data){
+    	var div = "<div class='rfd' id='"+data.name+"'><h5>"+data.name+"님이<br/> 위치공유를 신청하였습니다.</h5><button class='btn' onclick='locaReject("+data.name+")' style='margin-right:10px'>거절</button><button id='la' onclick='javascript:locationAgree("+data.name+");' class='btn'>수락</button></div>";
+		$("body").append(div);
+		$('#'+data.name).animate({ bottom:'0px'},1000);
+    });
+    function locationAgree(name){
+    	console.log($(name).prop("id"));
+    	var $id = $(name).prop("id");
+    	socket.emit("locationAgree",{name:$id,lat:lat,lng:lng});
+    	$('#'+$id).hide('slow');
+    	$('#'+$id).remove();
+    }
+    function locaReject(target){
+    	var $id = $(target).prop("id");
+    	socket.emit("locaReject", $id);
+    	$('#'+$id).hide('slow');
+    	$('#'+$id).remove();
+    }
+    socket.on("requestLatLng", function(data){
+    	console.log("보낸 클라이언트 : " + data);
+    	var id = $("[name=myid]").val();
+    	socket.emit("firstLocation", {sendC:data,name:id,lat:lat,lng:lng});
+    	console.log({sendC:data,name:id,lat:lat,lng:lng});
+    });
     

@@ -66,6 +66,15 @@
 		location.href="/admin/store/regist";
 	}
 </script>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
@@ -84,19 +93,15 @@
 					<div id="DataTables_Table_0_wrapper"
 						class="dataTables_wrapper form-inline" role="grid">
 						<div class="row-fluid">
-							<div class="span6">
-								<div id="DataTables_Table_0_length" class="dataTables_length">
-								</div>
-							</div>
 							
 						
 								
-							<div class="span6">
+							<div class="span6" style="float: right;">
 								<div class="dataTables_filter" id="DataTables_Table_0_filter">
 								
 									 
 									<form action="" method = "get">											<select class="span2" name= "type">
- 												<option value="s_name" <c:if test="${cri.type eq 's_name'}">selected="selected"</c:if>>상호</option>	
+ 												<option value="s_name" <c:if test="${cri.type eq 's_name'}">selected="selected"</c:if>>이름</option>	
  												<option value="s_homepage" <c:if test="${cri.type eq 's_homepage'}">selected="selected"</c:if>>홈페이지</option>
  												<option value="s_address" <c:if test="${cri.type eq 's_address'}">selected="selected"</c:if>>주소</option> 
 											</select>
@@ -116,7 +121,7 @@
 								<thead>
 									<tr>
 										<th class="center">＃</th>
-										<th>상호</th>
+										<th>이름</th>
 										<th>홈페이지</th>
 										<th>위도</th>
 										<th>경도</th>
@@ -145,8 +150,8 @@
 							</div>
 						</div>
 						<div class="row-fluid">
-							<div class="span8">
-								<div class="dataTables_paginate paging_bootstrap pagination">
+							<div class="span8" style="width: 100%;">
+								<div class="dataTables_paginate paging_bootstrap pagination" style="text-align: center;">
 									<ul>
 										<c:if test="${cri.prePage == true }"><li class="prev disabled"><a href="/admin/store/storelist?page=${cri.startPage - 10 }&type=${cri.type}&keyword=${cri.keyword}">← Previous</a></li></c:if>
 										<c:forEach var = "p"  begin="${cri.startPage}" end="${cri.startPage + cri.lastPage -1}">

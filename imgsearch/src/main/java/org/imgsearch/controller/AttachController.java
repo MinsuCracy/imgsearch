@@ -29,6 +29,8 @@ public class AttachController {
 	@RequestMapping(value="/view", produces={"image/jpeg","image/gif","image/png"})
 	public @ResponseBody byte[] viewFile(@ModelAttribute("path") String path) throws Exception {
 		
+		//logger.info("view?path= -------------> " + path);
+		
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		
 		byte[] buffer = new byte[1024*8];
@@ -54,7 +56,7 @@ public class AttachController {
 		}
 		
 		byte[] buffer = new byte[1024*8];
-		String fileName = file.getOriginalFilename(); //UUID.randomUUID() +"_"+file.getOriginalFilename();
+		String fileName = UUID.randomUUID() +"_"+file.getOriginalFilename();
 		
 		String suffix = fileName.substring(fileName.lastIndexOf("."));
 		

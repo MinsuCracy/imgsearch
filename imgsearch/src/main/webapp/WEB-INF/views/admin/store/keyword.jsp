@@ -61,6 +61,14 @@
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
 
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 <script>
 	function reviewForm(){
 		location.href="/admin/store/view?s_no=${vo.s_no}";
@@ -107,7 +115,7 @@
 								<table class="table table-bordered table-primary">
 									<thead>
 										<tr>
-											<th>상호</th>
+											<th>이름</th>
 											<th>홈페이지</th>
 											<th>주소</th>
 											<th>위도</th>
@@ -159,12 +167,6 @@
 			</div>
 		</div>
 	</div>
-	<script>
-	 function returnForm(){
-		 location.href= "storelist";
-	 }
-	 
-	</script>
 </body>
 </html>
 

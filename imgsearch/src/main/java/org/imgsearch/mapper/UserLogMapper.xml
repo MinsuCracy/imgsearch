@@ -31,16 +31,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 30//EN"
 				select count(*) from 
 				<choose>
 					<when test="keyword != '' ">
-						 tbl_user_log as tbl1 join  
+						 (select * from tbl_user_log as tbl1 join  
 						(select u_id, u_no from tbl_user where u_id = #{keyword}) as tbl2
 						on tbl1.u_no = tbl2.u_no
 					</when>
 					<otherwise>
-						 tbl_user_log 
+						 (select * from tbl_user_log 
 					</otherwise>
 				</choose>
 				
-				 limit #{dbLimitTotal}, 101
+				   limit #{dbLimitTotal}, 101) as tbl
 	
 	</select>
 	
