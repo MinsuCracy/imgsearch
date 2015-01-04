@@ -89,21 +89,53 @@ html,body{
 	border-radius: 5%;
 }
 
-#paging{
+.pagination { 
+	text-align: center; 
+	margin: 20px 0; 
+/* 	word-spacing: -1em;  */
+}
+
+.pagination li { 
+	display: inline-block; 
 	list-style: none; 
-	width:60%; 
-	height:10%;
-	margin-left:30%;
-	margin-top:40px;
+	font: bold 12px/13px Arial, Helvetica, sans-serif; 
+	padding: 5px 9px; 
+	color: #999; 
+	background: #eee; 
+	word-spacing: normal; 
+	margin: 0 1% 1px 1%; 
 }
 
-#paging li{
-	float:left;
-	width:8%;
+.pagination li a { 
+	display: inline-block; 
+	padding: 5px 9px; 
+	margin: -5px -9px; 
+	text-decoration: none;
 }
 
-#paging li a{
-	color:black;
+.pagination li a,
+.pagination li a:link,
+.pagination li a:visited,
+.pagination li a:active { 
+	background: #8E8E8E; 
+	color: #fff; 
+}
+
+.pagination li a:hover,
+.pagination li a:focus { 
+	background: #333; 
+} 
+
+.pagination li,
+.pagination li a {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.pagination li a.current { 
+	background: #069956; 
+	color: #fff; 
 }
 
 .storeInfo{
@@ -146,11 +178,11 @@ html,body{
 							<table style="margin-top: 1%;">
 								<tr>
 									<td style="width: 35%;"><h3>ADDRESS</h3></td>
-									<td><h3 style="color: #5e5e5e;">${store.s_address}</h3></td>
+									<td><h3 style="color: #7b7b7b;">${store.s_address}</h3></td>
 								</tr>
 								<tr>
 									<td style="width: 35%;"><h3>TEL</h3></td>
-									<td><h3 style="color: #5e5e5e;">${store.s_tel}</h3></td>
+									<td><h3 style="color: #7b7b7b;">${store.s_tel}</h3></td>
 								</tr>
 							</table>
 						</li>
@@ -158,21 +190,22 @@ html,body{
 				</div>
 			</div>
 		</c:forEach>
-			
-		<ul id="paging">
-			<c:if test="${cri.prePage == 'false' }">
-				<li id="${cri.startPage-1 }"><a href="javascript:goPage(${cri.startPage-1 });" style="font-color:black">pre</a></li>
+		
+		<ul class="pagination">
+			<c:if test="${cri.prePage eq true}">
+				<li class="prev" id="${cri.startPage-1}"> <a href="javascript:goPage(${cri.startPage-1});">&lsaquo; Prev</a></li>
 			</c:if>
-			<c:forEach var="page" begin="${cri.startPage }" end="${cri.lastPage }">
-						
-				<li  id="${page }"><a href="javascript:goPage(${page });">${page}</a></li>
-				
+			
+			<c:forEach var="page" step="1" begin="${cri.startPage}" end="${cri.lastPage}">
+				<li id="${page}">
+					<a <c:if test="${cri.page eq page}">class="current"</c:if> href="javascript:goPage(${page});">${page}</a></li>
 			</c:forEach>
-				
-			<c:if test="${cri.nextPage == 'false' }">
-				<li id="${cri.lastPage+1 }"><a href="javascript:goPage(${cri.lastPage+1 });">next</a></li>
+			
+			<c:if test="${cri.nextPage eq true}">
+				<li class="next" id="${cri.lastPage+1}"> <a href="javascript:goPage(${cri.lastPage+1});">Next &rsaquo;</a></li>
 			</c:if>
 		</ul>
+
 	</div>
 
 <script>

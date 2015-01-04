@@ -56,7 +56,7 @@ body {
 
 #menu {
 	width: 100%;
-	height: 10px;
+	height: 15px;
 }
 
 .chapter {
@@ -70,6 +70,27 @@ body {
 	-moz-column-rule: thin solid silver;
 	column-rule: thin solid silver;
 	text-align: justify;
+}
+
+#button {
+	width: 100%;
+	text-align: right;
+}
+
+.buttonDiv{
+	width: 78%; 
+	margin: auto;
+}
+
+.buttonDiv button {
+	color: #364157;
+	background-color: rgb(247, 245, 240);
+	padding: 0.5% 0.5%;
+}
+
+.buttonDiv button:hover {
+	color: #fff;
+	background-color: #364157;
 }
 
 .store {
@@ -116,7 +137,7 @@ body {
 
 .store .content {
 	width: 75%;
-	height: 60%;
+	height: 55%;
 	float: left;
 }
 
@@ -128,9 +149,30 @@ body {
 .storeButton {
 	float: left;
 	width: 55%;
-	height: 20%;
+	height: 25%;
 	text-align: right;
 }
+
+
+.store_button:hover,
+.store_button:focus {
+	color: #fff;
+    background-color: #3d9167;
+    outline: 0 !important;
+}
+
+.store_button {
+    color: #fff;
+    display: inline-block;
+    padding: 10% 10%;
+    background-color: #71c39a;
+/* 	border: 0.1em solid #3d9167; */
+    text-decoration: none;
+}
+
+/* .store_button:-webkit-any-link { */
+/*     cursor: auto; */
+/* } */
 
 .photo {
 	width: 78.5%;
@@ -233,6 +275,10 @@ body {
 	color: #4a4a4a;
 	line-height:  0.8em;
 	display: block;
+}
+
+.review_button {
+	color: #87BBA1;
 }
 
 #paging {
@@ -408,6 +454,13 @@ body {
 	</div>
 
 	<div id="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
+	
+	<div id="button">
+		<div class="buttonDiv">
+			<h5><button onclick="goList(${cri.page})">현재목록</button>
+			<button onclick="goList(1)">최신목록</button></h5>
+		</div>
+	</div>
 
 	<div class='store'>
 		<ul>
@@ -447,23 +500,23 @@ body {
 				</table>
 			</li>
 			<li class="storeButton">
+			
 				<table style="height: 100%; width: 100%; text-align: right;">
-					<tr>
-						<td style="width: 55%;"></td>
-						<td style="width: 15%;" >
-							<a id="reservButton">찜하기</a>
+					<tr style="vertical-align: bottom; text-align: center;">
+						<td style="width: 30%;"></td>
+						<td style="width: 10%;">
+							<h5><a class="store_button" id="menubutton"><i class="fa fa-book fa-lg"></i> 메뉴보기</a></h5>
 						</td>
-						<td style="width: 15%;"><a id="menubutton" >메뉴보기</a>
+						<td style="width: 10%;" >
+							<h5><a class="store_button" id="reservButton"> <i class="fa fa-heart fa-lg"></i> 찜하기</a></h5>
 						</td>
-						<td style="width: 15%;"><a id="#">즐겨찾기</a></td>
+						<td style="width: 10%;">
+							<h5><a class="store_button" id="#"><i class="fa fa-star fa-lg"></i> 즐겨찾기</a></h5>
+						</td>
 					</tr>
 
-				</table> <!-- 				<ul>
-					<li> 여백의 미 </li>
-					<li> <button id="reservButton"style="float:right; margin:20px;">찜하기</button> </li>
-					<li> <a id="menubutton" style="float:right; margin:20px;">메뉴보기</a> </li>
-					<li> 세번째 버튼 </li>
-				</ul> -->
+				</table>
+
 			</li>
 		</ul>
 	</div>
@@ -584,36 +637,17 @@ body {
 			
 			<div>
 				<ul id="reviewList"></ul>
-				<div style="height:50px; padding-top:20px;"><ul id="paging" style=""></ul></div>
+				<div style="height:50px; padding-top:20px;">
+					<ul id="paging" style=""></ul>
+				</div>
 			</div>
 		
 		</div>
-			
-			
-<!-- 		<div class="reviewBox"> -->
-
-<!-- 			<div class="review_write"> -->
-<!-- 				<input type='text' name='reviewData' value=''> -->
-<!-- 				<button onclick='javascript:reviewWrite()'>등록</button> -->
-<!-- 			</div> -->
-
-<!-- 		<div> -->
-<!-- 			<ul id="reviewList"></ul> -->
-<!-- 			<div style="height:50px; padding-top:20px;"><ul id="paging" style=""></ul></div> -->
-<!-- 		</div> -->
-
-		
-		
-<!-- 		</div> -->
-
 		
 
 	</div>
 
 
-
-	<button onclick="goList(${cri.page})">현재목록</button>
-	<button onclick="goList(1)">최신목록</button>
 	<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
 		MIT Open Source license applies.</div>
 
@@ -657,8 +691,9 @@ body {
 										+ "<span class=\"review_user_id\"><strong>"+ target.u_id +"</strong></span>"
 										+ "<span class=\"review_regdate\">"+ target.r_regdate +"</span></div>"
 										+ "<div class=\"review_section2\">"
-										+ "<span><a href='javascript:reviewModify("+target.r_no+")'><i class=\"fa fa-pencil\"></i></a></span>"
-										+ "<span style=\"padding-left: 10px;\"><a href='javascript:reviewDelete("+target.r_no+")'><i class=\"fa fa-times\"></i></a></span></div>"
+										+ "<h5><span><a class=\"review_button\" href='javascript:reviewModify("+target.r_no+")'>수정 </a></span>"
+										+ "<span style=\"color: #ADADAD;\"> | </span>"
+										+ "<span><a class=\"review_button\" href='javascript:reviewDelete("+target.r_no+")'> 삭제</a></span></h5></div>"
 										+ "<div id='"+ target.r_no +"' class=\"review_comment\">"+ target.r_comment +"</div></li>");
 
 	 			});//end each
@@ -740,42 +775,51 @@ body {
 		var textData = '';
 		// 댓글 수정 진입
 		function reviewModify(rno){
+			
+			$(".review_section2").css("z-index", "-1000");
 		 
-		 var $target = $("#"+rno+"");
-		 textData = $target.contents(":first-child").text();
+		 	var $target = $("#"+rno+"");
+		 	textData = $target.contents(":first-child").text();
 		 
-		 $target.contents(":first-child").remove();
+		 	$target.contents(":first-child").remove();
 		 
-		 $target.append("<input type='text' name='reviewModifyData' value='"+textData+"' \/>"
-		 +"<a href='javascript:reviewModifySubmit("+rno+")'>완료</a>"
-		 +"<a href='javascript:reviewModifyCancel("+rno+")'>취소</a>");
-		 
+		 	$target.append("<input type='text' style=\"float: left;\" name='reviewModifyData' value='"+textData+"' \/>"
+		 				 + "<h5 style=\"text-align: right;\"><span><a class=\"review_button\" href='javascript:reviewModifySubmit("+rno+")'>완료 </a><span>"
+		 				 + "<span style=\"color: #ADADAD;\"> | <span>"
+		 				 + "<span><a class=\"review_button\" href='javascript:reviewModifyCancel("+rno+")'>취소</a><span></h5>");
 		}
+		
 		//댓글 수정 완료
 		function reviewModifySubmit(rno){
-
-		 var modifyData = {r_no : rno, r_comment : $("[name=reviewModifyData]").val()}
+			
+			$(".review_section2").css("z-index", "0");
+			
+			var modifyData = {r_no : rno, r_comment : $("[name=reviewModifyData]").val()}
+			
+			console.log(modifyData);
 		 
-		 console.log(modifyData);
-		 
-		 $.ajax({
-		 url:"/img/store/reviewModify",
-		 type:"post",
-		 data:modifyData,
-		 success:function(data){
-		 goReview(curPage);
-		 
-		 }
+		 	$.ajax({
+		 		url:"/img/store/reviewModify",
+				 type:"post",
+				 data:modifyData,
+				 success:function(data){
+				 goReview(curPage);
+			 }
 		 
 		 });
 
 		}
+		
 		//댓글 수정 취소
 		function reviewModifyCancel(rno){
-		 var $target = $("#"+rno+"");
-		 console.log($target);
-		 $target.children().remove();
-		 $target.append(textData);
+			$(".review_section2").css("z-index", "0");
+		
+			var $target = $("#"+rno+"");
+		 	
+			console.log($target);
+		 
+			$target.children().remove();
+		 	$target.append(textData);
 		}
 	
 	

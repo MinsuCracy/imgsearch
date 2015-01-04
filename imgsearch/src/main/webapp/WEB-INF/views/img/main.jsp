@@ -10,6 +10,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/bbs/css/style.css" /> -->
 <!-- <script src="/resources/main/bbs/js/modernizr.custom.63321.js"></script> -->
 
@@ -105,7 +106,7 @@ html,body{
 /* 	position:absolute; */
 /*  	padding-top:3%;  */
 /* 	margin:3% 10% 0 10%; */
-	padding-top:3%;
+	padding-top:60px;
 	padding-bottom:3%;
 	background-color: rgb(247, 245, 240); /* white; */
 	width: 100%;
@@ -162,8 +163,9 @@ html,body{
 }
 
 #grid1 ul li{
-	height:30px;
+	height:30%;
 	width:60px;
+	text-align: center;
 }
 #grid16_1 img,
 #grid16_2 img{
@@ -204,15 +206,15 @@ html,body{
 #popup2{
  	position :fixed;;
  	text-align: center;
-	width: 50%;
-	height:30%;
-	left:25%;
- 	top:25%; 
+	width: 300px;
+	height:150px;
+/* 	left:25%; */
+ 	top:30%; 
   	display: none;     
 	z-index:-100;
- 	background-color: white;
+/*  	background-color: white; */
 /*  	border-radius : 10%;  */
- 	border : 0.1em black solid; 	
+/*  	border : 0.1em black solid; 	 */
 	
 }
 
@@ -255,7 +257,7 @@ html,body{
  	position:absolute;
  	width: 100%;
 	height: 100%;	
-	margin-top:40px;
+	margin-top:80px;
 }
 
 </style>
@@ -283,20 +285,20 @@ html,body{
 		<div id="popup2">
 			
 			
-			<div style="width:100%; height:15%;">
+			<div style="width:100%; height:35px;">
 				<span><button onclick="javascript:entSearchClose();"class="closepopup" sytle=""></button></span>
 			</div>
 	
-			<div style="width:100%; height:20%; text-align: left"> </div>
+<!-- 			<div style="width:100%; height:20%; text-align: left"> </div> -->
 			
 			
-			<div style="width:100%; height:25%;">
-				<span><input type="text"  name="entsearchkey" placeholder="연예인 이름으로 검색"></span>
-				<span><button id="entsubmit" sytle="">검색</button></span>
+			<div style="width:100%; height:39px; border:2px solid black;  background-color: white; margin-bottom:5px; border-radius:5px;">
+				<input style="float:left;margin-left:10px;width:75%; height:35px; " type="text" name="entsearchkey" placeholder="연예인 이름으로 검색">
+				<button style="float:left;margin-left:10px;width:35px; height:35px;background-color: white; " id="entsubmit""><i class="fa fa-search fa-lg"></i></button>
 			</div>
 			
 			
-			<div id="returnText" style="width:100%; height:25%;"> </div>
+			<div id="returnText" style="width: 100%;  height: 35px; border-radius:5px;"><h1></h1></div>
 		
 	</div>
 	
@@ -307,14 +309,14 @@ html,body{
 	<div id="mainBar" style="text-align: center;">
 <!-- 		<form style="text-align: center; "> -->
 			<input style="height:30px; width:25%; margin-top:10px; " Stype="text" name="topSearch" value="">
-			<button>aaaa</button>
+			<button style="height:30px; width:30px; margin-top:10px; background-color: white; "><i class="fa fa-search fa-lg"></i></button>
 <!-- 			<input style="height:30px; width:5%; margin-top:10px;" type="submit1" vlaue="검색"> -->
 <!-- 		</form> -->
 	
 	</div>
 	
 	
-	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="max-height: 100%;"></a></div>
+	<div class="logo"><a href="/img/"><img src="/file/view?path=logo2.png" style="height:55px;width:100%;"></a></div>
 	<div class="menu">
 		<jsp:include page="menubutton.jsp">
 			<jsp:param value="${id}" name="id"/>
@@ -326,7 +328,7 @@ html,body{
 		<div id="mainGrid">
 			
 			<div id="grid1" >
-				<ul style="list-style: none; text-align: center; padding-top:20px;">
+				<ul style="list-style: none; text-align: center; float:right;padding-top:30%; padding-right: 10%; height:100%;">
 					<li><input id="default" type="checkbox" name="type"><span > 기본</span></li>
 					<li><input id="rank" type="checkbox" name="type"><span> 랭크</span></li>
 					<li><input id="style" type="checkbox" name="type"><span> 성향</span></li>
@@ -421,7 +423,7 @@ html,body{
 			<input  type="text" name="searchKeyword" placeholder="search" value="" >
 			<input type="hidden" name="e_no" value="">
 			
-			<button >검색</button>
+			<button style="height: 35px; width:35px;background-color: white;"><i class="fa fa-search fa-lg"></i></button>
 		</div>
 
 	</div>
@@ -455,7 +457,7 @@ $("#grid1 ul li input").on("click",function(e){
 	ImgPage=1;
 	entImg();
 	
-})
+});
 
 
 
@@ -469,9 +471,7 @@ $("#mainGrid").on("click",function(e){
 	var $target = $(e.target);
 	var $targetId = $target.attr("id");
 	
-	console.log(e.target.localName);
 	
-	console.log($target);
 	if(e.target.localName != "img"){
 		return true;
 	}
@@ -493,8 +493,8 @@ $("#mainGrid").on("click",function(e){
 	}
 	
 	
+	$("[name=e_no]").val($target.parent().attr("id"));
 	
-	console.log("몰라~~~~~")
 	entFocusingView($target.attr("src"));
 	
 	
@@ -617,7 +617,7 @@ $("#mainGrid").on("click",function(e){
 // 연예인 검색팝업
 function entSearch(){
 	
-	$("#mainGrid").css("opacity" , "0.5");
+	$("#mainGrid").css("opacity" , "0.3");
 	$("#popup2").css({ "display": "inherit" , "z-index":"250","opacity" : "1" });
 		
 }//end function
@@ -629,7 +629,8 @@ function entSearchClose(){
 
 	$("#popup2").css({"display" :"none", "z-index":"-100"});
 	$("#mainGrid").css("opacity" ,"1");
-	$("#returnText").text("");
+	$("#returnText").css("background-color" , "");
+	$("#returnText h1").text("");
 
 }
 
@@ -652,7 +653,8 @@ $("#entsubmit").on("click",function(){
 				entFocusingView("/file/view?path="+data.e_img);
 			//데이터가 안왔을때	
 			}else{
-			 	$("#returnText").text("결과 없다");
+				$("#returnText").css("background-color" , "#80d9ab");
+			 	$("#returnText h1").text("일치하는 연예인이 없습니다");
 			}
 			$("[name=entsearchkey]").val("");
 		}
@@ -662,7 +664,7 @@ $("#entsubmit").on("click",function(){
 
 // 사진선택
 function entFocusingView(enoImg){
-	
+	console.log(enoImg);
 	$("#entView").css({ "display": "inherit" , "z-index":"250"});
 	
 	$(".imgFocus").css({ "-webkit-transition-duration" : "1s","-webkit-transform": "rotateX(0deg) translateZ(0px) scale(1.00) "});
@@ -681,7 +683,7 @@ function entFocusingView(enoImg){
 $("#entView button").on("click",function(){
 	
 	$("#searchBar").css("z-index" , "-1000");
-	$("#searchGrid").contents(":first-child").text("연예인을 선택해라");
+	$("#searchGrid").contents(":first-child").text("연예인을 선택하세요");
 	
 	$("#mainGrid").css("opacity" ,"1");
 	$("#entView").css({"z-index":"-100"});
@@ -871,6 +873,9 @@ $(document).ready(function() {
 	entImg();
 	firstConnect = false;
 	
+	$("#popup2").css("left", (($(document.body).width()-300)/2)+"px");
+	
+	
 	if('${cri.type}' == "default"){
 		$("#default").prop("checked",true);
 	}else if('${cri.type}' == "rank"){
@@ -894,6 +899,10 @@ $(document).ready(function() {
 }); // end function
 
 
+$(window).resize(function(){
+	
+	$("#popup2").css("left", (($(document.body).width()-300)/2)+"px");
+});
 //윈도우 리사이즈... 서치 바 조정 및 이미지 애니매이션
 // $(window).resize(function(){
 // 	$(".searchBar").css({width : ($(document.body).width()) * 0.3,	height : ($(document.body).height()) * 0.05	});
@@ -1050,7 +1059,7 @@ function goPage(page){
 
 </script>	
 
-<link	href="/resources/defualtFont.css"	rel="stylesheet" type="text/css" />
+<link href="/resources/defualtFont.css"	rel="stylesheet" type="text/css" />
 </body>
 </html>
 
