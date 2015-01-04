@@ -22,5 +22,9 @@
     <input type="hidden" name= "store" value="${store}">
     <button onclick="setBounds()">친구 한눈에 보기</button>
 	</div>
+
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
+	
 </body>
 </html>

@@ -15,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -57,8 +56,7 @@ public class UserController {
 	}
 	
 	
-	
-//	유저 생성을 위한 컨트롤러
+
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String userInsert(UserVO vo){
 		String result = us.userInsert(vo);
@@ -76,8 +74,7 @@ public class UserController {
 	public void success(){
 	}
 		
-	
-//	id 또는 email로 조회 컨트롤러
+
 	@RequestMapping(value = "/inquiry", method = RequestMethod.GET)
 	public String userInquriy(Model model, String inputData){
 		logger.info("*********************"+inputData+"*************************");
@@ -93,28 +90,17 @@ public class UserController {
 		return "admin/user/list";
 	}
 	
+
 	
-/*
-//	회원 전체 리스트를 위한 컨트롤러 ajax
-	@RequestMapping(value = "/userlist", method = RequestMethod.GET)
-	@ResponseBody
-	public List<UserVO> userList(){
-		
-		List<UserVO> list = us.userList();
-		return list;
-	}*/
-	
-	
-//	회원 정보 읽기 위한 컨트롤러
 	@RequestMapping("/view")
-	public void urPage(Model model, @ModelAttribute("vo") UserVO vo){
+	public void urPage(Model model, int page, @ModelAttribute("vo") UserVO vo){
 		vo = us.userRead(vo);
 		model.addAttribute("vo", vo);
+		model.addAttribute("page", page);
 		
 	}
 	
-	
-//	회원 정보 수정을 위한 컨트롤러
+
 	@RequestMapping("/modify")
 	public void uuPage(Model model, @ModelAttribute("vo") UserVO vo){
 		vo = us.userRead(vo);
@@ -135,10 +121,6 @@ public class UserController {
 		model.addAttribute("result", "good");
 		return "redirect:/admin/user/success";
 	}
-	
-	
-	
-//	회원 정보 삭제를 위한 컨트롤러
 	
 	@RequestMapping(value="/remove", method = RequestMethod.POST)
 	public String userDelete(UserVO vo){

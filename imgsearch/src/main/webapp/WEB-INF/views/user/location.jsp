@@ -89,6 +89,9 @@
 		</div>
 		
 	</div>
+	
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
 
 </body>
 </html>

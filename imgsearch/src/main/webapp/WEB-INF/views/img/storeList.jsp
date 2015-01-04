@@ -46,7 +46,6 @@ html,body{
 	position: inherit;
 	width: 100%;
 	height: 100%;
-	/* 	background-color: red; */
 }
 
 .grid .first ul {
@@ -115,6 +114,11 @@ html,body{
 	color: #3d9167;
 }
 
+#container h3 {
+	margin: 0;
+	color: #71c39a;
+}
+
 </style>
 
 </head>
@@ -141,12 +145,12 @@ html,body{
 						<li class='content'>
 							<table style="margin-top: 1%;">
 								<tr>
-									<td><img src='/file/view?path=address.png'></td>
-									<td style="color: #323b4c/* #116139 */;">${store.s_address}</td>
+									<td style="width: 35%;"><h3>ADDRESS</h3></td>
+									<td><h3 style="color: #5e5e5e;">${store.s_address}</h3></td>
 								</tr>
 								<tr>
-									<td><img src='/file/view?path=tel.png'></td>
-									<td style="color: #323b4c /* #116139 */;">${store.s_tel}</td>
+									<td style="width: 35%;"><h3>TEL</h3></td>
+									<td><h3 style="color: #5e5e5e;">${store.s_tel}</h3></td>
 								</tr>
 							</table>
 						</li>
@@ -187,6 +191,8 @@ html,body{
 
 </script>
 
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
 
 </body>
 </html>

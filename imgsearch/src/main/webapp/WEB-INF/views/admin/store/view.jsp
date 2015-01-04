@@ -62,41 +62,14 @@
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 
-<script type="text/javascript">
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
-/*  fileupload */
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
 
-function viewphoto(){
-	
-	
-	
-	
-		var fileName ="${ivolist[0].si_img}";
-	 		
-		
-	
-		$("#main").attr("src", "/admin/store/file/view/"+fileName);
-		
-			
-		}
-		
-		
-		
-		
-
-
-/* 				$("#main").attr("src", "/admin/store/file/view/"+data.fileName);
-				
-				
-				var nameparsing = data.fileName;
-				nameparsing = nameparsing.substring(nameparsing.indexOf("_") + 1);
-				
-				
-				$(".photolist").append('<a href="#" onclick="func('+"'"+data.fileName+"'"+');">'+nameparsing+'</a><br>');
- */
-
-
-</script>
 
 <style>
     .tb tr td img{
@@ -114,7 +87,7 @@ function viewphoto(){
 
 
 </head>
-<body onload="viewphoto()">
+<body >
 	<jsp:include page="/WEB-INF/views/admin/topmenu.jsp" flush="true">
 		<jsp:param name="selected" value="3" />
 	</jsp:include>
@@ -136,7 +109,7 @@ function viewphoto(){
 							<tr>
 								<td height="auto">
 								
-								<img id='main' class='thumb' src="/resources/imgs/plzphoto.jpg" height="400px">
+								<img id='main' class='thumb' src="" height="400px">
 								</td>
 								<td class="photolist">
 								<c:forEach items="${ivolist}"  var = "list"  >
@@ -151,7 +124,7 @@ function viewphoto(){
 						<script>
 					        function func(data){
 					            var changeImg = document.getElementById("main");
-					            changeImg.src ="/admin/store/file/view/"+data;
+					            changeImg.src ="/file/view?path="+data+".jpg";
 					
 					        }
 					    </script>
@@ -168,7 +141,7 @@ function viewphoto(){
 								<table class="table table-bordered table-primary">
 									<thead>
 										<tr>
-											<th>상호</th>
+											<th>이름</th>
 											<th>홈페이지</th>
 											<th>주소</th>
 											<th>위도</th>
@@ -246,9 +219,11 @@ function viewphoto(){
 									</thead>
 									<tbody>
 										<tr>
-											<td id="keyname"></td>
-											
-											
+											<td id="keyname">
+											<c:forEach items="${kvolist}"  var = "list"  >
+											<input type="text" value = "${list.k_keyword}">
+											</c:forEach>
+											</td>
 										</tr>
 									</tbody>
 								
@@ -273,13 +248,15 @@ function viewphoto(){
 											
 										</tr>
 									</thead>
+									<c:forEach items="${mvolist}" var ="list">
 									<tbody>
 										<tr>
-											<td>${mvolist[0].sm_menu}</td>
-											<td>${mvolist[0].sm_price}</td>
+											<td>${list.sm_menu}</td>
+											<td>${list.sm_price}</td>
 											
 										</tr>
 									</tbody>
+									</c:forEach>
 								</table>
 							</div>
 							
@@ -312,7 +289,7 @@ function viewphoto(){
 										<button class="btn btn-block btn-primary delete">삭제</button>
 									</div>
 									<div class="span2">
-										<button class="btn btn-block btn-primary">목록</button>
+										<button class="btn btn-block btn-primary backlist">목록</button>
 									</div>
 							
 						</div>
@@ -331,9 +308,33 @@ function viewphoto(){
 		console.log("클릭");
 		location.href="/admin/store/remove?s_no=${vo.s_no}";
 	});
+	$(".backlist").click(function(){
+		console.log("클릭");
+		location.href="/admin/store/storelist";
+	});
+	
+	
+</script>
+
+<script type="text/javascript">
+
+/*  fileupload */
+
+function viewphoto(){
 	
 	
 	
+	
+		var fileName ='${ivolist[0].si_img}';
+	 	
+		console.log("----------" + fileName);
+		
+	
+		$("#main").attr("src", "/file/view?path="+fileName+".jpg");
+		
+			
+		}
+
 </script>
 
 
@@ -343,7 +344,7 @@ function viewphoto(){
  $( document ).ready(function() {
 	
 
-	 
+	 viewphoto();
 	 
 	 
 	 /* review */
@@ -399,7 +400,7 @@ function viewphoto(){
  });	
 </script>
 
-	
+
 
 
 

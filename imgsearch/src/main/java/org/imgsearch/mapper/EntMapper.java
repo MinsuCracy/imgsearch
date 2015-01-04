@@ -22,4 +22,6 @@ public interface EntMapper {
 	
 	public List<StoreVO> entStore(int e_no);
 	
+	public EntVO entSearch(String e_name);
+	
 }

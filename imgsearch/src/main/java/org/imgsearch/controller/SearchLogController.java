@@ -1,6 +1,5 @@
 package org.imgsearch.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,7 +34,7 @@ public class SearchLogController {
 	
 	@RequestMapping("/list")
 	public void list(Model model, @ModelAttribute("cri") Criteria cri){
-		
+ 		
 		cri.setTotalPage(sls.searchLogCount(cri));
 		List<SearchLogVO> list = sls.searchLogList(cri);
 		List<SearchLogVO> fEnt = sls.favoriteEnt();
@@ -45,7 +44,6 @@ public class SearchLogController {
 		model.addAttribute("searchLogList", list);
 		model.addAttribute("favoriteEntList", fEnt);
 		model.addAttribute("favoriteKeyList", fKey);
-		
 	}
 	
 	

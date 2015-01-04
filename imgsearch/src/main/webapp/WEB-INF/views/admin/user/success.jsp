@@ -6,6 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="refresh" content="1; url=list">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>

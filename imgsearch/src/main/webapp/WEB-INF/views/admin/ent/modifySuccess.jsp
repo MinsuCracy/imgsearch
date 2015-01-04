@@ -10,13 +10,10 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-@font-face {
-	font-family: 'NanumGothic';
-	src: url('images/NanumGothic.eot');
-}
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body {
-	font-family: '맑은고딕' 'NanumGothic', 'MalgunGothic';
+    font-family: 'Nanum Gothic', serif;
 }
 </style>
 

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,8 @@
 
 <!-- 메뉴뷰 관련 -->
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/menuView/css/style1.css" /> -->
-<script type="text/javascript" src="/resources/main/menuView/js/modernizr.custom.79639.js"></script>
+<script type="text/javascript"
+	src="/resources/main/menuView/js/modernizr.custom.79639.js"></script>
 
 
 
@@ -28,11 +29,11 @@
 
 <!-- Index -->
 <style>
-html, body{
-	position:absolute;
-	width:100%;
-	height:100%;
-	background-color: rgb(247, 245, 240); 
+html, body {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(247, 245, 240);
 }
 
 body {
@@ -41,25 +42,24 @@ body {
 	color: #fff;
 }
 
-*{
-	margin:0;
-	padding:0;
-	border:0;
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
-.logo{
-	background: none; 
-	width: 200px; 
-	height: 7%; 
+.logo {
+	background: none;
+	width: 200px;
+	height: 7%;
 }
 
 #menu {
-	width:100%;
+	width: 100%;
 	height: 10px;
 }
 
 .chapter {
-
 	-webkit-columns: 460px;
 	-moz-columns: 460px;
 	columns: 460px;
@@ -76,36 +76,37 @@ body {
 	width: 100%;
 	height: 45%;
 	margin-bottom: 20px;
- 	padding:1%; 
-/*  	padding-top: 5px; */
- 	padding-bottom: 0;
+	padding: 1%;
+	/*  	padding-top: 5px; */
+	padding-bottom: 0;
 }
 
 .store ul {
 	list-style: none;
 	position: inherit;
- 	margin: 0% 10% 0 10%; 
- 	padding: 1% 0 1% 0;
+	margin: 0% 10% 0 10%;
+	padding: 1% 0 1% 0;
 	width: 80%;
 	height: 100%;
 	background-color: #71c39a;
 }
 
-.store .menu{
-	float:left;
-	width:20%;
-	height:100%;	
-	
+.store .menu {
+	float: left;
+	width: 25%;
+	height: 100%;
 }
-.store .title{
-	float:left;
-	width: 60%;
+
+.store .title {
+	float: left;
+	width: 55%;
 	height: 20%;
-	border-bottom : 0.15em dashed #fff;
+	border-bottom: 0.15em dashed #fff;
 }
-.store .category{
-	float:left;
-	width: 20%; 
+
+.store .category {
+	float: left;
+	width: 20%;
 	height: 20%;
 }
 
@@ -113,79 +114,79 @@ body {
 	margin: 20% 0 0 20%;
 }
 
-.store .content{
-	width: 45%;
+.store .content {
+	width: 75%;
 	height: 60%;
 	float: left;
 }
 
-.storeContent{
+.storeContent {
 	color: #fff;
 	margin-top: 2%;
 }
 
 .storeButton {
 	float: left;
-	width: 15%;
-	height: 60%;
+	width: 55%;
+	height: 20%;
 	text-align: right;
 }
 
 .photo {
 	width: 78.5%;
 	height: 45%;
-	padding:1%;
+	padding: 1%;
 	margin: auto;
 	background-color: #364157; /*  #c7c7c7; */
 }
 
-.photoTitle{
-	position:inherit;
- 	margin:0;
-	width:80%;
+.photoTitle {
+	position: inherit;
+	margin: 0;
+	width: 80%;
 	height: 15%;
 	text-align: left;
 	align: left;
 }
 
-.photoSlide{
-	position:inherit;
-	margin:0 10%;
-	width:80%;
-	height:80%;
+.photoSlide {
+	position: inherit;
+	margin: 0 10%;
+	width: 80%;
+	height: 80%;
 }
 
-.review{
+.review {
 	margin: 0 10%;
 	width: 78.5%;
-	height: 130%;
+/*  	height: 80%;  */
 	margin: auto;
- 	margin-top: 20px;
- 	background-color: white;
+	margin-top: 20px;
+	background-color: white;
 }
 
-.reviewTitle{
+.reviewTitle {
 	position: inherit;
 	padding: 1%;
- 	text-align: left;
- 	align: left;
- 	color: #1d9d74;
+	text-align: left;
+	align: left;
+	color: #1d9d74;
 }
 
-.reviewBox{
-	position:inherit;
-	margin:3% auto 0 auto;
-	width:70%;
-	height:80%;
-	background-color: white; 
+.reviewBox {
+	position: inherit;
+	margin: 3% auto 0 auto;
+	width: 70%;
+	height: 80%;
+	background-color: white;
 	color: #3d9167;
 }
 
-.review_write{
-	width:100%; 
-/* 	height:9%;  */
-	border-bottom: 0.1em solid gray; 
-	margin-top:1%;
+.review_write {
+	width: 100%;
+	height: 30px;
+	border-bottom: 0.1em solid gray;
+	margin-top: 1%;
 }
 
 .reviewBox ul li {
@@ -202,13 +203,13 @@ body {
 	display: block;
 }
 
-.review_user_id{
+.review_user_id {
 	padding-right: 1px;
 	color: #3d3d3d;
-	font-size: 14px;
+	font-size: 1em;
 }
 
-.review_regdate{
+.review_regdate {
 	vertical-align: top;
 	padding-top: 0.7%;
 	padding-left: 2%;
@@ -228,28 +229,29 @@ body {
 }
 
 .review_comment {
-	padding: 10px 0 10px 1px;
+	padding: 0.5em 0 0.5em 1px;
 	color: #4a4a4a;
-	line-height: 20px;
+	line-height:  0.8em;
 	display: block;
 }
 
-
-#paging{
+#paging {
 	list-style: none;
 	width: 60%;
 	height: 5%;
 	margin-left: 25%;
-	padding-top: 20px;
+/* 	padding-top: 20px; */
 }
 
-#paging li{
-	float:left;
-	width:8%;
+#paging li {
+	float: left;
+	width: 8%;
 }
-#paging li a{
-	color:black;
+
+#paging li a {
+	color: black;
 }
+
 #footer {
 	margin-top: 4em;
 	text-align: center;
@@ -269,39 +271,36 @@ body {
 	cursor: pointer;
 }
 
-
-#unittest{
+#unittest {
 	width: 80%;
 	margin: 0 10% 3% 10%;
-	height:500px;
-	background-color:yellow;
-}
-
-#popup{
- 	position :fixed;;
- 	text-align: center;
-	width: 90%;
-	height:90%;
-	left:5%;
- 	top:2%; 
-   	display: none;    
-	z-index:1000;
+	height: 500px;
 	background-color: yellow;
-	
-}
-#reserv{
- 	position :fixed;;
- 	text-align: center;
-	width: 50%;
-	height:50%;
-	left:25%;
- 	top:25%; 
-  	display: none;      
-	z-index:1000;
-	background-color: red;
-	
 }
 
+#popup {
+	position: fixed;;
+	text-align: center;
+	width: 90%;
+	height: 90%;
+	left: 5%;
+	top: 2%;
+	display: none;
+	z-index: 1000;
+	background-color: yellow;
+}
+
+#reserv {
+	position: fixed;;
+	text-align: center;
+	width: 50%;
+	height: 50%;
+	left: 25%;
+	top: 25%;
+	display: none;
+	z-index: 1000;
+	background-color: red;
+}
 </style>
 <script>
 			$(function() {
@@ -386,15 +385,15 @@ body {
 <body>
 
 	<form name="listForm">
-		<input type="hidden" name="keyword" value="${cri.keyword}">
-		<input type="hidden" name="e_no" value="${cri.e_no}">
-		<input type="hidden" name="page" value="">
+		<input type="hidden" name="keyword" value="${cri.keyword}"> <input
+			type="hidden" name="e_no" value="${cri.e_no}"> <input
+			type="hidden" name="page" value="">
 	</form>
-	
+
 	<!-- logo -->
 	<div class="logo">
-		<a href="/img/">
-			<img src="/file/view?path=logo2.png" style="max-height: 100%;">
+		<a href="/img/"> <img src="/file/view?path=logo2.png"
+			style="max-height: 100%;">
 		</a>
 	</div>
 
@@ -403,65 +402,63 @@ body {
 		<div>
 			<form>
 				<input type="text" name="endKeyword" placeholder="예약기능 구현..">
-				<input type="submit" value="검색">			
-			</form>		
+				<input type="submit" value="검색">
+			</form>
 		</div>
 	</div>
-	
+
 	<div id="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
-	
+
 	<div class='store'>
 		<ul>
 			<li class='menu'><h1 style="color: #fff; margin-left: 5%;">{ STORE }</h1></li>
 			<li class='title storeName'><h1 style="color: #fff;"> ${vo.s_name}</h1></li>
 			<li class='category' style="text-align: center; color: #fff;">
-				<c:forEach var="cate" items="${cateList}" varStatus="status">
-					${cate.c_category}
+				<h4><c:forEach	var="cate" items="${cateList}" varStatus="status">
+						${cate.c_category}
 					<c:if test="${status.last == false}"> > </c:if>
-				</c:forEach>
-			</li>
+					</c:forEach></h4>
+				</li>
 			<li class='content'>
-				<table class="storeContent">
+				<table class="storeContent" style="height:100%;">
 					<tr>
-						<td><img src="/file/view?path=address2.png"></td>
-						<td>${vo.s_address}</td>
+						<td style="width:40%;height:25%;"><h3>ADDRESS</h3></td>
+						<td><h3>${vo.s_address}</h3></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td><img src="/file/view?path=tel2.png"></td>
-						<td>${vo.s_tel}</td>
+						<td style="width:40%;height:25%;"><h3>TEL</h3></td>
+						<td><h3>${vo.s_tel}</h3></td>
 					</tr>
 					<tr>
-						<td><img src="/file/view?path=homepage2.png"></td>
-						<td><a href="${vo.s_homepage}" target="_new" style="color: #fff;"><i class="fa fa-home fa-lg"></i></a></td>
+						<td style="width:40%;height:25%;"><h3>HOMEPAGE</h3></td>
+						<td><a href="${vo.s_homepage}" target="_new"
+							style="color: #fff;"><i class="fa fa-home fa-lg"></i></a></td>
 					</tr>
-					<tr>
-						<td><img src="/file/view?path=match2.png"></td>
-						<td id="storeContent-Ent"> 
-							<c:forEach var="ent" items="${entList}" varStatus="status">
-								${ent.e_name}
+					<tr>	
+						<td style="width:40%;height:25%;"><h3>MATCH</h3></td>
+						<td id="storeContent-Ent">
+							<h3><c:forEach var="ent" items="${entList}" varStatus="status">
+									${ent.e_name}
 								<c:if test="${status.last == false}">, </c:if>
-							</c:forEach>
+								</c:forEach> </h3>
 						</td>
-						<td></td>
 					</tr>
-<!-- 					<tr>
-						<td></td>
-						<td style="text-align: right;">
-							<button id="reservButton"style="float:right; margin:20px;">찜하기</button>
-							<a id="menubutton" style="float:right; margin:20px;">메뉴보기</a>
-						</td>
-					</tr> -->
 				</table>
 			</li>
 			<li class="storeButton">
-				<table>
-					<tr><td></td></tr>
-					<tr><td> <button id="reservButton"style="float:right; margin:20px;">찜하기</button> </td></tr>
-					<tr><td> <a id="menubutton" style="float:right; margin:20px;">메뉴보기</a> </td></tr>
-					<tr><td> 즐겨찾기 </td></tr>
-				</table>
-<!-- 				<ul>
+				<table style="height: 100%; width: 100%; text-align: right;">
+					<tr>
+						<td style="width: 55%;"></td>
+						<td style="width: 15%;" >
+							<a id="reservButton">찜하기</a>
+						</td>
+						<td style="width: 15%;"><a id="menubutton" >메뉴보기</a>
+						</td>
+						<td style="width: 15%;"><a id="#">즐겨찾기</a></td>
+					</tr>
+
+				</table> <!-- 				<ul>
 					<li> 여백의 미 </li>
 					<li> <button id="reservButton"style="float:right; margin:20px;">찜하기</button> </li>
 					<li> <a id="menubutton" style="float:right; margin:20px;">메뉴보기</a> </li>
@@ -470,48 +467,50 @@ body {
 			</li>
 		</ul>
 	</div>
-	
-	
-<!-- 	사진스크롤 -->
-	<div class='photo'>
-		<div class="photoTitle"><h1 style="color: #fff;">{ PHOTO }</h1></div>
-		
-		<div class="photoSlide">
-		<div id="preview">
-			<div id="preview-coverflow">
-			
-				<c:forEach var="img" items="${imgList}" >
-				
-					<div  class="cover" ><img src="/file/view?path=${img.si_img}.jpg"></div>
-										  
-				</c:forEach>
-			</div>
-			
-	<style>
-	
-	#preview {
-  		height: 100%; 
-  		width:100%;
-	}
-	
-	#preview-coverflow .cover {
-		margin-top:3%;
-		cursor: pointer;
-		width: 25%;
-		height: 25%;
-	}
-	
-	#preview-coverflow .cover img {
-		position:inherit;
-		cursor: pointer;
-		width: 100%;
-		height: 100%;
-	}
 
-	</style>
-	
-	<script src="/resources/colorbox/jquery.colorbox.js"></script>
-	<script>
+
+	<!-- 	사진스크롤 -->
+	<div class='photo'>
+		<div class="photoTitle">
+			<h1 style="color: #fff;">{ PHOTO }</h1>
+		</div>
+
+		<div class="photoSlide">
+			<div id="preview">
+				<div id="preview-coverflow">
+
+					<c:forEach var="img" items="${imgList}">
+
+						<div class="cover">
+							<img src="/file/view?path=${img.si_img}.jpg">
+						</div>
+
+					</c:forEach>
+				</div>
+
+				<style>
+#preview {
+	height: 100%;
+	width: 100%;
+}
+
+#preview-coverflow .cover {
+	margin-top: 3%;
+	cursor: pointer;
+	width: 25%;
+	height: 25%;
+}
+
+#preview-coverflow .cover img {
+	position: inherit;
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+</style>
+
+				<script src="/resources/colorbox/jquery.colorbox.js"></script>
+				<script>
 
 	
 		$(function() {
@@ -562,43 +561,64 @@ body {
 		};
 		
 	</script>
-	
-	
+
+
 			</div>
 		</div>
 	</div>
-		
+
 	<!-- 리뷰 -->
 	<div class="review">
-	
-		<div class="reviewTitle"><h1>{ REVIEW }</h1></div>
-		
-		<div class="reviewWrite"> </div>
-		
-		<div class="reviewBox">	
-		
-			<div class="review_write">
-				<input type='text' name='reviewData' value=''>
-				<button onclick='javascript:reviewWrite()'>등록</button>
-			</div>
 
-			<ul></ul>
-			
+		<div class="reviewTitle">
+			<h1>{ REVIEW }</h1>
 		</div>
+<!-- 		<div class="reviewWrite"></div> -->
+			
+		<div class="reviewBox">
 
-		<ul id="paging" style="margin-top: 1%;"></ul>
+			<div class="review_write">
+				<a style="background-color: #71c39a; color: black;margin:0 2% 0 3%;padding-top:8px; text-align:center; width:15%; height:100%; border-radius:15%;float:right;" onclick='javascript:reviewWrite()'>등록</a>
+				<textarea style="width:80%; height:100%; border : 1.5px solid black; float:right;" name='reviewData' value=''></textarea>
+			</div>
+			
+			<div>
+				<ul id="reviewList"></ul>
+				<div style="height:50px; padding-top:20px;"><ul id="paging" style=""></ul></div>
+			</div>
 		
-	</div>	
+		</div>
+			
+			
+<!-- 		<div class="reviewBox"> -->
 
-	
-	
+<!-- 			<div class="review_write"> -->
+<!-- 				<input type='text' name='reviewData' value=''> -->
+<!-- 				<button onclick='javascript:reviewWrite()'>등록</button> -->
+<!-- 			</div> -->
+
+<!-- 		<div> -->
+<!-- 			<ul id="reviewList"></ul> -->
+<!-- 			<div style="height:50px; padding-top:20px;"><ul id="paging" style=""></ul></div> -->
+<!-- 		</div> -->
+
+		
+		
+<!-- 		</div> -->
+
+		
+
+	</div>
+
+
+
 	<button onclick="goList(${cri.page})">현재목록</button>
 	<button onclick="goList(1)">최신목록</button>
-		<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
+	<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
 		MIT Open Source license applies.</div>
-		
-		
-<script>
+
+
+	<script>
 	
 	// 찜하기 버튼
 	$("#reservButton").on("click",function(){
@@ -629,11 +649,11 @@ body {
 	 		type:"get",
 	 		success:function(data){
 	 			
-				$(".reviewBox ul").children().remove();
+				$("#reviewList").children().remove();
 	 
 	 			$(data).each(function(index,target){
 	 				
-					$(".reviewBox ul").append("<li> <div class=\"review_section\">"
+					$("#reviewList").append("<li> <div class=\"review_section\">"
 										+ "<span class=\"review_user_id\"><strong>"+ target.u_id +"</strong></span>"
 										+ "<span class=\"review_regdate\">"+ target.r_regdate +"</span></div>"
 										+ "<div class=\"review_section2\">"
@@ -769,6 +789,7 @@ body {
 
 </script>
 
-
+	<link href="/resources/defualtFont.css" rel="stylesheet"
+		type="text/css" />
 </body>
 </html>

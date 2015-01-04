@@ -7,21 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Meta -->
 <meta charset="UTF-8" />
 <meta name="viewport"
@@ -77,30 +62,39 @@
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
 
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
+
 <!-- fileupload-->
 
 <script>
 
 function updateResult(data){
+
 	
-	
-	
-	if(data.suffix == '.jpg'){
+	 if(data.suffix == '.jpg' || data.suffix == '.png' || data.suffix == '.gif'){
 		
 		
-		$("#main").attr("src", "/admin/store/file/view/s_"+data.fileName);
-		
-		/* $(".uploadUL tr").prepend("<td  name='"+ data.fileName +"'><image id='main' class='thumb' src='/admin/store/file/view/"+ "s_"+ data.fileName+"'/></td>"); */
+		$("#main").attr("src", "/file/view?path="+data.fileName);
 		
 		var nameparsing = data.fileName;
 		nameparsing = nameparsing.substring(nameparsing.indexOf("_") + 1);
 		
+		$(".photolist").append('<a onclick="func('+"'"+data.fileName+"'"+');">'+nameparsing+'</a>'
+							 + '<input type="button" value = "삭제" onclick="removelist($(this))">'
+							 + '<input type="text" name="siimg" style="display:none;" value='+"'"+data.fileName+"'"+'>');
 		
-		$(".photolist").append('<a href="#" onclick="func('+"'"+data.fileName+"'"+');">'+nameparsing+'</a><br>');
 		
+		/* $(".photolist").append('<a onclick="func('+"'"+data.fileName+"'"+');">'+nameparsing+'</a>');
+		$(".photolist").append('<input type="button" value = "삭제" onclick="removelist($(this))">');
+		$(".photolist").append('<input type="text" name="siimg" style="display:none;" value='+"'"+data.fileName+"'"+'>'); */
 		
-		
-	
 	}else{
 		$(".uploadUL").append("<li><a href='/admin/store/file/down?src=" + data.fileName + "'><image class='thumb' src='/resources/imgs/iDVD.png'/></a></li>");
 	}
@@ -124,11 +118,16 @@ function keywordup() {
      }else{
          $("#keywordcontainer").css('display', 'block') ;
      }
+	
 
+	
+	
 } 
 
 
 
+
+	 
 
 
 
@@ -154,9 +153,17 @@ function keywordup() {
 	height:100%;
 	display:none;
 	z-index:10;
-	
+	overflow:auto;
 	}
 
+input {
+
+padding-bottom: 0px; 
+padding-top: 10px;
+
+}
+
+	
 
 </style>
 
@@ -178,6 +185,7 @@ function keywordup() {
 					가게 등록<span>| Action is the foundational key to success</span>
 				</h2>
 			</div>
+			
 			<div class="widget widget-4 widget-body-white">
 				<div class="widget-body" style="padding: 10px 0 0;">
 					<div id="DataTables_Table_0_wrapper"
@@ -188,7 +196,7 @@ function keywordup() {
 								<tr>
 								<td height="auto">
 								
-								<img id='main' class='thumb' src="/resources/imgs/plzphoto.jpg" height="400px">
+								<img id='main' class='thumb' src="/file/view?path=default2.jpg" height="400px">
 								</td>
 								<td class="photolist">
 								
@@ -203,15 +211,13 @@ function keywordup() {
 						<script>
 					        function func(data){
 					            var changeImg = document.getElementById("main");
-					            changeImg.src ="/admin/store/file/view/"+data;
+					            changeImg.src ="/file/view?path="+data;
 					
 					        }
 					    </script>
 				</table>
 			
 		</div>
-		
-		
 		
 			<div class="widget-body" style="padding: 10px 0 0;" >
 			<input type="txt" id="inputfilename">
@@ -222,8 +228,8 @@ function keywordup() {
 		
 		
 		
-			<form id="fileform"  target="zero" action="/admin/store/file/upload" method="post" enctype="multipart/form-data">
-			<input type='file' style="display:none" onChange="inform()"  id="photofile" name="file"><input type='submit'  style="display:none" id="photosubmit" value="upload">
+			<form id="fileform"  target="zero" action="/file/upload" method="post" enctype="multipart/form-data">
+				<input type='file' style="display:none" onChange="inform()"  id="photofile" name="file"><input type='submit'  style="display:none" id="photosubmit" value="upload">
 			</form>
 			
 			<iframe name="zero" frameborder="0" style="width:0px; height:0px; border:0px">
@@ -236,12 +242,12 @@ function keywordup() {
 						
 						
 
-								<form action= "" method= "post" id="registform">
+								<form action="/admin/store/regist" method= "post" id="registform">
 							<div class="widget-body" style="padding: 10px 0 0;">
 								<table class="table table-bordered table-primary">
 									<thead>
 										<tr>
-											<th>상호</th>
+											<th>이름</th>
 											<th>홈페이지</th>
 											<th>주소</th>
 											<th>위도</th>
@@ -259,7 +265,7 @@ function keywordup() {
 									</tbody>
 								</table>
 							</div>
-
+						
 							<div class="widget-body" style="padding: 10px 0 0;">
 								<table class="table table-bordered table-primary">
 									<thead>
@@ -273,17 +279,17 @@ function keywordup() {
 									</thead>
 									<tbody>
 										<tr>
-											<td><select class="span2" name= "entno1">
+											<td><select class="span2" name= "entfirst">
 											<c:forEach items="${elist}"  var = "list"  >
 												<option  value="${list.e_no}">${list.e_name}</option>
 											</c:forEach>
  											</select></td>
-											<td><select class="span2" name= "entno2">
+											<td><select class="span2" name= "entsecond">
 											<c:forEach items="${elist}"  var = "list"  >
 												<option value="${list.e_no}">${list.e_name}</option>
 											</c:forEach>
  											</select></td>
-											<td><select class="span2" name= "entno3">
+											<td><select class="span2" name= "entthird">
 											<c:forEach items="${elist}"  var = "list"  >
 												<option value="${list.e_no}">${list.e_name}</option>
 											</c:forEach>
@@ -293,6 +299,8 @@ function keywordup() {
 									</tbody>
 								</table>
 							</div>
+							
+						
 			<div class="widget-body" style="padding: 10px 0 0;">
 								<table class="table table-bordered table-primary">
 									<thead>
@@ -316,23 +324,30 @@ function keywordup() {
 											<td><select class="span2" name= "cno" id="selectcate1" onchange="catelist2(this.value)">
 												<option></option>
 											</select></td>
+											
+											
+											
+										
  											<td><select class="span2" name= "c_no" id="selectcate2">
 												<option></option>
 											</select></td>
+										
+											
+											
 										</tr>
 									</tbody>
 							
 							</table>	
 						</div>
 						
-							
+						
 						<div class="widget-body" style="padding: 10px 0 0;">
 								<table class="table table-bordered table-primary" >
 									<thead>
 
 										<tr>
 											
-											<th>매치 키워드                      <input type="button" onclick="keywordup()" value="키워드 추가"></th>
+											<th>매치 키워드</th>
 											
 											
 										</tr>
@@ -351,7 +366,7 @@ function keywordup() {
 						
 						
 						
-							
+						
 							
 						<div class="widget-body" style="padding: 10px 0 0;">
 								<table class="table table-bordered table-primary" id="traddline">
@@ -367,36 +382,8 @@ function keywordup() {
 									</thead>
 									<tbody>
 										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_price"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
+											<td><input type="text" class="span2" style="border: 0 " name="smmenu"></td>
+											<td><input type="text" class="span2" style="border: 0 " name="smprice"></td>
 											
 										</tr>
 									</tbody>
@@ -405,19 +392,21 @@ function keywordup() {
 								</table>
 							</div>	
 						
-						
-						<div class= "sendkno" style="display:none;">
+						<div style="display:none;" class="filename">
 						
 						
 						</div>
 						
-						
-						<input type=hidden name= "si_img" class="filename">
+					
 						
 						</form>
 						<div class="row-fluid">
 						<div class="span1">
-							<button class="btn btn-block btn-primary" onclick="javascript:addline()">추가</button>
+							<input class="btn btn-block btn-primary" type="button"  onclick="javascript:addline()" value="추가">
+						</div>	
+						<div class="span1">
+							<input class="btn btn-block btn-primary" type="button" onclick="javascript:deleteline()" value="삭제">
+						</div>	
 						</div><br><br>	
 						<script>
 						
@@ -425,9 +414,14 @@ function keywordup() {
 						function addline(){
 							
 							var traddtd = $("#traddline").append('<tbody><tr></tr></tbody>');
-							traddtd.append('<td><input type="text" class="span2" style="border: 0 "></td><td><input type="text" class="span2" style="border: 0 "></td><td><select  name= "keyword"><c:forEach items="${kvolist}"  var = "list"  ><option value="${list.k_no}">${list.k_keyword}</option></c:forEach></select></td>');
+							traddtd.append('<td><input type="text" class="span2" style="border: 0 " name="smmenu"></td><td><input type="text" class="span2" style="border: 0 " name="smprice"></td>');
 						}
-						
+						function deleteline(){
+							
+							$("#traddline td:last").remove();
+							$("#traddline td:last").remove();
+							
+						}
 						
 						</script>
 						
@@ -438,15 +432,15 @@ function keywordup() {
 						
 						<div class="row-fluid">
 									<div class="span2">
-										<button class="btn btn-block btn-primary" type="submit" form="registform"   value="submit">등록</button>
+										<input class="btn btn-block btn-primary" onclick="javascript:submitform()" value="등록">
 									</div>
 									
 						<div class="span2">
-										<button class="btn btn-block btn-primary" onclick="javascript:returnForm()">취소</button>
+										<input class="btn btn-block btn-primary" onclick="javascript:returnform()" value="취소">
 						</div>
-						
-						
-								
+									<div class="span2">
+										<input class="btn btn-block btn-primary" onclick="javascript:keywordup()" value="키워드 추가">                     
+									</div>
 						</div>
 					</div>
 				</div>
@@ -457,22 +451,17 @@ function keywordup() {
 	
 
 	
-	<div class="widget-body" style="padding: 10px 0 0; position:absolute; top:50%; left:40%;"  >
-			<table>
-			<tr><td style="padding-bottom: 0px; padding-top: 10px;">
-			<input type="text" id="keywordsearch" class="span3" placeholder="검색할 키워드">
-			</td><td>
-			<button type="button" onclick="keyworddiv()">키워드 검색</button>
-			</td><td>
-			<button type="button" onclick="keywordup()" >검색 취소</button>
-			</td></tr>
+	<div class="widget-body" style="padding: 10px 0 0; position:absolute; top:30%; left:40%;"  >
+			<table><tr >
+			<td style="padding-bottom: 0px; padding-top: 10px;"><input type="text" id="keywordsearch" placeholder="검색할 키워드"></td>
+			<td><button type="button" onclick="keyworddiv()" >키워드 검색</button></td>
+			<td><button type="button" onclick="keywordup()" >검색 취소</button></td>
+			</tr>
 			</table>
 			<table id="keywordlist">
 			
 			
-			
 			</table>
-			
 			
 			</div>
 			
@@ -496,7 +485,7 @@ function keywordup() {
 		
 			$("#sendbutton").click(function(){
 				$("#photosubmit").click();
-			}); 
+				}); 
 			
 		
 			
@@ -519,6 +508,9 @@ function keywordup() {
 
 
  function catelist1(cno) {
+	
+
+	 
 	 
 	 console.log(cno);
 	 /* category */
@@ -610,6 +602,11 @@ function keywordup() {
 	 
 	 /* keyword
 	  */
+	  
+
+	 
+	 
+	  
 function keywordadd(keyword){
 	 		
 	 		
@@ -618,27 +615,37 @@ function keywordadd(keyword){
 	 		console.log(keysearch.val());
 	 	} 
 
-	 	function keyworddiv() {
+var keynumlist=[];
+
+function keyworddiv() {
 	 		
 	 		var keysearch = $("#keywordsearch");
 	 		 keysearch = keysearch.val();
 	 		 console.log(keysearch);
+	 		 
+	 		 console.log("0----------------");
+	 		 
+	 		console.log(keynumlist);
+	 			
+	 	
 	 		
 	 	 $.ajax({
 	 	         type: "GET",
 	 	         url:"/admin/store/keyword",
 	 	         contentType:"application/json; charset=UTF-8",
 	 			 dataType:"json",
-	 			 data:{"k_keyword":keysearch},
+	 			 data:{k_keyword:keysearch,keynumlist:keynumlist},
 	 	         success: function(data){
 
 	 	        	$("#keywordlist tbody").remove();
-	 	        	 
-	 	        	 
+	 	        	
 	 			 		if(data != null){
-	 					for(i=0 ; i < data.length ; i++) {
+	 					for(var i=0 ; i < data.length ; i++) {
 	 						
 	 						
+	 						
+	 						
+	 					
 	 						var newtbody = document.createElement("tbody");
 	 						var newinput = document.createElement("button"),
 	 						textinput = document.createTextNode("선택"),
@@ -648,7 +655,12 @@ function keywordadd(keyword){
 	 						newinput.value = data[i].k_no;
 	 						newinput.name = "k_no";
 	 					
-	 						newinput.onclick = keychoice(data[i]);
+	 					$(newinput).on("click", function(){
+	 							
+	 							keychoice($(this).val(),$(this).prev().val());
+	 						}); 
+	 					
+	 					 	newinput.setAttribute("type", "button");	
 	 						newinput1.setAttribute("type", "text");
 	 						newtbody.appendChild(newinput1);
 	 						newtbody.appendChild(newinput);
@@ -656,7 +668,10 @@ function keywordadd(keyword){
 	 						
 	 						
 	 						
-	 						$("#keywordlist").append(newtbody);
+	 					 	$("#keywordlist").append(newtbody);
+
+	 						
+	 						
 	 					
 	 					}}else 
 	 					{
@@ -667,51 +682,93 @@ function keywordadd(keyword){
 	 	}
 	 		 
 	 
-	 
- function keychoice(data) {
-	 
-	
-	 
-	 var newinput = document.createElement("input");
-	 newinput.value = data.k_no;
-	 newinput.name = "kno";
-	
-	 newinput.setAttribute("type", "text");
-		$(".sendkno").append(newinput);
-	 
-	 var newinput1 = document.createElement("input");
-	 newinput1.value = data.k_keyword;
-	
-	 $("#keyname").append(newinput1);
-	 
-	/*  
-	 var newinput2 = document.createElement("input");
-	 newinput2.value = "삭제";
-	 newinput2.onclick = function removeklist(cname){
+	function keychoice(key, keyword) {
+	 	
+		
+		 console.log("keychoice...." );
+		 keynumlist.push(key);
+		 console.log(keynumlist);
+				
 		 
-		var classname = "."+cname;
-		console.log();
 		 
-		$(classname).remove();
-};
-	 newinput2.setAttribute("type", "button");
-	 $("#keyname").append(newinput2); */
-  }
-	 
-	 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+			 			 
+			 		 
+			 		 
+			 		 var newinput1 = document.createElement("input");
+			 		 newinput1.value = keyword;
+			 			
+			 		 $("#keyname").append(newinput1);
+			 	
+			 		 var newinput2 = document.createElement("input");
+			 		 newinput2.value = "삭제";
+			 		 
+			 		$(newinput2).on("click", function removeklist(){ $(this).prev().remove();
+			 		$(this).next().remove();
+			 		$(this).remove();});
+			 		 newinput2.setAttribute("type", "button");
+			 		 $("#keyname").append(newinput2); 
 
+			 		var newinput = document.createElement("input");
+			 		 newinput.value = key;
+			 		 newinput.name = "kno";
+			 		
+			 		 newinput.setAttribute("type", "text");
+			 		 $(newinput).css("display", "none");
+			 			$("#keyname").append(newinput);
+			
+		
+	 	
+	 	 }
 
+	/* submit
+	 */
+	function submitform() {
+		
+		console.log("1..................");
+		
+		$('#selectcate0').removeAttr('onchange');
+		$('#selectcate1').removeAttr('onchange');
+		$('.filename').append($('.photolist'))
+		$('form').each(function(){
+			
+			$(this).submit();
+			});
+	
+		
+	}
+	
+	function removelist(rthis){
+		
+		
+		
+		rthis.prev().remove();
+		rthis.next().remove();
+		rthis.remove();
+		
+	}	
+	
+	
+	
+function returnform(){
+		
+	location.href = "/admin/store/storelist";
+		
+		
+	} 
+	
+	
 
- function returnForm(){
-	 location.href= "storelist";
- }
- 
-
-	 
 	
-</script>
-	
-	
-	
-</body>
-</html>
+	</script>
+		
+		
+		
+	</body>
+	</html>

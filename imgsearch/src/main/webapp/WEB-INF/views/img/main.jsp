@@ -8,7 +8,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap2.css">
+<link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/bbs/css/style.css" /> -->
 <!-- <script src="/resources/main/bbs/js/modernizr.custom.63321.js"></script> -->
@@ -22,7 +22,7 @@ html,body{
 	width: 100%;
 	height: 100%;
 	z-index:200; 
- 	background-color: rgb(247, 245, 240); 
+	background-color: rgb(247, 245, 240);
  	
 }
 
@@ -160,6 +160,11 @@ html,body{
  	border-color : rgba(102,255,102,0.7); 
 /* 	box-shadow: 0 0 2em silver; */
 }
+
+#grid1 ul li{
+	height:30px;
+	width:60px;
+}
 #grid16_1 img,
 #grid16_2 img{
 	width:100%;
@@ -189,27 +194,57 @@ html,body{
 	background-color : none;
   	position :fixed;; 
  	text-align: center;
-	width: 50%;
-	height:50%;
-	left:25%;
- 	top:15%; 
-
+	width: 25%; /* 50%; */
+	height: 50%;
+	left: 40%; /* 25%; */
+ 	top: 15%; 
 	z-index:-1000;
-
-	
 }
 
 #popup2{
  	position :fixed;;
  	text-align: center;
 	width: 50%;
-	height:50%;
+	height:30%;
 	left:25%;
  	top:25%; 
   	display: none;     
 	z-index:-100;
-	background-color: red;
+ 	background-color: white;
+/*  	border-radius : 10%;  */
+ 	border : 0.1em black solid; 	
 	
+}
+
+#popup2 input{
+ 	position :inherit;
+ 	width:70%; 
+/*  	margin: 0 0 0 0;; */
+	
+}
+
+.closepopup{
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	background: url('/resources/testImg/cancel-32.png') no-repeat;
+	-webkit-appearance: none;
+	float:right; 
+	height:35px;
+	width:35px;
+}
+
+.closeentView{
+	padding: 0;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	background: url('/resources/testImg/cancel-32.png') no-repeat;
+	-webkit-appearance: none;
+	float:right; 
+	height:35px;
+	width:35px;
 }
 </style>
 
@@ -225,8 +260,8 @@ html,body{
 
 </style>
 </head>
-<body style="margin-top:-2%;">
-	<form name="MainForm">
+<body >
+	<form name="MainForm" style="margin: 0 ;">
 		<input type="hidden" name="keyword" value="${cri.keyword }">
 		<input type="hidden" name="e_no" value="${cri.e_no }">
 		<input type="hidden" name="page" value="${cri.page }">
@@ -238,23 +273,31 @@ html,body{
 		<div id="entView">
 			
 			<div class="imgFocus" style="border-radius:15%;width:100%; height:100%;-webkit-transform: scale(0.1) rotateX(-360deg);">
-				<div style="width:100%; height:100%;">
-					<button sytle="text-align : right">닫기</button>
+				<div style="width:100%; height:90%;">
+					<button class="closeentView" sytle=""></button>
 					<img style="width:100%; height:100%;border-radius:15%;box-shadow: 0 0 4em 1em white;" src='' >
 				</div>
 			</div>
 		</div>
 		
 		<div id="popup2">
-			<button sytle="text-align : left">닫기</button>
-		<div>
+			
+			
+			<div style="width:100%; height:15%;">
+				<span><button onclick="javascript:entSearchClose();"class="closepopup" sytle=""></button></span>
+			</div>
+	
+			<div style="width:100%; height:20%; text-align: left"> </div>
+			
+			
+			<div style="width:100%; height:25%;">
+				<span><input type="text"  name="entsearchkey" placeholder="연예인 이름으로 검색"></span>
+				<span><button id="entsubmit" sytle="">검색</button></span>
+			</div>
+			
+			
+			<div id="returnText" style="width:100%; height:25%;"> </div>
 		
-			<form>
-				<input type="text" name="entKeyword" placeholder="연예인이름">
-				<input type="submit" values="검색">			
-			</form>
-				
-		</div>
 	</div>
 	
 	
@@ -283,12 +326,11 @@ html,body{
 		<div id="mainGrid">
 			
 			<div id="grid1" >
-				<ul style="list-style: none; text-align: center; padding-top:20%;">
-					<li><input id="default" type="checkbox" name="type"><span>기본</span></li>
-					<li><input id="rank" type="checkbox" name="type"><span>랭크</span></li>
-					<li><input id="style" type="checkbox" name="type"><span>성향</span></li>
+				<ul style="list-style: none; text-align: center; padding-top:20px;">
+					<li><input id="default" type="checkbox" name="type"><span > 기본</span></li>
+					<li><input id="rank" type="checkbox" name="type"><span> 랭크</span></li>
+					<li><input id="style" type="checkbox" name="type"><span> 성향</span></li>
 				</ul>
-			
 			</div>
 			
 			
@@ -374,7 +416,7 @@ html,body{
 	</div>
 	
 	<div id="searchGrid">	
-		<h1>연예인을 선택해라</h1>
+		<h1 style="padding-top:10px">연예인을 선택하세요</h1>
 		<div id="searchBar" style="z-index:-1000;">
 			<input  type="text" name="searchKeyword" placeholder="search" value="" >
 			<input type="hidden" name="e_no" value="">
@@ -387,6 +429,8 @@ html,body{
 	
 
 <script>
+
+
 
 
 var entType ='${cri.type}';
@@ -448,8 +492,7 @@ $("#mainGrid").on("click",function(e){
 		return true;
 	}
 	
-	$("#searchBar").css("z-index" , "1000");
-	$("#searchGrid").contents(":first-child").text("키워드를 입력해라");
+	
 	
 	console.log("몰라~~~~~")
 	entFocusingView($target.attr("src"));
@@ -571,9 +614,9 @@ $("#mainGrid").on("click",function(e){
 // 	console.log("newImg");
 // }//end function
 
-// 연예인 검색
+// 연예인 검색팝업
 function entSearch(){
-	console.log("entSearch");
+	
 	$("#mainGrid").css("opacity" , "0.5");
 	$("#popup2").css({ "display": "inherit" , "z-index":"250","opacity" : "1" });
 		
@@ -581,12 +624,41 @@ function entSearch(){
 
 
 
-//연예인검색 닫기
-$("#popup2 button").on("click",function(){
+//연예인검색 팝업 닫기
+function entSearchClose(){
+
 	$("#popup2").css({"display" :"none", "z-index":"-100"});
 	$("#mainGrid").css("opacity" ,"1");
-});//end function
+	$("#returnText").text("");
 
+}
+
+
+//연예인 검색서밋
+$("#entsubmit").on("click",function(){
+	
+	var ename = $("[name=entsearchkey]").val();
+	
+	entSearch
+	$.ajax({
+		url:"/img/entSearch?e_name="+ename,
+		type:"get",
+		success:function(data){
+			
+			
+			// 데이터가 왔을때
+			if(data != ""){
+				entSearchClose();
+				entFocusingView("/file/view?path="+data.e_img);
+			//데이터가 안왔을때	
+			}else{
+			 	$("#returnText").text("결과 없다");
+			}
+			$("[name=entsearchkey]").val("");
+		}
+	});
+	
+});
 
 // 사진선택
 function entFocusingView(enoImg){
@@ -598,6 +670,9 @@ function entFocusingView(enoImg){
 	$("#mainGrid").css("opacity" ,"0.3");
 	
 	$("#entView div img").attr("src", enoImg);
+	
+	$("#searchBar").css("z-index" , "1000");
+	$("#searchGrid").contents(":first-child").text("키워드를 입력하세요");
 	
 	
 }//end function
@@ -975,7 +1050,7 @@ function goPage(page){
 
 </script>	
 
-
+<link	href="/resources/defualtFont.css"	rel="stylesheet" type="text/css" />
 </body>
 </html>
 

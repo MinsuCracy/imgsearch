@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.imgsearch.common.Criteria;
+import org.imgsearch.service.EntService;
 import org.imgsearch.service.MainService;
 import org.imgsearch.vo.EntVO;
 import org.imgsearch.vo.StoreReviewVO;
@@ -21,11 +22,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/img/*")
 public class MainController {
 
-	// private static final Logger logger =
-	// LoggerFactory.getLogger(MainController.class);
-
 	@Inject
 	private MainService service;
+	
+	@Inject
+	private EntService entService;
 
 	@RequestMapping("/")
 	public String index(@ModelAttribute("cri") Criteria cri) {
@@ -128,6 +129,12 @@ public class MainController {
 	@ResponseBody
 	public void storeReviewModify(StoreReviewVO rvo) {
 		service.storeReviewModify(rvo);
+	}
+	
+	@RequestMapping("/entSearch")
+	@ResponseBody
+	public EntVO entSearch(String e_name) {
+		return entService.entSearch(e_name);
 	}
 
 }

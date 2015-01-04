@@ -61,6 +61,14 @@
 <!-- LESS 2 CSS -->
 <script src="/resources/admin/theme/scripts/less-1.3.3.min.js"></script>
 
+<style type="text/css">
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body {
+    font-family: 'Nanum Gothic', serif;
+}
+</style>
+
 <script>
 	function reviewForm(){
 		location.href="/admin/store/view?s_no=${vo.s_no}";
@@ -69,6 +77,45 @@
 	
 	
 	/*  fileupload */
+	
+function updateResult(data){
+	
+	
+	
+	if(data.suffix == '.jpg' || data.suffix == '.png' || data.suffix == '.gif'){
+		
+		
+		$("#main").attr("src", "/file/view?path="+data.fileName);
+		
+		/* $(".uploadUL tr").prepend("<td  name='"+ data.fileName +"'><image id='main' class='thumb' src='/admin/store/file/view/"+ "s_"+ data.fileName+"'/></td>"); */
+		
+		var nameparsing = data.fileName;
+		nameparsing = nameparsing.substring(nameparsing.indexOf("_") + 1);
+		
+		
+		$(".photolist").append('<a href="#" onclick="func('+"'"+data.fileName+"'"+');">'+nameparsing+'</a>');
+		$(".photolist").append('<input type="button" value = "삭제" onclick="removelist($(this))">');
+		$(".photolist").append('<input type="text" name="siimg" style="display:none;" value='+"'"+data.fileName+"'"+'>')
+		
+	
+	}else{
+		$(".uploadUL").append("<li><a href='/admin/store/file/down?src=" + data.fileName + "'><image class='thumb' src='/resources/imgs/iDVD.png'/></a></li>");
+	}
+	
+	
+	var txt =""; 
+		
+		txt= data.fileName;
+	
+		console.log(txt);
+		
+		$(".filename").val(txt);
+	
+}
+	
+	
+	
+	
 
 	function viewphoto(){
 		
@@ -79,7 +126,7 @@
 		 		
 			
 		
-			$("#main").attr("src", "/admin/store/file/view/"+fileName);
+			$("#main").attr("src", "/file/view?path="+fileName);
 			
 				
 			}
@@ -153,12 +200,12 @@
 							<tr>
 								<td height="auto">
 								
-								<img id='main' class='thumb' src="/resources/imgs/plzphoto.jpg" height="400px">
+								<img id='main' class='thumb' src="/file/view?path=default2.jpg" height="400px">
 								</td>
 								<td class="photolist">
 								<c:forEach items="${ivolist}"  var = "list"  >
 										
-											<a href="#" onclick="func('${list.si_img}');">${list.si_img}</a>
+											<a href="" onclick="func('${list.si_img}'+'.jpg');">${list.si_img}</a>
 									
 								
 								</c:forEach>
@@ -168,7 +215,7 @@
 						<script>
 					        function func(data){
 					            var changeImg = document.getElementById("main");
-					            changeImg.src ="/admin/store/file/view/"+data;
+					            changeImg.src ="/file/view?path="+data;
 					
 					        }
 					    </script>
@@ -206,7 +253,7 @@
 								<table class="table table-bordered table-primary">
 									<thead>
 										<tr>
-											<th>상호</th>
+											<th>이름</th>
 											<th>홈페이지</th>
 											<th>주소</th>
 											<th>위도</th>
@@ -237,7 +284,7 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td><select class="span2" name= "entno1">
+											<td><select class="span2" name= "entfirst">
 											<c:forEach items="${elist}"  var = "list"  >
 												<c:choose>
 												<c:when test="${evolist[0].e_no eq list.e_no}">
@@ -249,7 +296,7 @@
 												</c:choose>
 											</c:forEach>
  											</select></td>
-											<td><select class="span2" name= "entno2">
+											<td><select class="span2" name= "entsecond">
 											<c:forEach items="${elist}"  var = "list"  >
 												<c:choose>
 												<c:when test="${evolist[1].e_no eq list.e_no}">
@@ -261,7 +308,7 @@
 												</c:choose>
 											</c:forEach>
  											</select></td>
-											<td><select class="span2" name= "entno3">
+											<td><select class="span2" name= "entthird">
 											<c:forEach items="${elist}"  var = "list"  >
 												<c:choose>
 												<c:when test="${evolist[2].e_no eq list.e_no}">
@@ -297,7 +344,7 @@
 											<td><select class="span2" name= "cno" onchange="catelist1(this.value)" id="selectcate0">
 												<option>${scvop2.c_category}</option>
 											<c:forEach items="${cvolist}"  var = "list"  >
-												<option></option>
+												<option value="${list.c_no}">${list.c_category}</option>
 											</c:forEach>
  											</select></td>
 											<td><select class="span2" name= "cno" id="selectcate1" onchange="catelist2(this.value)">
@@ -319,16 +366,20 @@
 
 										<tr>
 											
-											<th>매치 키워드                      <input type="button" onclick="keywordup()" value="키워드 추가"></th>
+											<th>매치 키워드</th>
 											
 											
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td id="keyname"></td>
-											
-											
+											<td id="keyname">
+											<c:forEach items="${kvolist}"  var = "list"  >
+											<input type="text" value = "${list.k_keyword}">
+											<input type="button" value = "삭제" onclick="removelist($(this))">
+											<input type="text" style="display:none;" name="kno" value = "${list.k_no}">
+											</c:forEach>
+											</td>
 										</tr>
 									</tbody>
 								
@@ -352,59 +403,35 @@
 											
 										</tr>
 									</thead>
+									<c:forEach items="${mvolist}" var ="list">
 									<tbody>
 										<tr>
-											<td><input type="text" class="span2" style="border: 0" name="sm_menu" value="${mvolist[0].sm_menu}"></td>
-											<td><input type="text" class="span2" style="border: 0" name="sm_menu" value="${mvolist[0].sm_price}"></td>
+											<td><input type="text" class="span2" style="border: 0" name="smmenu" value="${list.sm_menu}"></td>
+											<td><input type="text" class="span2" style="border: 0" name="smprice" value="${list.sm_price}"></td>
 											
 										</tr>
 									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									<tbody>
-										<tr>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											<td><input type="text" class="span2" style="border: 0 " name="sm_menu"></td>
-											
-										</tr>
-									</tbody>
-									
-									
+									</c:forEach>
 								</table>
 							</div>	
 						
-						
-						<div class= "sendkno" style="display:none;">
+						<div style="display:none;" class="filename">
 						
 						
 						</div>
 						
 						
-						<input type=hidden name= "si_img" class="filename">
+						
 						
 						</form>
 						<div class="row-fluid">
+						<div class="row-fluid">
 						<div class="span1">
-							<button class="btn btn-block btn-primary" onclick="javascript:addline()">추가</button>
+							<input class="btn btn-block btn-primary" type="button"  onclick="javascript:addline()" value="추가">
+						</div>	
+						<div class="span1">
+							<input class="btn btn-block btn-primary" type="button" onclick="javascript:deleteline()" value="삭제">
+						</div>	
 						</div><br><br>	
 						<script>
 						
@@ -412,9 +439,14 @@
 						function addline(){
 							
 							var traddtd = $("#traddline").append('<tbody><tr></tr></tbody>');
-							traddtd.append('<td><input type="text" class="span2" style="border: 0 "></td><td><input type="text" class="span2" style="border: 0 "></td><td><select  name= "keyword"><c:forEach items="${kvolist}"  var = "list"  ><option value="${list.k_no}">${list.k_keyword}</option></c:forEach></select></td>');
+							traddtd.append('<td><input type="text" class="span2" style="border: 0 " name="smmenu"></td><td><input type="text" class="span2" style="border: 0 " name="smprice"></td>');
 						}
-						
+						function deleteline(){
+							
+							$("#traddline td:last").remove();
+							$("#traddline td:last").remove();
+							
+						}
 						
 						</script>
 						
@@ -425,15 +457,15 @@
 						
 						<div class="row-fluid">
 									<div class="span2">
-										<button class="btn btn-block btn-primary" type="submit" form="registform"   value="submit">등록</button>
+										<input class="btn btn-block btn-primary" onclick="javascript:submitform()" value="등록">
 									</div>
 									
 						<div class="span2">
-										<button class="btn btn-block btn-primary" onclick="javascript:returnForm()">취소</button>
+										<input class="btn btn-block btn-primary" onclick="javascript:returnform()" value="취소">
 						</div>
-						
-						
-								
+									<div class="span2">
+										<input class="btn btn-block btn-primary" onclick="javascript:keywordup()" value="키워드 추가">                     
+									</div>
 						</div>
 					</div>
 				</div>
@@ -444,18 +476,17 @@
 	
 
 	
-	<div class="widget-body" style="padding: 10px 0 0; position:absolute; top:50%; left:40%;"  >
-			<table>
-			<input type="text" id="keywordsearch" value="검색할 키워드">
-			<button type="button" onclick="keyworddiv()" >키워드 검색</button>
-			<button type="button" onclick="keywordup()" >검색 취소</button>
+	<div class="widget-body" style="padding: 10px 0 0; position:absolute; top:30%; left:40%;"  >
+			<table><tr >
+			<td style="padding-bottom: 0px; padding-top: 10px;"><input type="text" id="keywordsearch" placeholder="검색할 키워드"></td>
+			<td><button type="button" onclick="keyworddiv()" >키워드 검색</button></td>
+			<td><button type="button" onclick="keywordup()" >검색 취소</button></td>
+			</tr>
 			</table>
 			<table id="keywordlist">
 			
 			
-			
 			</table>
-			
 			
 			</div>
 			
@@ -465,85 +496,8 @@
 
 
 	
-	<script>
-	$(".update").click(function(){
-		console.log("클릭");
-		location.href="/admin/store/modify?s_no=${vo.s_no}";
-	});
-	$(".delete").click(function(){
-		console.log("클릭");
-		location.href="/admin/store/remove?s_no=${vo.s_no}";
-	});
+
 	
-	 function returnForm(){
-		 location.href= "storelist";
-	 }
-	 
-	
-</script>
-
-
-<script>
-
-
- $( document ).ready(function() {
-	
-
-	 
-	 
-	 
-	 /* review */
-	 
-	 
-	 var s_no= ${vo.s_no};
-	 
-	 $.ajax({
-			url:"/admin/store/review",
-			type:"GET",
-			contentType:"application/json; charset=UTF-8",
-		    dataType:"json",
-		    data:{"s_no":s_no},
-		 	success: function(data){
-		 		
-		 		if(data != null){
-				for(i=0 ; i < data.length ; i++) {
-					
-					
-					
-					var newtbody = document.createElement("tbody"), 
-					newtr = document.createElement("tr"),
-					newtdid = document.createElement("td"),
-					newtdcom = document.createElement("td"),
-					newtdreg = document.createElement("td"),
-					tdidtext = document.createTextNode(data[i].u_id),
-					tdcomtext = document.createTextNode(data[i].r_comment),
-					tdregtext = document.createTextNode(data[i].r_regdate);
-						
-						newtdid.appendChild(tdidtext);
-						newtdcom.appendChild(tdcomtext);
-						newtdreg.appendChild(tdregtext);
-						
-						newtr.appendChild(newtdid);
-						newtr.appendChild(newtdcom);
-						newtr.appendChild(newtdreg);
-					
-					newtbody.appendChild(newtr);
-					
-					$("#reviewtable").append(newtbody);
-				
-				}}else 
-				{
-					$(".reviewlist").append("<li>댓글이 없습니다.</li>");
-				}	
-		 		
-		 	
-		 	}
-			
-			
-	});  
-	 
- });	
-</script>
 <script type="text/javascript">
 			
 			$("#selectbutton").click(function(){
@@ -673,6 +627,11 @@
 	 
 	 /* keyword
 	  */
+	  
+
+	 
+	 
+	  
 function keywordadd(keyword){
 	 		
 	 		
@@ -681,11 +640,16 @@ function keywordadd(keyword){
 	 		console.log(keysearch.val());
 	 	} 
 
-	 	function keyworddiv() {
+
+
+function keyworddiv() {
 	 		
 	 		var keysearch = $("#keywordsearch");
 	 		 keysearch = keysearch.val();
 	 		 console.log(keysearch);
+	 		 
+	 		 console.log("0----------------");
+	 		 
 	 		
 	 	 $.ajax({
 	 	         type: "GET",
@@ -696,10 +660,9 @@ function keywordadd(keyword){
 	 	         success: function(data){
 
 	 	        	$("#keywordlist tbody").remove();
-	 	        	 
-	 	        	 
+	 	        	
 	 			 		if(data != null){
-	 					for(i=0 ; i < data.length ; i++) {
+	 					for(var i=0 ; i < data.length ; i++) {
 	 						
 	 						
 	 						var newtbody = document.createElement("tbody");
@@ -710,8 +673,15 @@ function keywordadd(keyword){
 	 						newinput1.value = data[i].k_keyword;
 	 						newinput.value = data[i].k_no;
 	 						newinput.name = "k_no";
+	 						console.log("1.........");
 	 					
-	 						newinput.onclick = keychoice(data[i]);
+	 						//newinput.onclick = keychoice(data[i]);
+	 					$(newinput).on("click", function(){
+	 							
+	 							keychoice($(this).val(),$(this).prev().val());
+	 						}); 
+	 					
+	 					 	newinput.setAttribute("type", "button");	
 	 						newinput1.setAttribute("type", "text");
 	 						newtbody.appendChild(newinput1);
 	 						newtbody.appendChild(newinput);
@@ -719,7 +689,7 @@ function keywordadd(keyword){
 	 						
 	 						
 	 						
-	 						$("#keywordlist").append(newtbody);
+	 					 	$("#keywordlist").append(newtbody);
 	 					
 	 					}}else 
 	 					{
@@ -730,46 +700,81 @@ function keywordadd(keyword){
 	 	}
 	 		 
 	 
-	 
- function keychoice(data) {
-	 
+	function keychoice(key, keyword) {
+	 	
+		
+		 console.log("keychoice...." );
+		 						 		
+			 		console.log(keyword);	
+			 		
+			 		 
+			 		 var newinput1 = document.createElement("input");
+			 		 newinput1.value = keyword;
+			 			$(newinput1).addClass(key);
+			 		 $("#keyname").append(newinput1);
+			 	
+			 		 var newinput2 = document.createElement("input");
+			 		 newinput2.value = "삭제";
+			 		 
+			 		$(newinput2).on("click", function removeklist(){ $(this).prev().remove();
+			 		$(this).next().remove();
+			 		$(this).remove();});
+			 		 newinput2.setAttribute("type", "button");
+			 		 $("#keyname").append(newinput2); 
+
+			 		var newinput = document.createElement("input");
+			 		 newinput.value = key;
+			 		 newinput.name = "kno";
+			 		 $(newinput).addClass(key);
+			 		 newinput.setAttribute("type", "text");
+			 		 $(newinput).css("display", "none");
+			 			$("#keyname").append(newinput);
+			
+		
+	 	
+	 	 }
+
+	/* submit
+	 */
+	function submitform() {
+		
+		console.log("1..................");
+		
+		$('#selectcate0').removeAttr('onchange');
+		$('#selectcate1').removeAttr('onchange');
+		$('.filename').append($('.photolist'))
+		
+		$('form').each(function(){
+			
+			$(this).submit();
+		});
+		
+		
+		
+	}
+
+	function removelist(rthis){
+		
+		
+		
+		rthis.prev().remove();
+		rthis.next().remove();
+		rthis.remove();
+		
+	}
 	
-	 
-	 var newinput = document.createElement("input");
-	 newinput.value = data.k_no;
-	 newinput.name = "kno";
+	function returnform(){
+		
 	
-	 newinput.setAttribute("type", "text");
-		$(".sendkno").append(newinput);
-	 
-	 var newinput1 = document.createElement("input");
-	 newinput1.value = data.k_keyword;
+		var sno = ${vo.s_no}
+		
+		location.href = "/admin/store/view?s_no="+sno;
+		
+		
+		
+	}
 	
-	 $("#keyname").append(newinput1);
-	 
-	/*  
-	 var newinput2 = document.createElement("input");
-	 newinput2.value = "삭제";
-	 newinput2.onclick = function removeklist(cname){
-		 
-		var classname = "."+cname;
-		console.log();
-		 
-		$(classname).remove();
-};
-	 newinput2.setAttribute("type", "button");
-	 $("#keyname").append(newinput2); */
-  }
-	 
-	 
-
-
-
-
- 
-
-	 
-	
-</script>
+	</script>
+		
 </body>
 </html>

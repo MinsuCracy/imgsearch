@@ -244,7 +244,8 @@ function disableOther( button ) {
 
 </script>
 
-
+ <link href="/resources/defualtFont.css" rel="stylesheet"
+ type="text/css" />
 
 </body>
 </html>

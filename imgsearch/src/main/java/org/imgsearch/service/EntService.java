@@ -62,8 +62,12 @@ public class EntService {
 		entMapper.entRemove(e_no);
 	}
 	
-	public List<StoreVO> entStore(int e_no){
+	public List<StoreVO> entStore(int e_no) {
 		return entMapper.entStore(e_no);
+	}
+	
+	public EntVO entSearch(String e_name) {
+		return entMapper.entSearch(e_name);
 	}
 
 }
