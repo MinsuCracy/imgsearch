@@ -12,12 +12,14 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.js"></script>
-
+<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" > -->
 
 <!-- 메뉴뷰 관련 -->
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/menuView/css/style1.css" /> -->
 <script type="text/javascript"
 	src="/resources/main/menuView/js/modernizr.custom.79639.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/colorbox/colorbox.css"/>
+<script src="/resources/colorbox/jquery.colorbox.js"></script>
 
 
 
@@ -443,28 +445,12 @@ body {
 		</a>
 	</div>
 
-	<div id="reserv">
-		<button id="reservClose" sytle="text-align : left">닫기</button>
-		<div>
-			<form>
-				<input type="text" name="endKeyword" placeholder="예약기능 구현..">
-				<input type="submit" value="검색">
-			</form>
-		</div>
-	</div>
 
 	<div id="menu"><jsp:include page="menubutton.jsp"></jsp:include></div>
-	
-	<div id="button">
-		<div class="buttonDiv">
-			<h5><button onclick="goList(${cri.page})">현재목록</button>
-			<button onclick="goList(1)">최신목록</button></h5>
-		</div>
-	</div>
 
 	<div class='store'>
 		<ul>
-			<li class='menu'><h1 style="color: #fff; margin-left: 5%;">{ STORE }</h1></li>
+			<li class='menu'><h1 style="color: #fff; margin-left: 5%;">STORE</h1></li>
 			<li class='title storeName'><h1 style="color: #fff;"> ${vo.s_name}</h1></li>
 			<li class='category' style="text-align: center; color: #fff;">
 				<h4><c:forEach	var="cate" items="${cateList}" varStatus="status">
@@ -508,7 +494,7 @@ body {
 							<h5><a class="store_button" id="menubutton"><i class="fa fa-book fa-lg"></i> 메뉴보기</a></h5>
 						</td>
 						<td style="width: 10%;" >
-							<h5><a class="store_button" id="reservButton"> <i class="fa fa-heart fa-lg"></i> 찜하기</a></h5>
+							<h5><a id="reserve" href="/img/store/reserve" class="store_button" id="reservButton"> <i class="fa fa-heart fa-lg"></i> 찜하기</a></h5>
 						</td>
 						<td style="width: 10%;">
 							<h5><a class="store_button" id="#"><i class="fa fa-star fa-lg"></i> 즐겨찾기</a></h5>
@@ -520,12 +506,19 @@ body {
 			</li>
 		</ul>
 	</div>
-
+	<script type="text/javascript">
+		$("#login").click(function(event){
+			event.preventDefault();
+			$(".form").submit();
+			parent.$.fn.colorbox.close();
+// 			parent.location.href= "/img/main";
+		});
+	</script>
 
 	<!-- 	사진스크롤 -->
 	<div class='photo'>
 		<div class="photoTitle">
-			<h1 style="color: #fff;">{ PHOTO }</h1>
+			<h1 style="color: #fff;">PHOTO</h1>
 		</div>
 
 		<div class="photoSlide">
@@ -605,7 +598,7 @@ body {
 			
 			
 			$("#menubutton").colorbox({
-				href:"/img/menuView?s_no="+${cri.s_no} + "&name=" + '${vo.s_name}',
+				href:"/img/menuView?s_no="+${cri.s_no} + "&name=" + "${vo.s_name}",
 				iframe:true, 
 				width:"80%", height:"80%",
 				opacity: 0.5,
@@ -624,7 +617,7 @@ body {
 	<div class="review">
 
 		<div class="reviewTitle">
-			<h1>{ REVIEW }</h1>
+			<h1>REVIEW </h1>
 		</div>
 <!-- 		<div class="reviewWrite"></div> -->
 			
@@ -648,14 +641,22 @@ body {
 	</div>
 
 
-	<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee.
-		MIT Open Source license applies.</div>
+<!-- 	<div id="footer">Copyright &copy; 2013-2014 Martijn van der Lee. -->
+<!-- 		MIT Open Source license applies.</div> -->
 
 
 	<script>
-	
 	// 찜하기 버튼
+	$("#reserve").colorbox({
+			iframe:true, 
+			width:"530px", height:"350px",
+			opacity: 0.5,
+			onClosed: function() {
+				location.reload();
+			}
+	});
 	$("#reservButton").on("click",function(){
+		
 		$("#reserv").css({"display" : "inherit" , "z-index":"100"});		
 	});
 
@@ -717,13 +718,13 @@ body {
 				
 				for(page = cri.startPage; page <= cri.lastPage ; page ++){
 					if(cri.prePage == true && page == cri.startPage){
-					code +="<li><a href='javascript:goReview("+(cri.startPage-1)+");' >pre</a></li>";
+					code +="<li><a href='javascript:goReview("+(cri.startPage-1)+");' <</a></li>";
 					}
 				
 					code += "<li><a href='javascript:goReview("+page+");'>"+page+"</a></li>";
 				
 					if(cri.nextPage == true && page == cri.lastPage){
-						code +="<li><a href='javascript:goReview("+(cri.lastPage+1)+");' >n</a></li>";
+						code +="<li><a href='javascript:goReview("+(cri.lastPage+1)+");' >></a></li>";
 					}
 				}
 			

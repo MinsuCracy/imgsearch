@@ -136,5 +136,9 @@ public class MainController {
 	public EntVO entSearch(String e_name) {
 		return entService.entSearch(e_name);
 	}
-
+	//찜 컬러박스 페이즈 
+	@RequestMapping("/store/reserve")
+	public String reserve(){
+		return "/img/reserve";
+	}
 }

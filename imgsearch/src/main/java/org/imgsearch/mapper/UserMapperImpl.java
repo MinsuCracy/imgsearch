@@ -2,6 +2,7 @@ package org.imgsearch.mapper;
 
 import java.util.List;
 
+import org.imgsearch.vo.StoreVO;
 import org.imgsearch.vo.UserVO;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -96,6 +97,12 @@ public class UserMapperImpl extends SqlSessionDaoSupport implements UserMapper {
 	public void insertFriend(UserVO vo) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<StoreVO> getBookMark(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

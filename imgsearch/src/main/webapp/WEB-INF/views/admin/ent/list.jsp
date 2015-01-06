@@ -60,10 +60,13 @@
 <link rel="stylesheet" href="/resources/admin/theme/css/style.min.css" />
 
 <style type="text/css">
-@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@font-face {
+	font-family: 'NanumGothic';
+	src: url('images/NanumGothic.eot');
+}
 
 body {
-    font-family: 'Nanum Gothic', serif;
+	font-family: '맑은고딕' 'NanumGothic', 'MalgunGothic';
 }
 </style>
 
@@ -114,7 +117,7 @@ body {
 									</div>
 								</div>
 							</div>
-							<input type="hidden" name="e_no">
+							<input type="hidden" name="e_no" value="${cri.e_no }">
 						</form>
 						<div class="widget-body" style="padding: 10px 0 0;">
 							<table class="table table-bordered table-primary">

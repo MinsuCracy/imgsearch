@@ -7,10 +7,10 @@
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/resources/user/location/css/responsive.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- <link rel="stylesheet" type="text/css" href="/resources/main/bbs/css/style.css" /> -->
 <!-- <script src="/resources/main/bbs/js/modernizr.custom.63321.js"></script> -->
 

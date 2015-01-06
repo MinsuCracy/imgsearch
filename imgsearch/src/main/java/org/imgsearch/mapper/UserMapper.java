@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.imgsearch.vo.StoreVO;
 import org.imgsearch.vo.UserVO;
 
 public interface UserMapper {
@@ -75,6 +76,8 @@ public interface UserMapper {
 	
 	//·Î±×ÀÎ 
 	public UserVO getUser(String userId);
+	
+	public List<StoreVO> getBookMark(String userId);
 	
 	
 }

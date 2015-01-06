@@ -16,7 +16,6 @@
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 
 
-
 <!-- 친구찾기 버튼 -->
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/default.css" />
 <link rel="stylesheet" type="text/css" href="/resources/main/menu/css/component.css" />
@@ -24,11 +23,12 @@
 <link rel="stylesheet" type="text/css" href="/resources/colorbox/colorbox.css" />
 <script src="/resources/colorbox/jquery.colorbox.js"></script>
 <!-- Font Awesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=282059b054fbcbdcb74ec4e8253e98930616f874"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" >
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=0c2b0a9685b5d431411a98ce97c1961f2e0f49b4"></script>
 <script src="/resources/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 <script src="/resources/js/geolocation.js"></script>
 <style type="text/css">
+
 #navs {
   position: fixed;
   right: 10px;
@@ -43,6 +43,7 @@
   font-family: 'Nanum Gothic';
   color: black; 
   cursor: pointer;
+  
 }
 
 #navs>li,
@@ -54,18 +55,22 @@
   height: 100%;
   border-radius: 20%;
   -webkit-border-radius: 20%;
-  background-color: #3d9167; /* #51fcf7; */
+  background-color: #74CA9F; /* #51fcf7; */
 }
+
 
 #navs>li {
   transition: all .6s;
   -webkit-transition: all .6s;
   -moz-transition: .6s;
+  
 }
 
 #navs:after {
-  content: attr(data-close);
-  z-index: 1;
+  font-family: FontAwesome;
+  font-size:2em;
+  content: "\f03a";
+  z-index: 999;
   border-radius: 20%;
   -webkit-border-radius: 20%;
 }
@@ -80,6 +85,7 @@
   text-decoration: none;
   color: #fff;
   font-size: 0.8em;
+  padding-top: 10px;
 }
 
 #toTop{
@@ -115,17 +121,17 @@
 </head>
 <body>
 
-
-<ul id="navs" class="hi-icon hi-icon-images" style="color: #fff;" data-open="-" data-close="메뉴">
+<!-- data-open="-" data-close="asdfsaf" -->
+<ul id="navs" class="fa fa-list-ul" style="color: #fff;">
 <%--   <sec:authorize ifNotGranted="ROLE_USER"> --%>
-  <li><a id="login" href="/user/loginform"><i class="fa fa-sign-in fa-lg"></i></a></li>
+  <li><a id="login" href="/user/loginform"><i class="fa fa-sign-in fa-lg fa-2x"></i></a></li>
 <%--   </sec:authorize> --%>
 <%--   <sec:authorize ifAnyGranted="ROLE_USER"> --%>
-  <li><a id="login" href="/j_spring_security_logout"><i class="fa fa-sign-out fa-lg"></i></a></li>
-  <li><a><i class="fa fa-info-circle fa-lg"></i></a></li>
-  <li><a id="friend"><i class="fa fa-users fa-lg"></i></a></li>
-  <li><a href="/user/location">친구찾기</a></li>
-  <li><a href="/admin/main"><i  class="fa fa-cog fa-lg"></i></a></li>
+  <li><a id="login" href="/j_spring_security_logout"><i class="fa fa-sign-out fa-lg fa-2x"></i></a></li>
+  <li><a><i class="fa fa-info-circle fa-lg fa-2x"></i></a></li>
+  <li><a id="friend"><i class="fa fa-users fa-lg fa-2x"></i></a></li>
+  <li><a href="/user/location"><i class="fa fa-map-marker fa-2x"></i></a></li>
+  <li><a href="/admin/main"><i  class="fa fa-cog fa-lg fa-2x"></i></a></li>
 <%--   </sec:authorize> --%>
 </ul>
 
@@ -149,15 +155,26 @@
 	});
 })($);
 </script>
+		
 		<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 		<!-- 	<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2"> -->
-		<h3>
-			친구목록<span><button class="close" id="menuclose"/></span>
+		<h3 class="friTitle" style='display: block'>
+			친구목록 <span><button class="close" id="friclose"/></span>
 		</h3>
-		<div class="friList">
+		<h3 class="bookmarkTitle" style='display: none'>
+			북마크 <span><button class="close" id="bookclose"/></span>
+		</h3>
+		<div class="friList" style='display: block'>
+		</div>
+		<div class="bookmarkList" style='display: none'>
 		</div>
 		<div class="search">
-			<button class="btn" onclick="javascript:locationShare()">위치 공유하기</button>
+			<div style="margin-bottom:3px">
+				<button class="btn btn-success fribtn" style='display: inline;' onclick="javascript:locationShare()">위치 공유</button>
+				<button class="btn btn-success bmbtn" style='display: none;' onclick="javascript:storeShare()">위치 공유</button>
+				<button class="btn" style='display: inline;' onclick="javascript:bookmarkListDisplay()">북마크</button>
+				<button class="btn" style='display: inline;' onclick="javascript:friListDisplay()">친구목록</button>
+			</div>
 			<form class="form-search" style='display: inline;'>
 				<input type="hidden" value="${id}" name="myid"></input>
 				<input type="text" class="input-medium search-query"
@@ -213,15 +230,34 @@ function disableOther( button ) {
 					});
 				}
 			});
-			
-			
+			$.ajax({
+				url:"/user/bookmarklist",
+				success:function(data){
+					var content = "";
+					$.each(data, function(idx, val){
+						content += "<a class='bookmark' href='#'><i class='icon-ok' data-store='"+val.s_name+"' data-lat='"+val.s_lat+"' data-lng='"+val.s_lng+"' style='display: none'></i>"+val.s_name+"</a>";
+					});
+					$(".bookmarkList").html(content);
+					
+					$(".bookmark").click(function(event){
+						event.preventDefault();
+						$(this).children().toggle("fast",function(){
+							if($(this).attr("data-check") == "checked"){
+								$(this).attr("data-check","");
+								return;
+							}
+							$(this).attr("data-check","checked");
+						});
+					});
+				}
+			});
 		});
 		
 		
 		loginOpen.onclick = function(){
 			$("#login").colorbox({
 				iframe:true, 
-				width:"40%", height:"80%",
+				width:"40%", height:"50%",
 				opacity: 0.5,
 				onClosed: function() {
 					location.reload();
@@ -230,7 +266,8 @@ function disableOther( button ) {
 		};
 
 		var friendOpen = document.getElementById( 'friend' );
-		var friendClose = document.getElementById( 'menuclose');
+		var friendClose = document.getElementById( 'friclose');
+		var bookmarkClose = document.getElementById( 'bookclose');
 		
 		friendOpen.onclick = function() {
 			
@@ -240,6 +277,12 @@ function disableOther( button ) {
 		};
 		
 		friendClose.onclick = function() {
+			
+			classie.toggle( this, 'active' );
+			classie.toggle( menuRight, 'cbp-spmenu-open' );
+			disableOther( 'showRight' );
+		};
+		bookmarkClose.onclick = function() {
 			
 			classie.toggle( this, 'active' );
 			classie.toggle( menuRight, 'cbp-spmenu-open' );
@@ -263,12 +306,26 @@ function disableOther( button ) {
 				}
 			});
 		}
-		
+		function friListDisplay(){
+			  $(".friList").css("display","block");
+			  $(".bookmarkList").css("display","none");
+			  $(".bookmarkTitle").css("display","none");
+			  $(".friTitle").css("display","block");
+			  $(".friTitle").css("display","block");
+			  $(".fribtn").css("display","inline");
+			  $(".bmbtn").css("display","none");
+			  
+		}
+		function bookmarkListDisplay(){
+			  $(".friList").css("display","none");
+			  $(".bookmarkList").css("display","block");
+			  $(".bookmarkTitle").css("display","block");
+			  $(".friTitle").css("display","none");
+			  $(".fribtn").css("display","none");
+			  $(".bmbtn").css("display","inline");
+		}
 		
 </script>
-
- <link href="/resources/defualtFont.css" rel="stylesheet"
- type="text/css" />
 
 </body>
 </html>

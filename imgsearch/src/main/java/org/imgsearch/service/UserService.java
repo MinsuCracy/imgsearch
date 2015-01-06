@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.imgsearch.mapper.UserMapper;
+import org.imgsearch.vo.StoreVO;
 import org.imgsearch.vo.UserVO;
 import org.springframework.stereotype.Service;
 
@@ -128,5 +129,8 @@ public class UserService{
 		return um.getFriendList(userId);
 	}
 	
+	public List<StoreVO> getBookMark(String userId){
+		return um.getBookMark(userId);
+	}
 	
 }

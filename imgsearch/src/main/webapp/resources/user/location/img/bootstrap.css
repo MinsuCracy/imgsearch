@@ -75,6 +75,7 @@ img {
 #map_canvas img {
   max-width: none;
 }
+
 button,
 input,
 select,
@@ -141,7 +142,6 @@ textarea {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 /*
  * Jeju Gothic (Korean) http://www.google.com/fonts/earlyaccess
  */
@@ -157,24 +157,15 @@ textarea {
        url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff) format('woff'),
        url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.ttf) format('truetype');
 }
-
-
 body {
   margin: 0;
   font-family: 'Jeju Gothic', serif;
   font-size: 14px;
   line-height: 20px;
   color: #7f7f7f;
-  background-color: rgb(247, 245, 240);
-	
-/* 	background: url(/resources/testImg/back.jpg) no-repeat center center fixed;  */
-	-webkit-background-size: 100% 100%;
-	-moz-background-size: 100% 100%;
-	-o-background-size: 100% 100%;
-	 background-size: 100% 100%;
+  background: #ffffff;
 }
 a {
-  font-family: 'Jeju Gothic', serif;
   color: #e85356;
   text-decoration: none;
 }
@@ -546,7 +537,7 @@ h4,
 h5,
 h6 {
   margin: 10px 0;
-  font-family: 'Jeju Gothic', serif;
+  ffont-family: 'Jeju Gothic', serif;
   font-weight: normal;
   line-height: 1;
   color: #ffffff;
@@ -769,6 +760,7 @@ pre code {
 }
 form {
   margin: 0 0 20px;
+  padding-left: 75px;
 }
 fieldset {
   padding: 0;
@@ -827,7 +819,7 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   display: inline-block;
-/*   height: 20px; */
+  height: 20px;
   padding: 4px 6px;
   margin-bottom: 9px;
   font-size: 14px;
@@ -1414,7 +1406,7 @@ input.search-query {
   margin-bottom: 0;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 /* Allow for input prepend/append in search forms */
 .form-search .input-append .search-query,
@@ -1469,8 +1461,8 @@ input.search-query {
   /* IE7 inline-block hack */
 
   *zoom: 1;
-  margin-bottom: 0;
   vertical-align: middle;
+  margin-bottom: 9px;
 }
 .form-search .hide,
 .form-inline .hide,
@@ -1820,14 +1812,14 @@ table [class*=span],
 [class^="icon-"],
 [class*=" icon-"] {
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin-right: .6em;
+  width: 14px;
+  height: 14px;
+  *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("/resources/user/location/img/ok-24.png");
+  background-image: url("../img/glyphicons-halflings.png");
   background-position: 14px 14px;
-/*   background-repeat: no-repeat; */
+  background-repeat: no-repeat;
   margin-top: 1px;
 }
 /* White icons with optional class, or on hover/active states of certain elements */
@@ -2516,8 +2508,6 @@ button.close {
   cursor: pointer;
   background: transparent;
   border: 0;
-  background: url(/resources/testImg/cancel-32.png) no-repeat;
-  
   -webkit-appearance: none;
 }
 .btn {
@@ -2859,6 +2849,7 @@ button.btn,
 input[type="submit"].btn {
   *padding-top: 3px;
   *padding-bottom: 3px;
+   margin-left: 120px;
 }
 button.btn::-moz-focus-inner,
 input[type="submit"].btn::-moz-focus-inner {
@@ -4904,46 +4895,4 @@ a.badge:hover {
 }
 .affix {
   position: fixed;
-}
-
-
-
-	
-.map2 {
-	width: 100%; 
-	height: 400px; 
-	margin: auto; 
-	margin-top: 90px;
-	border-radius: 20px;
-	
-/* 	-webkit-height: 100% 100%; */
-/* 	-moz-height: 100% 100%; */
-/* 	-o-height: 100% 100%; */
-}
-
-.mapbutton{
-	margin-top : 10px;
-	float:right;
-}
-
-
-.search {
-	padding-left: 15px;
-	position:absolute; 
-	bottom:4px;
-}
-
-.friList{
-	height:78%;
-	width:100%;
-	position:absolute;
-	overflow:auto;
-}
-.close{
-	background: url(/resources/testImg/cancel-32.png) no-repeat;
-    border: none;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    float: right;
 }
