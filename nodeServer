@@ -1,0 +1,280 @@
+/**
+ * Created by pc on 2014-12-02.
+ */
+var http = require("http");
+var fs = require("fs");
+var redis = require("redis");
+var client = redis.createClient();
+var mysql =  require("mysql");
+var url = require('url') ;
+
+var connection = mysql.createConnection({
+    host     : 'wkqk60th.iptime.org',
+    port     : 6001,
+    user     : 'bit60',
+    password : '8997',
+    database  : 'imgsearch'
+});
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+connection.connect();
+
+
+
+var server = http.createServer(function serverMethod(req, res) {
+    var urlMap = url.parse(req.url, true).path;
+    var param = url.parse(req.url, true).query;
+
+    if (req.url == urlMap) {
+         console.log("서버 접속");
+        //fs.readFile("currentpostion.html", function (err, data) {
+        //    res.write(param.callback + '('+ JSON.stringify({nodo:data}) + ');');
+            //res.send(param.callback + '('+ JSON.stringify(data) + ');');
+            res.end();
+        //})
+    }
+});
+
+server.listen(5555);
+var io = require("socket.io")(server);
+
+io.on("connection", function(socket) {
+
+    console.log("connected.........");
+
+    var id = "";
+    socket.on("id", function (data) {
+        id = data;
+        socket.id=id;
+        firstEnter(id);
+        reLocation(id);
+        addFriendRequest(id);
+
+    });
+        function reLocation(id){
+            client.hkeys(id, function(err, fids){
+                for(var i in fids) {
+                    (function () {
+                        var idx = i;
+                        for (var j = 0; j< io.sockets.sockets.length; j++) {
+                            (function() {
+                                var idx2 = j;
+                                if (io.sockets.sockets[idx2].id == fids[idx]) {
+                                    io.sockets.sockets[idx2].emit("requestLatLng", id);
+                                }
+                            })();
+                        }
+                    })();
+                }
+            });
+        };
+        socket.on("firstLocation",function(friInfo){
+            client.hmset(friInfo.sendC,friInfo.name, JSON.stringify({name: friInfo.name, lat: friInfo.lat, lng: friInfo.lng, connected: true}));
+            client.hvals(friInfo.sendC,function(err, result){
+                for (var j = 0; j< io.sockets.sockets.length; j++) {
+                    (function() {
+                        var idx2 = j;
+                        if (io.sockets.sockets[idx2].id == friInfo.sendC) {
+
+                            io.sockets.sockets[idx2].emit("change",result);
+                        }
+                    })();
+                }
+            });
+        });
+        //친구 추가
+        function addFriendRequest(id){
+            client.HKEYS(id+'friendList', function(err, fid){
+                for(var i in fid){
+                    (function(){
+                        var idx = i;
+
+                        client.hget(id+'friendList',fid[idx], function(err, data){
+
+                            socket.emit("requestFriend",{name:fid[idx],state:data});
+                        });
+                   })();
+                }
+            });
+        }
+        socket.on("fri_id",function(fri_id){
+            connection.query('select * from tbl_user_friend where u_id="'+id+'" and f_uid="'+fri_id+'"', function(err,rows){
+
+                if(rows.length == 0){
+                    var existsFriend = 'select * from tbl_user where u_id = "'+fri_id+'"';
+                    connection.query(existsFriend, function(err, rows, fields){
+                        if (err) {
+                            return;
+                        }
+                        if(rows.length == 0 ){
+                            socket.emit("notFound", true);
+                            return;
+                        }
+                        client.hmset(fri_id +'friendList', id, 'request');
+                        socket.emit("requestReady","wait");
+                        for (var i = 0; i < io.sockets.sockets.length; i++) {
+                            (function() {
+                                var idx = i;
+                                if (io.sockets.sockets[idx].id == fri_id) {
+                                    io.sockets.sockets[idx].emit("requestFriend", {name: id, state: "request"});
+                                }
+                            })();
+                        }
+                    });
+                }
+                else{
+                    socket.emit("alreadyExist", true);
+                }
+            });
+        });
+        socket.on("agree", function(fid){
+            connection.query('insert into tbl_user_friend (u_id,f_uid)values("'+id+'","'+fid+'")', function(err,result){
+                connection.query('insert into tbl_user_friend (u_id,f_uid)values("'+fid+'","'+id+'")',function(err,result){
+                    socket.emit("addFriendSuccess", fid);
+                    client.hdel(id +'friendList', fid);
+                });
+
+            });
+
+        });
+        //친구 요청 거절
+        socket.on("reject", function(data){
+             client.hdel(id +'friendList', data);
+        });
+
+        //위치공유 요청
+        socket.on("requestLocation", function(fid){
+            client.hmset(fid+"requestLocation",id,"request");
+            socket.emit("requestLocationing", "wait");
+            for (var i = 0; i < io.sockets.sockets.length; i++) {
+                (function() {
+                    var idx = i;
+                    if (io.sockets.sockets[idx].id == fid) {
+                        io.sockets.sockets[idx].emit("requestFriendLocationing", {name: id, state: "request"});
+                    }
+                })();
+            }
+        });
+
+        socket.on("requestStore",function(store){
+            client.hkeys(id,function(err,fid){
+                if(fid == ""){
+                    socket.emit("sharefail", "fail");
+                    return;
+                }
+                socket.emit("store", JSON.stringify(store));
+                for(var i in fid){
+                    (function(){
+                        var idx = i;
+                        for (var j = 0; j< io.sockets.sockets.length; j++) {
+                            (function() {
+                                var idx2 = j;
+                                if (io.sockets.sockets[idx2].id == fid[idx]) {
+                                    io.sockets.sockets[idx2].emit("store", JSON.stringify(store));
+                                }
+                            })();
+                        }
+                    })();
+                }
+            });
+
+        });
+        socket.on("locationAgree", function(fid){
+            //console.log("locationAgree : "+fid.name);
+            client.hdel(id+"requestLocation", fid.name);
+            client.hmset(id, fid.name, JSON.stringify({name: fid.name, lat: 0, lng: 0, connected: false}));
+            client.hmset(fid.name, id, JSON.stringify({name: id, lat:0, lng:0, connected: false}));
+            reLocation(id);
+
+        });
+
+        function findFriend(fid) {
+            for (var i = 0; i < io.sockets.sockets.length; i++) {
+                (function() {
+                    var idx = i;
+                    if (io.sockets.sockets[i].id == fid) {
+                        client.hvals(fid, function(err, myloca){
+                            io.sockets.sockets[idx].emit("change", myloca);
+                        });
+                        io.sockets.sockets[idx].emit("requestLatLng", "request");
+                    }
+                })();
+            }
+        }
+
+        //socket.on("firstLocation", function(result){
+           //console.log("firstLocation : " + result.name+", lat : " + result.lat);
+            //client.hmset(id, result.name, JSON.stringify({name: result.name, lat: result.lat, lng: result.lng, connected: true}));
+            //client.hget(id, result.name, function(err,val){
+               // socket.emit("change", val);
+           // });
+
+        //});
+        socket.on("locaReject", function(fid){
+            client.hdel(id+"requestLocation", fid, function(err, result){
+            });
+        });
+        //친구에게 위치
+        function firstEnter(id) {
+            client.hkeys(id+"requestLocation", function (err, fid) {
+                for(var i in fid) {
+                    (function () {
+                        var idx = i;
+                        findFriend(fid[idx]);
+                        client.hget(id + 'requestLocation', fid[idx], function (err, data) {
+                            socket.emit("requestFriendLocationing", {name: fid[idx], state: data});
+                        });
+                    })();
+                }
+            });
+
+        }
+
+        socket.on("latlng", function (latlng) {
+            client.HKEYS(latlng.id, function(err, fid){
+               for(var i in fid){
+                    (function(){
+                        var idx = i;
+                        client.hmset(fid[idx], id, JSON.stringify({name: latlng.id, lat: latlng.lat, lng: latlng.lng, connected: true}));
+                        frisend(fid[idx]);
+                    })();
+                }
+            });
+                function frisend(fid) {
+                    for (var i = 0; i < io.sockets.sockets.length; i++) {
+                        (function() {
+                            var idx = i;
+                            if (io.sockets.sockets[i].id == fid) {
+                                client.hvals(fid, function (err, val) {
+                                    io.sockets.sockets[idx].emit("change", val);
+                                });
+                            }
+                        })();
+                    }
+                }
+
+                
+        });
+
+
+       //client.flushall();
+
+        socket.on("disconnect2", function () {
+            client.hkeys(id, function(err, fid){
+                if(fid == ""){
+                    return;
+                }
+                for(var i in fid){
+                    (function(){
+                        var idx = i;
+                        client.hdel(id,fid[idx], function (err,result){
+                        });
+                        client.hdel(fid[idx],id,function(err,result){
+                        });
+                    })();
+                }
+            });
+        });
+});
+
